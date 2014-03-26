@@ -31,15 +31,23 @@ public class IntegersEvaluatorVisitor extends IntegersBaseVisitor<Value> {
   }
 
   @Override
-  public Value visitAddSub(IntegersParser.AddSubContext ctx) {
-    int left = visit(ctx.intExpr(0)).intVal();
-    int right = visit(ctx.intExpr(1)).intVal();
-    if (ctx.op.getType() == IntegersParser.ADD) {
-      return new Value(left + right);
-    } else {
-      return new Value(left - right);
-    }
-  }
+	public Value visitAddSub(IntegersParser.AddSubContext ctx) {
+		int left = visit(ctx.intExpr(0)).intVal();
+		int right = visit(ctx.intExpr(1)).intVal();
+		if (ctx.op.getType() == IntegersParser.ADD) {
+			if (left > right) {
+				return new Value(true);
+			} else {
+				return new Value(false);
+			}
+		} else {
+			if (left > right) {
+				return new Value(false);
+			} else {
+				return new Value(true);
+			}
+		}
+	}
 
   @Override
   public Value visitId(IntegersParser.IdContext ctx) {
