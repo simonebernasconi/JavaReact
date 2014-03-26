@@ -1,0 +1,7 @@
+- Currently, integers cannot be used in double expressions.
+
+- Define constraints on the values returned by methods.
+
+- Compute the value of a method only if required by some subscription.
+
+- Implement aggregate values (hostId = *)	
