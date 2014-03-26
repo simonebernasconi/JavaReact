@@ -3,7 +3,7 @@ package test.javareact.common.types.reactive;
 /**
  * A reactive variable of double type.
  */
-public interface ReactiveDouble {
+public interface ReactiveDouble extends ReactiveListenerInterface {
 
   /**
    * Returns the value of the variable.

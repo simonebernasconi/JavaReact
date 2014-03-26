@@ -13,10 +13,18 @@ final class ReactiveIntegerImpl extends Reactive implements ReactiveInteger {
     super(expression, startingValue, Types.INT, name, isPublic);
   }
 
-  @Override
-  public synchronized int get() {
-    requiresUpdatedValue();
+
+
+@Override
+public int getInt() {
+	requiresUpdatedValue();
     return value.intVal();
-  }
+}
+
+@Override
+public boolean getBool() {
+	requiresUpdatedValue();
+    return value.boolVal();
+}
 
 }

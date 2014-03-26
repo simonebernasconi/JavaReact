@@ -3,7 +3,7 @@ package test.javareact.common.types.reactive;
 /**
  * A reactive variable of boolean type.
  */
-public interface ReactiveBool {
+public interface ReactiveBool extends ReactiveListenerInterface {
 
   /**
    * Returns the value of the variable.
