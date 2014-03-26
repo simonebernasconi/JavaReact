@@ -103,6 +103,31 @@ public final class ReactiveFactory {
 		ReactiveBool result = new ReactiveBoolImpl(expression, name, true);
 		return result;
 	}
+	
+	public static final ReactiveDecrease getDecrease(String expression,
+			boolean startingValue, String name, boolean isPublic) {
+		ReactiveDecrease result = new ReactiveDecreaseImpl(expression, new Value(
+				startingValue), name, isPublic);
+		return result;
+	}
+
+	public static final ReactiveDecrease getDecrease(String expression,
+			boolean startingValue, String name) {
+		ReactiveDecrease result = new ReactiveDecreaseImpl(expression, new Value(
+				startingValue), name, true);
+		return result;
+	}
+
+	public static final ReactiveDecrease getDecrease(String expression, String name,
+			boolean isPublic) {
+		ReactiveDecrease result = new ReactiveDecreaseImpl(expression, name, isPublic);
+		return result;
+	}
+
+	public static final ReactiveDecrease getDecrease(String expression, String name) {
+		ReactiveDecrease result = new ReactiveDecreaseImpl(expression, name, true);
+		return result;
+	}
 
 	public static final ReactiveString getString(String expression,
 			String startingValue, String name, boolean isPublic) {

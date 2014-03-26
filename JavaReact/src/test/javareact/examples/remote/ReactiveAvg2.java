@@ -7,11 +7,11 @@ import test.javareact.common.types.reactive.ReactiveInteger;
 import test.javareact.common.types.reactive.ReactiveListener;
 import test.javareact.common.types.reactive.ReactiveString;
 
-public class RemoteReactive implements ReactiveListener {
+public class ReactiveAvg2 implements ReactiveListener {
 
 	public static void main(String args[]) {
 		Consts.hostName = "Reactive";
-		RemoteReactive remoteReact = new RemoteReactive();
+		ReactiveAvg2 remoteReact = new ReactiveAvg2();
 		ReactiveString react3 = ReactiveFactory.getString("Remote.obString.get()", "");
 		react3.addReactiveListener(remoteReact);
 	}

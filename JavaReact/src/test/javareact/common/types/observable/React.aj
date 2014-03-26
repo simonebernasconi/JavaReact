@@ -11,7 +11,7 @@ import test.javareact.common.packets.content.Attribute;
 public aspect React {
   
   pointcut hasReactiveAnnotation(Object o):
-    target(o) && execution(@javareact.common.types.observable.ImpactOn * *(..));
+    target(o) && execution(@test.javareact.common.types.observable.ImpactOn * *(..));
 
   after(Object o): hasReactiveAnnotation(o) {
     Signature sig = thisJoinPoint.getSignature();

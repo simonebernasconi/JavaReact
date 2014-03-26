@@ -13,11 +13,11 @@ import test.javareact.common.types.Types;
 final class ReactiveAvgImpl extends Reactive implements ReactiveAvg {
 
   protected ReactiveAvgImpl(String expression, String name, boolean isPublic) {
-    super(expression, Types.DOUBLE, name, isPublic);
+    super(expression, Types.INT, name, isPublic);
   }
 
   protected ReactiveAvgImpl(String expression, Value startingValue, String name, boolean isPublic) {
-    super(expression, startingValue, Types.DOUBLE, name, isPublic);
+    super(expression, startingValue, Types.INT, name, isPublic);
   }
 
   @Override
@@ -27,7 +27,7 @@ final class ReactiveAvgImpl extends Reactive implements ReactiveAvg {
   }
 
 	Queue<Integer> lastValues = new LinkedList<Integer>();
-	double average;
+	int average;
 		
 	@Override
 	public synchronized void notifyValueChanged(EventPacket evPkt) {
@@ -37,7 +37,6 @@ final class ReactiveAvgImpl extends Reactive implements ReactiveAvg {
 		Set<EventPacket> changes = queueManager.processEventPacket(evPkt, Consts.hostName + name);
 		assert (changes.size()==1 && changes.contains(evPkt));
 		int newVal = evPkt.getEvent().getAttributeFor("get()").intVal();
-		
 		int sum = 0;
 		if (lastValues.size() < 10){
 			lastValues.add(newVal);
@@ -50,12 +49,7 @@ final class ReactiveAvgImpl extends Reactive implements ReactiveAvg {
 			sum += val;
 		}
 		average = sum / (lastValues.size());
-		
 		value = new Value(average);
-		
-		
-		
-		
 		
 		for (ReactiveListener l : reactiveListeners) {
 			l.notifyReactiveChange(value);
