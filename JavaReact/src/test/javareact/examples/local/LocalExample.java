@@ -43,8 +43,8 @@ public class LocalExample {
       e.printStackTrace();
     }
 
-    System.out.println("reactInt: " + reactInt.get() + " (correct value: 158)");
-    System.out.println("reactInt2: " + reactInt2.get() + " (correct value: 316)");
+    System.out.println("reactInt: " + reactInt.getInt() + " (correct value: 158)");
+    System.out.println("reactInt2: " + reactInt2.getInt() + " (correct value: 316)");
     System.out.println("reactDouble: " + reactDouble.get() + " (correct value: 4.8)");
     System.out.println("reactBool: " + reactBool.get() + " (correct value: false)");
     System.out.println("reactString: " + reactString.get() + " (correct value: Hello World!)");

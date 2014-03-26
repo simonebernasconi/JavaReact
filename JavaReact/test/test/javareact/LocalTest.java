@@ -56,14 +56,14 @@ public class LocalTest {
       e.printStackTrace();
     }
 
-    assertEquals(reactInt.get(), 158);
+    assertEquals(reactInt.getInt(), 158);
     assertEquals(reactString.get(), "Hello World!");
-    assertEquals(reactInt2.get(), 316);
+    assertEquals(reactInt2.getInt(), 316);
 
-    assertEquals(reactInterm1.get(), 200);
-    assertEquals(reactInterm2.get(), 200);
-    assertEquals(reactFinal.get(), 400);
-    assertEquals(reactFinal2.get(), 300);
+    assertEquals(reactInterm1.getInt(), 200);
+    assertEquals(reactInterm2.getInt(), 200);
+    assertEquals(reactFinal.getInt(), 400);
+    assertEquals(reactFinal2.getInt(), 300);
   }
 
   private final void startServerIfNeeded() {
