@@ -12,8 +12,10 @@ public class RemoteReactive implements ReactiveListener {
 	public static void main(String args[]) {
 		Consts.hostName = "Reactive";
 		RemoteReactive remoteReact = new RemoteReactive();
-		ReactiveString react3 = ReactiveFactory.getString("Remote.obString.get()", "");
-		react3.addReactiveListener(remoteReact);
+		ReactiveString react1 = ReactiveFactory.getString("Remote.obString.get()", "");
+		ReactiveString react2 = ReactiveFactory.getString("Remote2.obString.get()", "");
+		react1.addReactiveListener(remoteReact);
+		react2.addReactiveListener(remoteReact);
 	}
 
 	@Override
