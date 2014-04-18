@@ -12,19 +12,17 @@ public class ReactiveAvg1 implements ReactiveListener {
 	public static void main(String args[]) {
 		Consts.hostName = "ReactiveAvg1";
 		ReactiveAvg1 remoteReact = new ReactiveAvg1();
-		ReactiveAvg react= ReactiveFactory.getAvg("Tire1.obTire1.get()", "");
+		ReactiveAvg react= ReactiveFactory.getAvg("Tire1.obTire1.get()", "obAvg1");
 		react.addReactiveListener(remoteReact);
 	}
 
 	@Override
 	public void notifyReactiveChange(Value value) {
-		
+		System.out.println("The AVG is now " + value.intVal());
 	}
 
 	@Override
 	public void notifyReactiveUpdate(Value value) {
-		System.out.println("The reactive value is changed in: " + value.intVal());		
-		ObservableInteger obAvg1 = new ObservableInteger("obAvg1", 0);
-		obAvg1.set(value.intVal());
+//		System.out.println("The reactive value is changed in: " + value.intVal());		
 	}
 }

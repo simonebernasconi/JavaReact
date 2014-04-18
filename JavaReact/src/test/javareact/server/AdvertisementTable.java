@@ -21,6 +21,7 @@ final class AdvertisementTable {
       advs.put(node, advsList);
     }
     advsList.add(adv);
+    System.out.println("Advs " + advs);
   }
 
   final void removeAdvertisement(NodeDescriptor node, Advertisement adv) {

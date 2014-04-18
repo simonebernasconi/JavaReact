@@ -1,5 +1,6 @@
 package test.javareact.examples.remote;
 
+import java.util.Random;
 import java.util.Scanner;
 
 import test.javareact.common.Consts;
@@ -18,7 +19,16 @@ public class Tire1 {
 			System.out.println("You sent " + in);
 			obTire1.set(in);
 		}
-
+		
+//		Random random = new Random();
+//
+//		while (true) {
+//			obTire1.set(random.nextInt(1000));
+//			try {
+//				Thread.sleep(1000);
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+//		}
 	}
-
 }

@@ -35,7 +35,10 @@ public class IntegersEvaluatorVisitor extends IntegersBaseVisitor<Value> {
 		int left = visit(ctx.intExpr(0)).intVal();
 		int right = visit(ctx.intExpr(1)).intVal();
 		if (ctx.op.getType() == IntegersParser.ADD) {
-			if (left > right) {
+			System.out.println("absolute is " + Math.abs(right - left) );
+			System.out.println("R is " + right);
+			System.out.println("L is " + left);
+			if (Math.abs(right - left) > 10) {
 				return new Value(true);
 			} else {
 				return new Value(false);

@@ -1,12 +1,15 @@
 package test.javareact.common.types.reactive;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
+import java.util.UUID;
 
-import test.javareact.client.QueueManager;
 import test.javareact.common.Consts;
 import test.javareact.common.packets.EventPacket;
+import test.javareact.common.packets.content.Attribute;
+import test.javareact.common.packets.content.Event;
 import test.javareact.common.packets.content.Value;
 import test.javareact.common.types.Types;
 
@@ -35,6 +38,7 @@ final class ReactiveAvgImpl extends Reactive implements ReactiveAvg {
 		// Contact the queue manager to obtain the list of changes that can be
 		// processed
 		Set<EventPacket> changes = queueManager.processEventPacket(evPkt, Consts.hostName + name);
+		
 		assert (changes.size()==1 && changes.contains(evPkt));
 		int newVal = evPkt.getEvent().getAttributeFor("get()").intVal();
 		int sum = 0;
@@ -49,12 +53,35 @@ final class ReactiveAvgImpl extends Reactive implements ReactiveAvg {
 			sum += val;
 		}
 		average = sum / (lastValues.size());
-		value = new Value(average);
 		
-		for (ReactiveListener l : reactiveListeners) {
-			l.notifyReactiveChange(value);
+		Value oldVal = value;
+
+		value = new Value(average);
+		hasValue = true;
+		if (name != null) {
+			try {
+				Attribute attr = new Attribute("get()", value);
+				Event event = new Event(name, Consts.hostName, attr);
+				Set<String> newComputedFrom = new HashSet<String>(getComputedFrom(changes));
+				newComputedFrom.add(name);
+				forwarder.sendEvent(evPkt.getId(), event, newComputedFrom,
+						evPkt.getFinalExpressions(), true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
+		if (!value.equals(oldVal)) {
+			for (ReactiveListener l : reactiveListeners) {
+				l.notifyReactiveChange(value);
+				l.notifyReactiveUpdate(value);
+			}
+		}
+		else {
+			for (ReactiveListener l : reactiveListeners) {
+				l.notifyReactiveUpdate(value);
+			}
+		}	
 	}
 
 }

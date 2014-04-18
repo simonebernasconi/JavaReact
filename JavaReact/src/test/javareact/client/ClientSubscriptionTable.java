@@ -22,6 +22,7 @@ final class ClientSubscriptionTable {
       subs.put(subscriber, subsList);
     }
     subsList.add(sub);
+    System.out.println("Client SubTable " + subsList );
   }
 
   final void addSubscriptions(Subscriber subscriber, Collection<Subscription> subs) {

@@ -12,18 +12,18 @@ public class ReactiveMin1 implements ReactiveListener {
 	public static void main(String args[]) {
 		Consts.hostName = "ReactiveMin1";
 		ReactiveMin1 remoteReact = new ReactiveMin1();
-		ReactiveInteger react= ReactiveFactory.getInteger("Tire1.obTire1.get() + ReactiveAvg.obAvg1.get() ", 0, "");
+		ReactiveInteger react= ReactiveFactory.getInteger("Tire1.obTire1.get() + ReactiveAvg1.obAvg1.get() ", 0, "obMin1");
 		react.addReactiveListener(remoteReact);
 	}
 
 	@Override
 	public void notifyReactiveChange(Value value) {
-		System.out.println("The reactive value is changed in: " + value.intVal());
+		System.out.println("The result is " + value.boolVal());
+		
 	}
 
 	@Override
 	public void notifyReactiveUpdate(Value value) {
-		ObservableBool obMin1 = new ObservableBool("obMin1", false);
-		obMin1.set(value.boolVal());
+		
 	}
 }

@@ -9,7 +9,7 @@ public class RemoteObservableString {
 
 	public static void main(String args[]) {
 		Consts.hostName = "Remote";
-		ObservableString obString = new ObservableString("obString", "");
+		ObservableString obString = new ObservableString("obString", "startingValue");
 		while (true) {
 			System.out.println("Insert String : ");
 			Scanner scanner = new Scanner(System.in);

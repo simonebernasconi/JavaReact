@@ -3,7 +3,6 @@ package test.javareact.examples.remote;
 import test.javareact.common.Consts;
 import test.javareact.common.packets.content.Value;
 import test.javareact.common.types.reactive.ReactiveFactory;
-import test.javareact.common.types.reactive.ReactiveInteger;
 import test.javareact.common.types.reactive.ReactiveListener;
 import test.javareact.common.types.reactive.ReactiveString;
 
