@@ -3,7 +3,7 @@ import Common;
 
 start: expression;
 
-expression:     numExpr | stringExpr | boolExpr | listExpr ;
+expression:     numExpr | stringExpr | boolExpr ;
               
 
 
