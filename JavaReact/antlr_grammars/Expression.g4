@@ -12,21 +12,21 @@ numExpr:    numExpr op=(MUL|DIV) numExpr                # MulDiv
     |       numExpr op=(MIN|MAX|MINEQ|MAXEQ) numExpr    # MinMaxMineqMaxeq 
     |       DIGIT                                       # Int
     |       DOUBLE                                      # Double
-    |       identifier                                  # Id        
-    |       '(' numExpr ')'                             # Parens   
+    |       identifier                                  # IdNum      
+    |       '(' numExpr ')'                             # ParensNum   
     ;
 
 stringExpr:     stringExpr ADD stringExpr   # Concat
-    |           identifier                  # Id  
-    |           '(' stringExpr ')'          # Parens
+    |           identifier                  # IdString  
+    |           '(' stringExpr ')'          # ParensString
     ;
 
 boolExpr:   NOT boolExpr                    # Not
     |       boolExpr op=(AND|OR) boolExpr   # AndOr
     |       boolExpr EQUAL boolExpr         # Equal
     |       BOOL                            # Bool
-    |       identifier                      # Id        
-    |       '(' boolExpr ')'                # Parens
+    |       identifier                      # IdBool        
+    |       '(' boolExpr ')'                # ParensBool
     |       numExpr DOT EQUAL '(' numExpr ')'           # EqualNum
     |       stringExpr DOT EQUAL '(' stringExpr ')'     # EqualString
     ;
