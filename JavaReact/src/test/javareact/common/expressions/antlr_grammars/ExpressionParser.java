@@ -19,15 +19,15 @@ public class ExpressionParser extends Parser {
 		NOT=11, BOOL=12, MAX=13, MIN=14, MAXEQ=15, MINEQ=16, SIZE=17, ISEMPTY=18, 
 		CONTAINS=19, COMMA=20, ORDERASC=21, ORDERDESC=22, ORDERASCBOOL=23, ORDERDESCBOOL=24, 
 		FILTER=25, AVG=26, SUM=27, ASC=28, DESC=29, ALLTRUE=30, ALLFALSE=31, ID=32, 
-		DIGIT=33, DOUBLE=34, STRING=35, LISTDIGIT=36, LISTDOUBLE=37, LISTSTRING=38, 
-		LISTBOOL=39, WS=40, ORDERDEAS=41;
+		DIGIT=33, DOUBLE=34, STRING=35, LISTDIGIT=36, SEQINT=37, LISTDOUBLE=38, 
+		SEQDOUBLE=39, LISTSTRING=40, LISTBOOL=41, WS=42;
 	public static final String[] tokenNames = {
 		"<INVALID>", "')'", "'('", "'*'", "'/'", "'+'", "'-'", "'=='", "'.'", 
 		"'&'", "'|'", "'!'", "BOOL", "'>'", "'<'", "'>='", "'<='", "'size'", "'isEmpty'", 
 		"'contains'", "','", "'orderAsc'", "'orderDesc'", "'orderAscBool'", "'orderDescBool'", 
 		"'filterBy'", "'avg'", "'sum'", "'isAsc'", "'isDesc'", "'isAllTrue'", 
-		"'isAllFalse'", "ID", "DIGIT", "DOUBLE", "STRING", "LISTDIGIT", "LISTDOUBLE", 
-		"LISTSTRING", "LISTBOOL", "WS", "ORDERDEAS"
+		"'isAllFalse'", "ID", "DIGIT", "DOUBLE", "STRING", "LISTDIGIT", "SEQINT", 
+		"LISTDOUBLE", "SEQDOUBLE", "LISTSTRING", "LISTBOOL", "WS"
 	};
 	public static final int
 		RULE_start = 0, RULE_expression = 1, RULE_numExpr = 2, RULE_stringExpr = 3, 
@@ -1210,12 +1210,12 @@ public class ExpressionParser extends Parser {
 	}
 	public static class OrderListIntContext extends ListDigitExprContext {
 		public Token op;
+		public TerminalNode ORDERDESC() { return getToken(ExpressionParser.ORDERDESC, 0); }
 		public ListDigitExprContext listDigitExpr() {
 			return getRuleContext(ListDigitExprContext.class,0);
 		}
 		public TerminalNode DOT() { return getToken(ExpressionParser.DOT, 0); }
 		public TerminalNode ORDERASC() { return getToken(ExpressionParser.ORDERASC, 0); }
-		public TerminalNode ORDERDEAS() { return getToken(ExpressionParser.ORDERDEAS, 0); }
 		public OrderListIntContext(ListDigitExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
@@ -1312,7 +1312,7 @@ public class ExpressionParser extends Parser {
 						setState(175);
 						((OrderListIntContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
-						if ( !(_la==ORDERASC || _la==ORDERDEAS) ) {
+						if ( !(_la==ORDERASC || _la==ORDERDESC) ) {
 							((OrderListIntContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
 						consume();
@@ -1387,12 +1387,12 @@ public class ExpressionParser extends Parser {
 	}
 	public static class OrderListDoubleContext extends ListDoubleExprContext {
 		public Token op;
+		public TerminalNode ORDERDESC() { return getToken(ExpressionParser.ORDERDESC, 0); }
 		public TerminalNode DOT() { return getToken(ExpressionParser.DOT, 0); }
 		public ListDoubleExprContext listDoubleExpr() {
 			return getRuleContext(ListDoubleExprContext.class,0);
 		}
 		public TerminalNode ORDERASC() { return getToken(ExpressionParser.ORDERASC, 0); }
-		public TerminalNode ORDERDEAS() { return getToken(ExpressionParser.ORDERDEAS, 0); }
 		public OrderListDoubleContext(ListDoubleExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
@@ -1487,7 +1487,7 @@ public class ExpressionParser extends Parser {
 						setState(196);
 						((OrderListDoubleContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
-						if ( !(_la==ORDERASC || _la==ORDERDEAS) ) {
+						if ( !(_la==ORDERASC || _la==ORDERDESC) ) {
 							((OrderListDoubleContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
 						consume();
@@ -1551,12 +1551,12 @@ public class ExpressionParser extends Parser {
 	}
 	public static class OrderListStringContext extends ListStringExprContext {
 		public Token op;
+		public TerminalNode ORDERDESC() { return getToken(ExpressionParser.ORDERDESC, 0); }
 		public TerminalNode DOT() { return getToken(ExpressionParser.DOT, 0); }
 		public ListStringExprContext listStringExpr() {
 			return getRuleContext(ListStringExprContext.class,0);
 		}
 		public TerminalNode ORDERASC() { return getToken(ExpressionParser.ORDERASC, 0); }
-		public TerminalNode ORDERDEAS() { return getToken(ExpressionParser.ORDERDEAS, 0); }
 		public OrderListStringContext(ListStringExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
@@ -1638,7 +1638,7 @@ public class ExpressionParser extends Parser {
 					setState(217);
 					((OrderListStringContext)_localctx).op = _input.LT(1);
 					_la = _input.LA(1);
-					if ( !(_la==ORDERASC || _la==ORDERDEAS) ) {
+					if ( !(_la==ORDERASC || _la==ORDERDESC) ) {
 						((OrderListStringContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 					}
 					consume();
@@ -1964,7 +1964,7 @@ public class ExpressionParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\uacf5\uee8c\u4f5d\u8b0d\u4a45\u78bd\u1b2f\u3378\3+\u00fa\4\2\t\2\4"+
+		"\3\uacf5\uee8c\u4f5d\u8b0d\u4a45\u78bd\u1b2f\u3378\3,\u00fa\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\3\2\3\2\3\3\3\3\3\3\3\3\5\3%\n"+
 		"\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4"+
@@ -1982,8 +1982,8 @@ public class ExpressionParser extends Parser {
 		"\13\n\3\13\3\13\5\13\u00e4\n\13\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3"+
 		"\f\5\f\u00f0\n\f\3\r\3\r\3\16\3\16\3\17\3\17\3\17\3\17\3\17\2\20\2\4\6"+
 		"\b\n\f\16\20\22\24\26\30\32\34\2\13\3\2\34\35\3\2\5\6\3\2\7\b\3\2\17\22"+
-		"\3\2\36\37\3\2 !\3\2\13\f\4\2\27\27++\4\2\5\5\"\"\u0115\2\36\3\2\2\2\4"+
-		"$\3\2\2\2\6:\3\2\2\2\bP\3\2\2\2\n\u0097\3\2\2\2\f\u00a8\3\2\2\2\16\u00ad"+
+		"\3\2\36\37\3\2 !\3\2\13\f\3\2\27\30\4\2\5\5\"\"\u0115\2\36\3\2\2\2\4$"+
+		"\3\2\2\2\6:\3\2\2\2\bP\3\2\2\2\n\u0097\3\2\2\2\f\u00a8\3\2\2\2\16\u00ad"+
 		"\3\2\2\2\20\u00c2\3\2\2\2\22\u00d7\3\2\2\2\24\u00e3\3\2\2\2\26\u00ef\3"+
 		"\2\2\2\30\u00f1\3\2\2\2\32\u00f3\3\2\2\2\34\u00f5\3\2\2\2\36\37\5\4\3"+
 		"\2\37\3\3\2\2\2 %\5\6\4\2!%\5\b\5\2\"%\5\n\6\2#%\5\f\7\2$ \3\2\2\2$!\3"+
@@ -2026,26 +2026,26 @@ public class ExpressionParser extends Parser {
 		"\2\2\u00b5\u00b6\7\4\2\2\u00b6\u00b7\t\5\2\2\u00b7\u00b8\5\6\4\2\u00b8"+
 		"\u00b9\7\3\2\2\u00b9\u00bb\3\2\2\2\u00ba\u00af\3\2\2\2\u00ba\u00b2\3\2"+
 		"\2\2\u00bb\u00be\3\2\2\2\u00bc\u00ba\3\2\2\2\u00bc\u00bd\3\2\2\2\u00bd"+
-		"\17\3\2\2\2\u00be\u00bc\3\2\2\2\u00bf\u00c0\b\t\1\2\u00c0\u00c3\7\'\2"+
-		"\2\u00c1\u00c3\5\26\f\2\u00c2\u00bf\3\2\2\2\u00c2\u00c1\3\2\2\2\u00c3"+
-		"\u00d1\3\2\2\2\u00c4\u00c5\6\t\n\3\u00c5\u00c6\7\n\2\2\u00c6\u00d0\t\t"+
-		"\2\2\u00c7\u00c8\6\t\13\3\u00c8\u00c9\7\n\2\2\u00c9\u00ca\7\33\2\2\u00ca"+
-		"\u00cb\7\4\2\2\u00cb\u00cc\t\5\2\2\u00cc\u00cd\5\6\4\2\u00cd\u00ce\7\3"+
-		"\2\2\u00ce\u00d0\3\2\2\2\u00cf\u00c4\3\2\2\2\u00cf\u00c7\3\2\2\2\u00d0"+
-		"\u00d3\3\2\2\2\u00d1\u00cf\3\2\2\2\u00d1\u00d2\3\2\2\2\u00d2\21\3\2\2"+
-		"\2\u00d3\u00d1\3\2\2\2\u00d4\u00d5\b\n\1\2\u00d5\u00d8\7(\2\2\u00d6\u00d8"+
-		"\5\26\f\2\u00d7\u00d4\3\2\2\2\u00d7\u00d6\3\2\2\2\u00d8\u00de\3\2\2\2"+
-		"\u00d9\u00da\6\n\f\3\u00da\u00db\7\n\2\2\u00db\u00dd\t\t\2\2\u00dc\u00d9"+
-		"\3\2\2\2\u00dd\u00e0\3\2\2\2\u00de\u00dc\3\2\2\2\u00de\u00df\3\2\2\2\u00df"+
-		"\23\3\2\2\2\u00e0\u00de\3\2\2\2\u00e1\u00e4\7)\2\2\u00e2\u00e4\5\26\f"+
-		"\2\u00e3\u00e1\3\2\2\2\u00e3\u00e2\3\2\2\2\u00e4\25\3\2\2\2\u00e5\u00e6"+
-		"\5\30\r\2\u00e6\u00e7\7\n\2\2\u00e7\u00e8\5\32\16\2\u00e8\u00e9\7\n\2"+
-		"\2\u00e9\u00ea\5\34\17\2\u00ea\u00f0\3\2\2\2\u00eb\u00ec\5\32\16\2\u00ec"+
-		"\u00ed\7\n\2\2\u00ed\u00ee\5\34\17\2\u00ee\u00f0\3\2\2\2\u00ef\u00e5\3"+
-		"\2\2\2\u00ef\u00eb\3\2\2\2\u00f0\27\3\2\2\2\u00f1\u00f2\t\n\2\2\u00f2"+
-		"\31\3\2\2\2\u00f3\u00f4\7\"\2\2\u00f4\33\3\2\2\2\u00f5\u00f6\7\"\2\2\u00f6"+
-		"\u00f7\7\4\2\2\u00f7\u00f8\7\3\2\2\u00f8\35\3\2\2\2\26$:EGPW\u0097\u009f"+
-		"\u00a1\u00a8\u00ad\u00ba\u00bc\u00c2\u00cf\u00d1\u00d7\u00de\u00e3\u00ef";
+		"\17\3\2\2\2\u00be\u00bc\3\2\2\2\u00bf\u00c0\b\t\1\2\u00c0\u00c3\7(\2\2"+
+		"\u00c1\u00c3\5\26\f\2\u00c2\u00bf\3\2\2\2\u00c2\u00c1\3\2\2\2\u00c3\u00d1"+
+		"\3\2\2\2\u00c4\u00c5\6\t\n\3\u00c5\u00c6\7\n\2\2\u00c6\u00d0\t\t\2\2\u00c7"+
+		"\u00c8\6\t\13\3\u00c8\u00c9\7\n\2\2\u00c9\u00ca\7\33\2\2\u00ca\u00cb\7"+
+		"\4\2\2\u00cb\u00cc\t\5\2\2\u00cc\u00cd\5\6\4\2\u00cd\u00ce\7\3\2\2\u00ce"+
+		"\u00d0\3\2\2\2\u00cf\u00c4\3\2\2\2\u00cf\u00c7\3\2\2\2\u00d0\u00d3\3\2"+
+		"\2\2\u00d1\u00cf\3\2\2\2\u00d1\u00d2\3\2\2\2\u00d2\21\3\2\2\2\u00d3\u00d1"+
+		"\3\2\2\2\u00d4\u00d5\b\n\1\2\u00d5\u00d8\7*\2\2\u00d6\u00d8\5\26\f\2\u00d7"+
+		"\u00d4\3\2\2\2\u00d7\u00d6\3\2\2\2\u00d8\u00de\3\2\2\2\u00d9\u00da\6\n"+
+		"\f\3\u00da\u00db\7\n\2\2\u00db\u00dd\t\t\2\2\u00dc\u00d9\3\2\2\2\u00dd"+
+		"\u00e0\3\2\2\2\u00de\u00dc\3\2\2\2\u00de\u00df\3\2\2\2\u00df\23\3\2\2"+
+		"\2\u00e0\u00de\3\2\2\2\u00e1\u00e4\7+\2\2\u00e2\u00e4\5\26\f\2\u00e3\u00e1"+
+		"\3\2\2\2\u00e3\u00e2\3\2\2\2\u00e4\25\3\2\2\2\u00e5\u00e6\5\30\r\2\u00e6"+
+		"\u00e7\7\n\2\2\u00e7\u00e8\5\32\16\2\u00e8\u00e9\7\n\2\2\u00e9\u00ea\5"+
+		"\34\17\2\u00ea\u00f0\3\2\2\2\u00eb\u00ec\5\32\16\2\u00ec\u00ed\7\n\2\2"+
+		"\u00ed\u00ee\5\34\17\2\u00ee\u00f0\3\2\2\2\u00ef\u00e5\3\2\2\2\u00ef\u00eb"+
+		"\3\2\2\2\u00f0\27\3\2\2\2\u00f1\u00f2\t\n\2\2\u00f2\31\3\2\2\2\u00f3\u00f4"+
+		"\7\"\2\2\u00f4\33\3\2\2\2\u00f5\u00f6\7\"\2\2\u00f6\u00f7\7\4\2\2\u00f7"+
+		"\u00f8\7\3\2\2\u00f8\35\3\2\2\2\26$:EGPW\u0097\u009f\u00a1\u00a8\u00ad"+
+		"\u00ba\u00bc\u00c2\u00cf\u00d1\u00d7\u00de\u00e3\u00ef";
 	public static final ATN _ATN =
 		ATNSimulator.deserialize(_serializedATN.toCharArray());
 	static {

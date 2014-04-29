@@ -44,19 +44,19 @@ boolExpr:   NOT boolExpr                    # Not
 
 listExpr:  listDigitExpr | listDoubleExpr | listStringExpr | listBoolExpr ;
     
-listDigitExpr:  listDigitExpr DOT op=(ORDERASC|ORDERDEAS)                       # OrderListInt   
+listDigitExpr:  listDigitExpr DOT op=(ORDERASC|ORDERDESC)                       # OrderListInt   
     |           listDigitExpr DOT FILTER '(' op=(MIN|MAX|MINEQ|MAXEQ) numExpr ')' # FilterListInt
     |           LISTDIGIT                                                       # ListDigit
     |           identifier                                                      # IdListInt      
     ;
 
-listDoubleExpr: listDoubleExpr DOT op=(ORDERASC|ORDERDEAS)                       # OrderListDouble   
+listDoubleExpr: listDoubleExpr DOT op=(ORDERASC|ORDERDESC)                       # OrderListDouble   
     |           listDoubleExpr DOT FILTER '(' op=(MIN|MAX|MINEQ|MAXEQ) numExpr ')' # FilterListDouble
     |           LISTDOUBLE                                                       # ListDouble
     |           identifier                                                       # IdListDouble        
     ;
 
-listStringExpr: listStringExpr DOT op=(ORDERASC|ORDERDEAS)                       # OrderListString
+listStringExpr: listStringExpr DOT op=(ORDERASC|ORDERDESC)                       # OrderListString
     |           LISTSTRING                                                       # ListString
     |           identifier                                                       # IdListString       
     ;
