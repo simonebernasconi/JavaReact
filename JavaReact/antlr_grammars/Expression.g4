@@ -35,23 +35,23 @@ boolExpr:   NOT boolExpr                    # Not
     |       listExpr EQUAL listExpr        				# EqualList
     |       listDigitExpr DOT op=(ASC|DESC)             # IsAscIsDescInt
     |       listDoubleExpr DOT op=(ASC|DESC)            # IsAscIsDescDouble
-    |       listDigitExpr DOT CONTAINS '(' DIGIT ')'    # ContainsInt
-    |       listDoubleExpr DOT CONTAINS '(' DOUBLE ')'  # ContainsDouble
-    |       listStringExpr DOT CONTAINS '(' STRING ')'  # ContainsString
-    |       listBoolExpr DOT CONTAINS '(' BOOL ')'      # ContainsBool
+    |       listDigitExpr DOT CONTAINS '(' numExpr ')'    # ContainsInt
+    |       listDoubleExpr DOT CONTAINS '(' numExpr ')'  # ContainsDouble
+    |       listStringExpr DOT CONTAINS '(' stringExpr ')'  # ContainsString
+    |       listBoolExpr DOT CONTAINS '(' boolExpr ')'      # ContainsBool
     |       listBoolExpr DOT op=(ALLTRUE|ALLFALSE)      # AllTrueFalse
     ;
 
 listExpr:  listDigitExpr | listDoubleExpr | listStringExpr | listBoolExpr ;
     
 listDigitExpr:  listDigitExpr DOT op=(ORDERASC|ORDERDEAS)                       # OrderListInt   
-    |           listDigitExpr DOT FILTER '(' op=(MIN|MAX|MINEQ|MAXEQ) DIGIT ')' # FilterListInt
+    |           listDigitExpr DOT FILTER '(' op=(MIN|MAX|MINEQ|MAXEQ) numExpr ')' # FilterListInt
     |           LISTDIGIT                                                       # ListDigit
     |           identifier                                                      # IdListInt      
     ;
 
 listDoubleExpr: listDoubleExpr DOT op=(ORDERASC|ORDERDEAS)                       # OrderListDouble   
-    |           listDoubleExpr DOT FILTER '(' op=(MIN|MAX|MINEQ|MAXEQ) DOUBLE ')' # FilterListDouble
+    |           listDoubleExpr DOT FILTER '(' op=(MIN|MAX|MINEQ|MAXEQ) numExpr ')' # FilterListDouble
     |           LISTDOUBLE                                                       # ListDouble
     |           identifier                                                       # IdListDouble        
     ;
