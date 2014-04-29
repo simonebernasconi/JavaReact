@@ -68,7 +68,10 @@ public final ValueType getType() {
   }
 
   public final double doubleVal() {
-    return doubleVal;
+    if (type == ValueType.INT){ 
+	  return (double)intVal;
+    }
+    else return doubleVal; 
   }
 
   public final String stringVal() {

@@ -1,6 +1,7 @@
 package test.javareact.common.packets.content;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Attribute implements Serializable {
   private static final long serialVersionUID = -1970460317346993023L;
@@ -26,6 +27,8 @@ public class Attribute implements Serializable {
       this.value = new Value((String) value);
     } else if (value instanceof Boolean) {
       this.value = new Value((Boolean) value);
+    } else if (value instanceof List<?>) {
+        this.value = new Value((List<?>) value);
     } else {
       throw new Exception("Invalid value type");
     }
