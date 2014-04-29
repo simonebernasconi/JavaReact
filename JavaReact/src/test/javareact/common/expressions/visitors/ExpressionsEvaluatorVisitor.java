@@ -21,9 +21,7 @@ import test.javareact.common.expressions.antlr_grammars.ExpressionParser.EqualLi
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ExpressionContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.FilterListDoubleContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.FilterListIntContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.HostIdContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IdListBoolContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IdListDoubleContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IdListIntContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IdListStringContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IsAscIsDescDoubleContext;
@@ -33,13 +31,10 @@ import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ListDig
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ListDoubleContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ListExprContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ListStringContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.MethodContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ObservableIdContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.OrderListDoubleContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.OrderListIntContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.OrderListStringContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.SizeListContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.StartContext;
 import test.javareact.common.packets.content.Value;
 
 public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
@@ -114,11 +109,6 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 	}
 
 	@Override
-	public Value visitIdListDouble(IdListDoubleContext ctx) {
-		return visit(ctx.identifier());
-	}
-
-	@Override
 	public Value visitAllTrueFalse(AllTrueFalseContext ctx) {
 		List<Boolean> list = visit(ctx.listBoolExpr()).listVal();
 		if (ctx.op.getType() == ExpressionParser.ALLTRUE) {
@@ -145,13 +135,14 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 	public Value visitAvgSumListInt(AvgSumListIntContext ctx) {
 		List<Integer> list = visit(ctx.listDigitExpr()).listVal();
 		if (ctx.op.getType() == ExpressionParser.AVG) {
-			int sum = 0;
+			double sum = 0;
 			if (!list.isEmpty()) {
 				for (int n : list) {
 					sum += n;
 				}
 			}
-			return new Value(sum / list.size());
+			double avg = sum/list.size();
+			return new Value(avg);
 		} else {
 			int sum = 0;
 			if (!list.isEmpty()) {
@@ -179,7 +170,7 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 	@Override
 	public Value visitContainsBool(ContainsBoolContext ctx) {
 		List<Boolean> list = visit(ctx.listBoolExpr()).listVal();
-		boolean bool = visit(ctx.BOOL()).boolVal();
+		boolean bool = visit(ctx.boolExpr()).boolVal();
 		return new Value(list.contains(bool));
 	}
 
@@ -198,7 +189,7 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 	@Override
 	public Value visitContainsDouble(ContainsDoubleContext ctx) {
 		List<Double> list = visit(ctx.listDoubleExpr()).listVal();
-		double n = visit(ctx.DOUBLE()).doubleVal();
+		double n = visit(ctx.numExpr()).doubleVal();
 		return new Value(list.contains(n));
 	}
 
@@ -211,8 +202,9 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 
 	@Override
 	public Value visitFilterListDouble(FilterListDoubleContext ctx) {
+		System.out.println("siamo nel double");
 		List<Double> list = visit(ctx.listDoubleExpr()).listVal();
-		double n = visit(ctx.DOUBLE()).doubleVal();
+		double n = visit(ctx.numExpr()).doubleVal();
 		List<Double> listNew = new ArrayList<Double>();
 		if (ctx.op.getType() == ExpressionParser.MIN) {
 			for (int i=0; i<list.size(); i++) {
@@ -247,8 +239,9 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 
 	@Override
 	public Value visitFilterListInt(FilterListIntContext ctx) {
+		System.out.println("siamo nel int");
 		List<Integer> list = visit(ctx.listDigitExpr()).listVal();
-		int n = visit(ctx.DIGIT()).intVal();
+		double n = visit(ctx.numExpr()).doubleVal();
 		List<Integer> listNew = new ArrayList<Integer>();
 		if (ctx.op.getType() == ExpressionParser.MIN) {
 			for (int i=0; i<list.size(); i++) {
@@ -364,19 +357,20 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 	@Override
 	public Value visitContainsInt(ContainsIntContext ctx) {
 		List<Integer> list = visit(ctx.listDigitExpr()).listVal();
-		int n = visit(ctx.DIGIT()).intVal();
-		return new Value(list.contains(n));
+		int n = visit(ctx.numExpr()).intVal();
+		return new Value(n);
 	}
 
 	@Override
 	public Value visitContainsString(ContainsStringContext ctx) {
 		List<String> list = visit(ctx.listStringExpr()).listVal();
-		String string = visit(ctx.STRING()).stringVal();
+		String string = visit(ctx.stringExpr()).stringVal();
 		return new Value(list.contains(string));
 	}
 
 	@Override
 	public Value visitOrderListInt(OrderListIntContext ctx) {
+		System.out.println("siamo nel int");
 		List<Integer> list = visit(ctx.listDigitExpr()).listVal();
 		Collections.sort(list);
 		return new Value(list);
@@ -384,9 +378,11 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 
 	@Override
 	public Value visitOrderListDouble(OrderListDoubleContext ctx) {
+		System.out.println("siamo nel double");
 		List<Double> list = visit(ctx.listDoubleExpr()).listVal();
 		Collections.sort(list);
-		return new Value(list);	}
+		return new Value(list);	
+	}
 
 	@Override
 	public Value visitEqualList(EqualListContext ctx) {
