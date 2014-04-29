@@ -12,228 +12,18 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface ExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpression(@NotNull ExpressionParser.ExpressionContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#IdListDouble}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIdListDouble(@NotNull ExpressionParser.IdListDoubleContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#listDouble}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitListDouble(@NotNull ExpressionParser.ListDoubleContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#EqualNum}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitEqualNum(@NotNull ExpressionParser.EqualNumContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#IdListString}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIdListString(@NotNull ExpressionParser.IdListStringContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#hostId}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitHostId(@NotNull ExpressionParser.HostIdContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#ContainsBool}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitContainsBool(@NotNull ExpressionParser.ContainsBoolContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#IdListBool}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIdListBool(@NotNull ExpressionParser.IdListBoolContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#MulDiv}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMulDiv(@NotNull ExpressionParser.MulDivContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#IdString}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIdString(@NotNull ExpressionParser.IdStringContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#OrderListString}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOrderListString(@NotNull ExpressionParser.OrderListStringContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#MinMaxMineqMaxeq}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMinMaxMineqMaxeq(@NotNull ExpressionParser.MinMaxMineqMaxeqContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#FilterListDouble}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFilterListDouble(@NotNull ExpressionParser.FilterListDoubleContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#Int}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInt(@NotNull ExpressionParser.IntContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#listString}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitListString(@NotNull ExpressionParser.ListStringContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#AvgSumListDouble}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAvgSumListDouble(@NotNull ExpressionParser.AvgSumListDoubleContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#ContainsInt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitContainsInt(@NotNull ExpressionParser.ContainsIntContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#seqInt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSeqInt(@NotNull ExpressionParser.SeqIntContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#ContainsString}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitContainsString(@NotNull ExpressionParser.ContainsStringContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#AddSub}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAddSub(@NotNull ExpressionParser.AddSubContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#EqualList}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitEqualList(@NotNull ExpressionParser.EqualListContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#ParensBool}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitParensBool(@NotNull ExpressionParser.ParensBoolContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#observableId}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitObservableId(@NotNull ExpressionParser.ObservableIdContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#IsAscIsDescDouble}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIsAscIsDescDouble(@NotNull ExpressionParser.IsAscIsDescDoubleContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#ParensString}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitParensString(@NotNull ExpressionParser.ParensStringContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#start}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStart(@NotNull ExpressionParser.StartContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#ListBool_Label}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitListBool_Label(@NotNull ExpressionParser.ListBool_LabelContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#seqBool}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSeqBool(@NotNull ExpressionParser.SeqBoolContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#identifier}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIdentifier(@NotNull ExpressionParser.IdentifierContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#SizeList}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSizeList(@NotNull ExpressionParser.SizeListContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#ListDouble_Label}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitListDouble_Label(@NotNull ExpressionParser.ListDouble_LabelContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link ExpressionParser#Double}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitDouble(@NotNull ExpressionParser.DoubleContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpression(@NotNull ExpressionParser.ExpressionContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link ExpressionParser#listDigit}.
@@ -264,6 +54,13 @@ public interface ExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	T visitAllTrueFalse(@NotNull ExpressionParser.AllTrueFalseContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#EqualNum}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEqualNum(@NotNull ExpressionParser.EqualNumContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link ExpressionParser#AvgSumListInt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -271,11 +68,32 @@ public interface ExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	T visitAvgSumListInt(@NotNull ExpressionParser.AvgSumListIntContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#IdListString}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdListString(@NotNull ExpressionParser.IdListStringContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#hostId}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitHostId(@NotNull ExpressionParser.HostIdContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link ExpressionParser#Concat}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitConcat(@NotNull ExpressionParser.ConcatContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#ContainsBool}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitContainsBool(@NotNull ExpressionParser.ContainsBoolContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link ExpressionParser#EqualString}.
@@ -292,6 +110,13 @@ public interface ExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	T visitListDigit_Label(@NotNull ExpressionParser.ListDigit_LabelContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#IdListBool}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdListBool(@NotNull ExpressionParser.IdListBoolContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link ExpressionParser#seqString}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -299,11 +124,32 @@ public interface ExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	T visitSeqString(@NotNull ExpressionParser.SeqStringContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#ContainsDouble}.
+	 * Visit a parse tree produced by {@link ExpressionParser#MulDiv}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitContainsDouble(@NotNull ExpressionParser.ContainsDoubleContext ctx);
+	T visitMulDiv(@NotNull ExpressionParser.MulDivContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#IdString}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdString(@NotNull ExpressionParser.IdStringContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#OrderListString}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOrderListString(@NotNull ExpressionParser.OrderListStringContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#MinMaxMineqMaxeq}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMinMaxMineqMaxeq(@NotNull ExpressionParser.MinMaxMineqMaxeqContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link ExpressionParser#ParensNum}.
@@ -313,11 +159,11 @@ public interface ExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	T visitParensNum(@NotNull ExpressionParser.ParensNumContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#seqDouble}.
+	 * Visit a parse tree produced by {@link ExpressionParser#Int}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSeqDouble(@NotNull ExpressionParser.SeqDoubleContext ctx);
+	T visitInt(@NotNull ExpressionParser.IntContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link ExpressionParser#listBool}.
@@ -334,11 +180,11 @@ public interface ExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	T visitFilterListInt(@NotNull ExpressionParser.FilterListIntContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#AndOr}.
+	 * Visit a parse tree produced by {@link ExpressionParser#listString}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAndOr(@NotNull ExpressionParser.AndOrContext ctx);
+	T visitListString(@NotNull ExpressionParser.ListStringContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link ExpressionParser#listExpr}.
@@ -348,6 +194,27 @@ public interface ExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	T visitListExpr(@NotNull ExpressionParser.ListExprContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#AndOr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAndOr(@NotNull ExpressionParser.AndOrContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#ContainsInt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitContainsInt(@NotNull ExpressionParser.ContainsIntContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#seqInt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSeqInt(@NotNull ExpressionParser.SeqIntContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link ExpressionParser#EqualBool}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -355,18 +222,25 @@ public interface ExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	T visitEqualBool(@NotNull ExpressionParser.EqualBoolContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#ContainsString}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitContainsString(@NotNull ExpressionParser.ContainsStringContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#AddSub}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAddSub(@NotNull ExpressionParser.AddSubContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link ExpressionParser#OrderListInt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitOrderListInt(@NotNull ExpressionParser.OrderListIntContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#OrderListDouble}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOrderListDouble(@NotNull ExpressionParser.OrderListDoubleContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link ExpressionParser#ListString_Label}.
@@ -383,11 +257,18 @@ public interface ExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	T visitIsAscIsDescInt(@NotNull ExpressionParser.IsAscIsDescIntContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link ExpressionParser#Not}.
+	 * Visit a parse tree produced by {@link ExpressionParser#EqualList}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNot(@NotNull ExpressionParser.NotContext ctx);
+	T visitEqualList(@NotNull ExpressionParser.EqualListContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#ParensBool}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParensBool(@NotNull ExpressionParser.ParensBoolContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link ExpressionParser#IdListInt}.
@@ -397,6 +278,20 @@ public interface ExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	T visitIdListInt(@NotNull ExpressionParser.IdListIntContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#Not}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNot(@NotNull ExpressionParser.NotContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#observableId}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitObservableId(@NotNull ExpressionParser.ObservableIdContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link ExpressionParser#IdNum}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -404,9 +299,51 @@ public interface ExpressionVisitor<T> extends ParseTreeVisitor<T> {
 	T visitIdNum(@NotNull ExpressionParser.IdNumContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#ParensString}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParensString(@NotNull ExpressionParser.ParensStringContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#start}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStart(@NotNull ExpressionParser.StartContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#ListBool_Label}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitListBool_Label(@NotNull ExpressionParser.ListBool_LabelContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#seqBool}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSeqBool(@NotNull ExpressionParser.SeqBoolContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link ExpressionParser#method}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitMethod(@NotNull ExpressionParser.MethodContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#identifier}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdentifier(@NotNull ExpressionParser.IdentifierContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ExpressionParser#SizeList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSizeList(@NotNull ExpressionParser.SizeListContext ctx);
 }

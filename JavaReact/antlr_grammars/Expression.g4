@@ -8,9 +8,6 @@ expression:     numExpr | stringExpr | boolExpr | listExpr ;
 seqInt: DIGIT | DIGIT ',' seqInt;   
 listDigit: '[' seqInt ']';
 
-seqDouble: DOUBLE | DOUBLE ',' seqDouble;
-listDouble: '[' seqDouble ']';
-
 seqString: STRING | STRING ',' seqString;
 listString: '[' seqString ']';
 
@@ -25,7 +22,6 @@ numExpr:    numExpr op=(MUL|DIV) numExpr                # MulDiv
     |       identifier                                  # IdNum      
     |       '(' numExpr ')'                             # ParensNum 
     |		listDigitExpr DOT op=(AVG|SUM)              # AvgSumListInt  
-    |		listDoubleExpr DOT op=(AVG|SUM)             # AvgSumListDouble
     |       listExpr DOT SIZE                     		# SizeList	 
     ;
 
@@ -44,26 +40,18 @@ boolExpr:   NOT boolExpr                    # Not
     |       stringExpr EQUAL stringExpr     			# EqualString
     |       listExpr EQUAL listExpr        				# EqualList
     |       listDigitExpr DOT op=(ASC|DESC)             # IsAscIsDescInt
-    |       listDoubleExpr DOT op=(ASC|DESC)            # IsAscIsDescDouble
     |       listDigitExpr DOT CONTAINS '(' numExpr ')'    # ContainsInt
-    |       listDoubleExpr DOT CONTAINS '(' numExpr ')'  # ContainsDouble
     |       listStringExpr DOT CONTAINS '(' stringExpr ')'  # ContainsString
     |       listBoolExpr DOT CONTAINS '(' boolExpr ')'      # ContainsBool
     |       listBoolExpr DOT op=(ALLTRUE|ALLFALSE)      # AllTrueFalse
     ;
 
-listExpr:  listDigitExpr | listDoubleExpr | listStringExpr | listBoolExpr ;
+listExpr:  listDigitExpr | listStringExpr | listBoolExpr ;
     
 listDigitExpr:  listDigitExpr DOT op=(ORDERASC|ORDERDESC)                       # OrderListInt   
     |           listDigitExpr DOT FILTER '(' op=(MIN|MAX|MINEQ|MAXEQ) numExpr ')' # FilterListInt
     |           listDigit                                                       # ListDigit_Label
     |           identifier                                                      # IdListInt      
-    ;
-
-listDoubleExpr: listDoubleExpr DOT op=(ORDERASC|ORDERDESC)                       # OrderListDouble   
-    |           listDoubleExpr DOT FILTER '(' op=(MIN|MAX|MINEQ|MAXEQ) numExpr ')' # FilterListDouble
-    |           listDouble                                                       # ListDouble_Label
-    |           identifier                                                       # IdListDouble        
     ;
 
 listStringExpr: listStringExpr DOT op=(ORDERASC|ORDERDESC)                       # OrderListString
