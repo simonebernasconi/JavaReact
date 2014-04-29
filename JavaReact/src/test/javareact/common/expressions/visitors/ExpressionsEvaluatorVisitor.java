@@ -34,6 +34,10 @@ import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ListStr
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.OrderListDoubleContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.OrderListIntContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.OrderListStringContext;
+import test.javareact.common.expressions.antlr_grammars.ExpressionParser.SeqBoolContext;
+import test.javareact.common.expressions.antlr_grammars.ExpressionParser.SeqDoubleContext;
+import test.javareact.common.expressions.antlr_grammars.ExpressionParser.SeqIntContext;
+import test.javareact.common.expressions.antlr_grammars.ExpressionParser.SeqStringContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.SizeListContext;
 import test.javareact.common.packets.content.Value;
 
@@ -107,6 +111,46 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		// TODO Auto-generated method stub
 		return super.visitExpression(ctx);
 	}
+	
+	
+
+	@Override
+	public Value visitSeqInt(SeqIntContext ctx) {
+		if (ctx.getChildCount() == 1){
+			return new Value(Integer.parseInt(ctx.getText()));
+		}
+		else {
+			int left = (Integer.parseInt(ctx.DIGIT().getText()));
+			List<Integer> right = visit(ctx.seqInt()).listVal();
+			return new Value(right.add(left));
+		}
+	}
+
+	@Override
+	public Value visitSeqBool(SeqBoolContext ctx) {
+		// TODO Auto-generated method stub
+		return super.visitSeqBool(ctx);
+	}
+
+	@Override
+	public Value visitSeqString(SeqStringContext ctx) {
+		// TODO Auto-generated method stub
+		return super.visitSeqString(ctx);
+	}
+
+	@Override
+	public Value visitSeqDouble(SeqDoubleContext ctx) {
+		if (ctx.getChildCount() == 1){
+			return new Value(Integer.parseInt(ctx.getText()));
+		}
+		else {
+			double left = (Double.parseDouble(ctx.DOUBLE().getText()));
+			List<Double> right = visit(ctx.seqDouble()).listVal();
+			return new Value(right.add(left));
+		}
+	}
+	
+	
 
 	@Override
 	public Value visitAllTrueFalse(AllTrueFalseContext ctx) {

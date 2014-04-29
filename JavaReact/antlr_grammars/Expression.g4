@@ -4,8 +4,18 @@ import Common;
 start: expression;
 
 expression:     numExpr | stringExpr | boolExpr | listExpr ;
-              
+           
+seqInt: DIGIT | DIGIT ',' seqInt;   
+listDigit: '[' seqInt ']';
 
+seqDouble: DOUBLE | DOUBLE ',' seqDouble;
+listDouble: '[' seqDouble ']';
+
+seqString: STRING | STRING ',' seqString;
+listString: '[' seqString ']';
+
+seqBool: BOOL | BOOL ',' seqBool;
+listBool: '[' seqBool ']';
 
 numExpr:    numExpr op=(MUL|DIV) numExpr                # MulDiv
     |       numExpr op=(ADD|SUB) numExpr                # AddSub
@@ -46,21 +56,21 @@ listExpr:  listDigitExpr | listDoubleExpr | listStringExpr | listBoolExpr ;
     
 listDigitExpr:  listDigitExpr DOT op=(ORDERASC|ORDERDESC)                       # OrderListInt   
     |           listDigitExpr DOT FILTER '(' op=(MIN|MAX|MINEQ|MAXEQ) numExpr ')' # FilterListInt
-    |           LISTDIGIT                                                       # ListDigit
+    |           listDigit                                                       # ListDigit_Label
     |           identifier                                                      # IdListInt      
     ;
 
 listDoubleExpr: listDoubleExpr DOT op=(ORDERASC|ORDERDESC)                       # OrderListDouble   
     |           listDoubleExpr DOT FILTER '(' op=(MIN|MAX|MINEQ|MAXEQ) numExpr ')' # FilterListDouble
-    |           LISTDOUBLE                                                       # ListDouble
+    |           listDouble                                                       # ListDouble_Label
     |           identifier                                                       # IdListDouble        
     ;
 
 listStringExpr: listStringExpr DOT op=(ORDERASC|ORDERDESC)                       # OrderListString
-    |           LISTSTRING                                                       # ListString
+    |           listString                                                       # ListString_Label
     |           identifier                                                       # IdListString       
     ;
 
-listBoolExpr:   LISTBOOL                                                         # ListBool
+listBoolExpr:   listBool                                                         # ListBool_Label
     |           identifier                                                       # IdListBool     
     ;
