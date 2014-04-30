@@ -1,37 +1,13 @@
 package test.javareact.common.expressions.visitors;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 import test.javareact.common.Consts;
 import test.javareact.common.expressions.antlr_grammars.ExpressionBaseVisitor;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.AllTrueFalseContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.AvgSumListIntContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ConcatContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ContainsBoolContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ContainsIntContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ContainsStringContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.EqualBoolContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.EqualListContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ExpressionContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.FilterListIntContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IdListBoolContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IdListIntContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IdListStringContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IsAscIsDescIntContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ListBoolContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ListDigitContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ListExprContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ListStringContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.OrderListIntContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.OrderListStringContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.SeqBoolContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.SeqIntContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.SeqStringContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.SizeListContext;
 import test.javareact.common.packets.content.Value;
 
 public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
@@ -93,55 +69,59 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		return new Value(Boolean.parseBoolean(ctx.getText()));
 	}
 
-	@Override
-	public Value visitListDigit(ListDigitContext ctx) {
-		// TODO Auto-generated method stub
-		return super.visitListDigit(ctx);
-	}
+//	@Override
+//	public Value visitListDigit(ListDigitContext ctx) {
+//		// TODO Auto-generated method stub
+//		return super.visitListDigit(ctx);
+////		System.out.println("prova int");
+////		List<Integer> list = visit(ctx.seqInt()).listVal();
+////		return new Value(list);
+//	}
 
 	@Override
 	public Value visitExpression(ExpressionContext ctx) {
 		// TODO Auto-generated method stub
 		return super.visitExpression(ctx);
 	}
+
 	
-	
 
-	@Override
-	public Value visitSeqInt(SeqIntContext ctx) {
-		if (ctx.getChildCount() == 1){
-			return new Value(Integer.parseInt(ctx.getText()));
-		}
-		else {
-			int left = (Integer.parseInt(ctx.DIGIT().getText()));
-			List<Integer> right = visit(ctx.seqInt()).listVal();
-			return new Value(right.add(left));
-		}
-	}
+//	@Override
+//	public Value visitSeqInt(SeqIntContext ctx) {
+//		if (ctx.getChildCount() == 1){
+//			return new Value(Integer.parseInt(ctx.getText()));
+//		}
+//		else {
+//			int left = (Integer.parseInt(ctx.DIGIT().getText()));
+//			List<Integer> right = visit(ctx.seqInt()).listVal();
+//			return new Value(right.add(left));
+//		}
+//	}
 
-	@Override
-	public Value visitSeqBool(SeqBoolContext ctx) {
-		if (ctx.getChildCount() == 1){
-			return new Value(Boolean.parseBoolean(ctx.getText()));
-		}
-		else {
-			Boolean left = (Boolean.parseBoolean(ctx.BOOL().getText()));
-			List<Boolean> right = visit(ctx.seqBool()).listVal();
-			return new Value(right.add(left));
-		}
-	}
+//	@Override
+//	public Value visitSeqBool(SeqBoolContext ctx) {
+//		System.out.println("prova add");
+//		if (ctx.getChildCount() == 1){
+//			return new Value(Boolean.parseBoolean(ctx.getText()));
+//		}
+//		else {
+//			Boolean left = (Boolean.parseBoolean(ctx.BOOL().getText()));
+//			List<Boolean> right = visit(ctx.seqBool()).listVal();
+//			return new Value(right.add(left));
+//		}
+//	}
 
-	@Override
-	public Value visitSeqString(SeqStringContext ctx) {
-		if (ctx.getChildCount() == 1){
-			return new Value(ctx.getText());
-		}
-		else {
-			String left = (ctx.STRING().getText());
-			List<String> right = visit(ctx.seqString()).listVal();
-			return new Value(right.add(left));
-		}
-	}
+//	@Override
+//	public Value visitSeqString(SeqStringContext ctx) {
+//		if (ctx.getChildCount() == 1){
+//			return new Value(ctx.getText());
+//		}
+//		else {
+//			String left = (ctx.STRING().getText());
+//			List<String> right = visit(ctx.seqString()).listVal();
+//			return new Value(right.add(left));
+//		}
+//	}
 
 
 //	@Override
@@ -158,56 +138,56 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 	
 	
 
-	@Override
-	public Value visitAllTrueFalse(AllTrueFalseContext ctx) {
-		List<Boolean> list = visit(ctx.listBoolExpr()).listVal();
-		if (ctx.op.getType() == ExpressionParser.ALLTRUE) {
-			boolean check = true;
-			for (boolean bool : list) {
-				if (bool == false) {
-					check = false;
-				}
-			}
-			return new Value(check);
-		} else {
-			boolean check = true;
-			for (boolean bool : list) {
-				if (bool == true) {
-					check = false;
-				}
-			}
-			return new Value(check);
+//	@Override
+//	public Value visitAllTrueFalse(AllTrueFalseContext ctx) {
+//		List<Boolean> list = visit(ctx.listBoolExpr()).listVal();
+//		if (ctx.op.getType() == ExpressionParser.ALLTRUE) {
+//			boolean check = true;
+//			for (boolean bool : list) {
+//				if (bool == false) {
+//					check = false;
+//				}
+//			}
+//			return new Value(check);
+//		} else {
+//			boolean check = true;
+//			for (boolean bool : list) {
+//				if (bool == true) {
+//					check = false;
+//				}
+//			}
+//			return new Value(check);
+//
+//		}
+//	}
 
-		}
-	}
+//	@Override
+//	public Value visitAvgSumListInt(AvgSumListIntContext ctx) {
+//		List<Integer> list = visit(ctx.listDigitExpr()).listVal();
+//		if (ctx.op.getType() == ExpressionParser.AVG) {
+//			double sum = 0;
+//			if (!list.isEmpty()) {
+//				for (int n : list) {
+//					sum += n;
+//				}
+//			}
+//			double avg = sum/list.size();
+//			return new Value(avg);
+//		} else {
+//			int sum = 0;
+//			if (!list.isEmpty()) {
+//				for (int n : list) {
+//					sum += n;
+//				}
+//			}
+//			return new Value(sum);
+//		}
+//	}
 
-	@Override
-	public Value visitAvgSumListInt(AvgSumListIntContext ctx) {
-		List<Integer> list = visit(ctx.listDigitExpr()).listVal();
-		if (ctx.op.getType() == ExpressionParser.AVG) {
-			double sum = 0;
-			if (!list.isEmpty()) {
-				for (int n : list) {
-					sum += n;
-				}
-			}
-			double avg = sum/list.size();
-			return new Value(avg);
-		} else {
-			int sum = 0;
-			if (!list.isEmpty()) {
-				for (int n : list) {
-					sum += n;
-				}
-			}
-			return new Value(sum);
-		}
-	}
-
-	@Override
-	public Value visitIdListString(IdListStringContext ctx) {
-		return visit(ctx.identifier());
-	}
+//	@Override
+//	public Value visitIdListString(IdListStringContext ctx) {
+//		return visit(ctx.identifier());
+//	}
 
 	@Override
 	public Value visitConcat(ConcatContext ctx) {
@@ -217,24 +197,32 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 
 	}
 
-	@Override
-	public Value visitContainsBool(ContainsBoolContext ctx) {
-		List<Boolean> list = visit(ctx.listBoolExpr()).listVal();
-		boolean bool = visit(ctx.boolExpr()).boolVal();
-		return new Value(list.contains(bool));
-	}
-
-	@Override
-	public Value visitIdListBool(IdListBoolContext ctx) {
-		return visit(ctx.identifier());
-	}
-
-	@Override
-	public Value visitOrderListString(OrderListStringContext ctx) {
-		List<String> list = visit(ctx.listStringExpr()).listVal();
-		Collections.sort(list);
-		return new Value(list);
-	}
+//	@Override
+//	public Value visitContainsBool(ContainsBoolContext ctx) {
+//		List<Boolean> list = visit(ctx.listBoolExpr()).listVal();
+//		boolean bool = visit(ctx.boolExpr()).boolVal();
+//		return new Value(list.contains(bool));
+//	}
+//
+//	@Override
+//	public Value visitIdListBool(IdListBoolContext ctx) {
+//		return visit(ctx.identifier());
+//	}
+//
+//	@Override
+//	public Value visitOrderListBool(OrderListBoolContext ctx) {
+//		System.out.println("sono in bool");
+//		List<Boolean> list = visit(ctx.listBoolExpr()).listVal();
+//		return new Value(list);
+//	}
+//
+//	@Override
+//	public Value visitOrderListString(OrderListStringContext ctx) {
+//		System.out.println("sono in string");
+//		List<String> list = visit(ctx.listStringExpr()).listVal();
+//		Collections.sort(list);
+//		return new Value(list);
+//	}
 
 //	@Override
 //	public Value visitContainsDouble(ContainsDoubleContext ctx) {
@@ -287,48 +275,51 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 //		}
 //	}
 
-	@Override
-	public Value visitFilterListInt(FilterListIntContext ctx) {
-		System.out.println("siamo nel int");
-		List<Integer> list = visit(ctx.listDigitExpr()).listVal();
-		double n = visit(ctx.numExpr()).doubleVal();
-		List<Integer> listNew = new ArrayList<Integer>();
-		if (ctx.op.getType() == ExpressionParser.MIN) {
-			for (int i=0; i<list.size(); i++) {
-				if (list.get(i) < n){
-					listNew.add(list.get(i));
-				}
-			}
-			return new Value(listNew);
-		} else if (ctx.op.getType() == ExpressionParser.MAX) {
-			for (int i=0; i<list.size(); i++) {
-				if (list.get(i) > n){
-					listNew.add(list.get(i));
-				}
-			}
-			return new Value(listNew);
-		} else if (ctx.op.getType() == ExpressionParser.MINEQ) {
-			for (int i=0; i<list.size(); i++) {
-				if (list.get(i) <= n){
-					listNew.add(list.get(i));
-				}
-			}
-			return new Value(listNew);
-		} else {
-			for (int i=0; i<list.size(); i++) {
-				if (list.get(i) >= n){
-					listNew.add(list.get(i));
-				}
-			}
-			return new Value(listNew);
-		}
-	}
+//	@Override
+//	public Value visitFilterListInt(FilterListIntContext ctx) {
+//		System.out.println("siamo nel int");
+//		List<Integer> list = visit(ctx.listDigitExpr()).listVal();
+//		double n = visit(ctx.numExpr()).doubleVal();
+//		List<Integer> listNew = new ArrayList<Integer>();
+//		if (ctx.op.getType() == ExpressionParser.MIN) {
+//			for (int i=0; i<list.size(); i++) {
+//				if (list.get(i) < n){
+//					listNew.add(list.get(i));
+//				}
+//			}
+//			return new Value(listNew);
+//		} else if (ctx.op.getType() == ExpressionParser.MAX) {
+//			for (int i=0; i<list.size(); i++) {
+//				if (list.get(i) > n){
+//					listNew.add(list.get(i));
+//				}
+//			}
+//			return new Value(listNew);
+//		} else if (ctx.op.getType() == ExpressionParser.MINEQ) {
+//			for (int i=0; i<list.size(); i++) {
+//				if (list.get(i) <= n){
+//					listNew.add(list.get(i));
+//				}
+//			}
+//			return new Value(listNew);
+//		} else {
+//			for (int i=0; i<list.size(); i++) {
+//				if (list.get(i) >= n){
+//					listNew.add(list.get(i));
+//				}
+//			}
+//			return new Value(listNew);
+//		}
+//	}
 
-	@Override
-	public Value visitListBool(ListBoolContext ctx) {
-		// TODO Auto-generated method stub
-		return super.visitListBool(ctx);
-	}
+//	@Override
+//	public Value visitListBool(ListBoolContext ctx) {
+//		// TODO Auto-generated method stub
+////		return super.visitListBool(ctx);
+//		System.out.println("prova bool");
+//	List<Boolean> list = visit(ctx.seqBool()).listVal();
+//	return new Value(list);
+//	}
 
 //	@Override
 //	public Value visitAvgSumListDouble(AvgSumListDoubleContext ctx) {
@@ -352,28 +343,28 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 //		}
 //	}
 	
-	@Override
-	public Value visitIsAscIsDescInt(IsAscIsDescIntContext ctx) {
-		List<Integer> list = visit(ctx.listDigitExpr()).listVal();
-		if (ctx.op.getType() == ExpressionParser.ASC) {
-			boolean sorted = true;
-			for (int i = 1; i < list.size(); i++) {
-				if (list.get(i - 1) < list.get(i)) {
-					sorted = false;
-				}
-			}
-			return new Value(sorted);
-		} else {
-			boolean sorted = true;
-			for (int i = 1; i < list.size(); i++) {
-				if (list.get(i - 1) > list.get(i)) {
-					sorted = false;
-				}
-			}
-			return new Value(sorted);
-		}
-
-	}
+//	@Override
+//	public Value visitIsAscIsDescInt(IsAscIsDescIntContext ctx) {
+//		List<Integer> list = visit(ctx.listDigitExpr()).listVal();
+//		if (ctx.op.getType() == ExpressionParser.ASC) {
+//			boolean sorted = true;
+//			for (int i = 1; i < list.size(); i++) {
+//				if (list.get(i - 1) < list.get(i)) {
+//					sorted = false;
+//				}
+//			}
+//			return new Value(sorted);
+//		} else {
+//			boolean sorted = true;
+//			for (int i = 1; i < list.size(); i++) {
+//				if (list.get(i - 1) > list.get(i)) {
+//					sorted = false;
+//				}
+//			}
+//			return new Value(sorted);
+//		}
+//
+//	}
 
 //	@Override
 //	public Value visitIsAscIsDescDouble(IsAscIsDescDoubleContext ctx) {
@@ -398,33 +389,38 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 //	}
 //
 
-	@Override
-	public Value visitListExpr(ListExprContext ctx) {
-		// TODO Auto-generated method stub
-		return super.visitListExpr(ctx);
-	}
+//	@Override
+//	public Value visitListExpr(ListExprContext ctx) {
+//		System.out.println("prova list");
+//
+//		// TODO Auto-generated method stub
+//		//return super.visitListExpr(ctx);
+//		List<String> list1 = visit(ctx.listStringExpr()).listVal();
+//		List<Boolean> list2 = visit(ctx.listBoolExpr()).listVal();
+//		return new Value(list1);
+//	}
 
-	@Override
-	public Value visitContainsInt(ContainsIntContext ctx) {
-		List<Integer> list = visit(ctx.listDigitExpr()).listVal();
-		int n = visit(ctx.numExpr()).intVal();
-		return new Value(n);
-	}
+//	@Override
+//	public Value visitContainsInt(ContainsIntContext ctx) {
+//		List<Integer> list = visit(ctx.listDigitExpr()).listVal();
+//		int n = visit(ctx.numExpr()).intVal();
+//		return new Value(n);
+//	}
 
-	@Override
-	public Value visitContainsString(ContainsStringContext ctx) {
-		List<String> list = visit(ctx.listStringExpr()).listVal();
-		String string = visit(ctx.stringExpr()).stringVal();
-		return new Value(list.contains(string));
-	}
+//	@Override
+//	public Value visitContainsString(ContainsStringContext ctx) {
+//		List<String> list = visit(ctx.listStringExpr()).listVal();
+//		String string = visit(ctx.stringExpr()).stringVal();
+//		return new Value(list.contains(string));
+//	}
 
-	@Override
-	public Value visitOrderListInt(OrderListIntContext ctx) {
-		System.out.println("siamo nel int");
-		List<Integer> list = visit(ctx.listDigitExpr()).listVal();
-		Collections.sort(list);
-		return new Value(list);
-	}
+//	@Override
+//	public Value visitOrderListInt(OrderListIntContext ctx) {
+//		System.out.println("siamo nel int");
+//		List<Integer> list = visit(ctx.listDigitExpr()).listVal();
+//		Collections.sort(list);
+//		return new Value(list);
+//	}
 
 //	@Override
 //	public Value visitOrderListDouble(OrderListDoubleContext ctx) {
@@ -434,12 +430,12 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 //		return new Value(list);	
 //	}
 
-	@Override
-	public Value visitEqualList(EqualListContext ctx) {
-		List<?> left = visit(ctx.listExpr(0)).listVal();
-		List<?> right = visit(ctx.listExpr(1)).listVal();
-		return new Value(left.equals(right));
-	}
+//	@Override
+//	public Value visitEqualList(EqualListContext ctx) {
+//		List<?> left = visit(ctx.listExpr(0)).listVal();
+//		List<?> right = visit(ctx.listExpr(1)).listVal();
+//		return new Value(left.equals(right));
+//	}
 
 	
 //	@Override
@@ -448,22 +444,32 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 //		return super.visitListDouble(ctx);
 //	}
 
-	@Override
-	public Value visitIdListInt(IdListIntContext ctx) {
-		return visit(ctx.identifier());
-	}
+//	@Override
+//	public Value visitIdListInt(IdListIntContext ctx) {
+//		return visit(ctx.identifier());
+//	}
 
-	@Override
-	public Value visitListString(ListStringContext ctx) {
-		// TODO Auto-generated method stub
-		return super.visitListString(ctx);
-	}
+	
+	
+//	@Override
+//	public Value visitListString(ListStringContext ctx) {
+//		// TODO Auto-generated method stub
+//		//return super.visitListString(ctx);
+//		System.out.println("prova string");
+//		List<String> list = visit(ctx.seqString()).listVal();
+//		return new Value(list);
+//	}
 
-	@Override
-	public Value visitSizeList(SizeListContext ctx) {
-		List list = visit(ctx.listExpr()).listVal();
-		return new Value(list.size());
-	}
+//	@Override
+//	public Value visitString(StringContext ctx) {
+//		return new Value(ctx.getText());
+//	}
+//
+//	@Override
+//	public Value visitSizeList(SizeListContext ctx) {
+//		List list = visit(ctx.listExpr()).listVal();
+//		return new Value(list.size());
+//	}
 
 	@Override
 	public Value visitInt(ExpressionParser.IntContext ctx) {

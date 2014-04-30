@@ -3,16 +3,15 @@ import Common;
 
 start: expression;
 
-expression:     numExpr | stringExpr | boolExpr | listExpr ;
+expression:     stringExpr | numExpr | boolExpr;
            
-seqInt: DIGIT | DIGIT ',' seqInt;   
-listDigit: '[' seqInt ']';
 
-seqString: STRING | STRING ',' seqString;
-listString: '[' seqString ']';
 
-seqBool: BOOL | BOOL ',' seqBool;
-listBool: '[' seqBool ']';
+stringExpr:     stringExpr ADD stringExpr   # Concat
+    |           identifier                  # IdString
+    |			STRING						# String  
+    |           '(' stringExpr ')'          # ParensString
+    ;
 
 numExpr:    numExpr op=(MUL|DIV) numExpr                # MulDiv
     |       numExpr op=(ADD|SUB) numExpr                # AddSub
@@ -20,16 +19,9 @@ numExpr:    numExpr op=(MUL|DIV) numExpr                # MulDiv
     |       DIGIT                                       # Int
     |       DOUBLE                                      # Double
     |       identifier                                  # IdNum      
-    |       '(' numExpr ')'                             # ParensNum 
-    |		listDigitExpr DOT op=(AVG|SUM)              # AvgSumListInt  
-    |       listExpr DOT SIZE                     		# SizeList	 
+    |       '(' numExpr ')'                             # ParensNum 	 
     ;
-
-stringExpr:     stringExpr ADD stringExpr   # Concat
-    |           identifier                  # IdString  
-    |           '(' stringExpr ')'          # ParensString
-    ;
-
+    
 boolExpr:   NOT boolExpr                    # Not
     |       boolExpr op=(AND|OR) boolExpr   # AndOr
     |       BOOL                            # Bool
@@ -38,27 +30,5 @@ boolExpr:   NOT boolExpr                    # Not
     |       boolExpr EQUAL boolExpr         			# EqualBool
     |       numExpr EQUAL numExpr           			# EqualNum
     |       stringExpr EQUAL stringExpr     			# EqualString
-    |       listExpr EQUAL listExpr        				# EqualList
-    |       listDigitExpr DOT op=(ASC|DESC)             # IsAscIsDescInt
-    |       listDigitExpr DOT CONTAINS '(' numExpr ')'    # ContainsInt
-    |       listStringExpr DOT CONTAINS '(' stringExpr ')'  # ContainsString
-    |       listBoolExpr DOT CONTAINS '(' boolExpr ')'      # ContainsBool
-    |       listBoolExpr DOT op=(ALLTRUE|ALLFALSE)      # AllTrueFalse
     ;
 
-listExpr:  listDigitExpr | listStringExpr | listBoolExpr ;
-    
-listDigitExpr:  listDigitExpr DOT op=(ORDERASC|ORDERDESC)                       # OrderListInt   
-    |           listDigitExpr DOT FILTER '(' op=(MIN|MAX|MINEQ|MAXEQ) numExpr ')' # FilterListInt
-    |           listDigit                                                       # ListDigit_Label
-    |           identifier                                                      # IdListInt      
-    ;
-
-listStringExpr: listStringExpr DOT op=(ORDERASC|ORDERDESC)                       # OrderListString
-    |           listString                                                       # ListString_Label
-    |           identifier                                                       # IdListString       
-    ;
-
-listBoolExpr:   listBool                                                         # ListBool_Label
-    |           identifier                                                       # IdListBool     
-    ;

@@ -3,7 +3,6 @@ package test.javareact.examples.remote;
 import java.util.Scanner;
 
 import test.javareact.common.Consts;
-import test.javareact.common.types.observable.ObservableDouble;
 import test.javareact.common.types.observable.ObservableInteger;
 
 public class Example1 {
@@ -20,15 +19,17 @@ public class Example1 {
 			obTire1.set(in);
 		}
 		
-//		Random random = new Random();
-//
+		
+//		Consts.hostName = "Remote1";
+//		ObservableString obTire1 = new ObservableString("obInt1", "");
 //		while (true) {
-//			obTire1.set(random.nextInt(1000));
-//			try {
-//				Thread.sleep(1000);
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
+//			System.out.println("Value of Tire 1 is : ");
+//			Scanner scanner = new Scanner(System.in);
+//			String input = scanner.nextLine();
+//			double in = Double.parseDouble(input);
+//			System.out.println("You sent " + input);
+//			obTire1.set(input);
 //		}
+		
 	}
 }
