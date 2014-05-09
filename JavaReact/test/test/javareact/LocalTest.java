@@ -28,16 +28,18 @@ public class LocalTest {
     ObservableString obString1 = new ObservableString("obString1", "");
     ObservableString obString2 = new ObservableString("obString2", "");
 
-    ReactiveInteger reactInt = ReactiveFactory.getInteger("10-2+((obInt.get()*2)+ obInt.get())/2", 10, "reactInt");
-    ReactiveString reactString = ReactiveFactory.getString("((obString1.get()) + obString2.get())", "", "reactString");
+    ReactiveInteger reactInt = ReactiveFactory.getInteger("10:Num-2:Num+((obInt.get():Num*2:Num)+ obInt.get():Num)/2:Num", 10, "reactInt");
+    ReactiveString reactString = ReactiveFactory.getString("((obString1.get():String) + obString2.get():String)", "", "reactString");
+    ReactiveString reactString2 = ReactiveFactory.getString("((obString1.get():String) + World:String)", "", "reactString");
 
-    ReactiveInteger reactInt2 = ReactiveFactory.getInteger("reactInt.get()*2", 10, "reactInt2");
+    ReactiveInteger reactInt2 = ReactiveFactory.getInteger("reactInt.get():Num*2:Num", 10, "reactInt2");
 
     ObservableInteger obIntStart = new ObservableInteger("obIntStart", 1);
-    ReactiveInteger reactInterm1 = ReactiveFactory.getInteger("obIntStart.get()*2", 10, "reactInterm1");
-    ReactiveInteger reactInterm2 = ReactiveFactory.getInteger("obIntStart.get()*2", 10, "reactInterm2");
-    ReactiveInteger reactFinal = ReactiveFactory.getInteger("reactInterm1.get() + reactInterm2.get()", 10, "reactFinal");
-    ReactiveInteger reactFinal2 = ReactiveFactory.getInteger("reactInterm1.get() + obIntStart.get()", 10, "reactFinal2");
+    ReactiveInteger reactInterm1 = ReactiveFactory.getInteger("obIntStart.get():Num*2:Num", 10, "reactInterm1");
+    ReactiveInteger reactInterm2 = ReactiveFactory.getInteger("obIntStart.get():Num*2:Num", 10, "reactInterm2");
+    ReactiveInteger reactFinal = ReactiveFactory.getInteger("reactInterm1.get():Num + reactInterm2.get():Num", 10, "reactFinal");
+    ReactiveInteger reactFinal2 = ReactiveFactory.getInteger("reactInterm1.get():Num + obIntStart.get():Num", 10, "reactFinal2");
+    ReactiveInteger reactFinal3 = ReactiveFactory.getInteger("reactFinla3.get():Num + 100", 10, "reactFinal3");
 
     try {
       Thread.sleep(500);
@@ -58,12 +60,14 @@ public class LocalTest {
 
     assertEquals(reactInt.getInt(), 158);
     assertEquals(reactString.get(), "Hello World!");
+    assertEquals(reactString2.get(), "Hello World!");
     assertEquals(reactInt2.getInt(), 316);
-
     assertEquals(reactInterm1.getInt(), 200);
     assertEquals(reactInterm2.getInt(), 200);
     assertEquals(reactFinal.getInt(), 400);
     assertEquals(reactFinal2.getInt(), 300);
+    assertEquals(reactFinal3.getInt(), 400);
+
   }
 
   private final void startServerIfNeeded() {
