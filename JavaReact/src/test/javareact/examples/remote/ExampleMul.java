@@ -21,9 +21,9 @@ public class ExampleMul implements ReactiveListener {
 //		ObservableBool obAnd1 = new ObservableBool("obAnd1", false);
 //		obAnd1.set(value.boolVal());
 	}
-
-	@Override
-	public void notifyReactiveUpdate(Value value) {
-		System.out.println("1The reactive value is changed in: " + value.doubleVal());
-	}
+//
+//	@Override
+//	public void notifyReactiveUpdate(Value value) {
+//		System.out.println("1The reactive value is changed in: " + value.doubleVal());
+//	}
 }

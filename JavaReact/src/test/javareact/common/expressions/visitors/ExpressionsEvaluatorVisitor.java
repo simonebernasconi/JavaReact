@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import test.javareact.common.Consts;
 import test.javareact.common.expressions.antlr_grammars.ExpressionBaseVisitor;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.AddSubContext;
@@ -15,6 +16,8 @@ import test.javareact.common.expressions.antlr_grammars.ExpressionParser.BaseStr
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.BoolContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.BoolExpressionContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ConcatContext;
+import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ConstantListDigitContext;
+import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ConstantListDoubleContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ContainsBoolContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ContainsDoubleContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ContainsIntContext;
@@ -41,6 +44,10 @@ import test.javareact.common.expressions.antlr_grammars.ExpressionParser.Identif
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IntContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IsAscIsDescDoubleContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IsAscIsDescIntContext;
+import test.javareact.common.expressions.antlr_grammars.ExpressionParser.LastListBoolContext;
+import test.javareact.common.expressions.antlr_grammars.ExpressionParser.LastListDoubleContext;
+import test.javareact.common.expressions.antlr_grammars.ExpressionParser.LastListIntContext;
+import test.javareact.common.expressions.antlr_grammars.ExpressionParser.LastListStringContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ListBoolContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ListBoolExpressionContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ListBool_LabelContext;
@@ -80,6 +87,7 @@ import test.javareact.common.expressions.antlr_grammars.ExpressionParser.SeqStri
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.SizeListContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.StringExpressionContext;
 import test.javareact.common.packets.content.Value;
+import test.javareact.common.packets.content.ValueType;
 
 public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 	private final Map<String, Value> values;
@@ -108,7 +116,6 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		System.out.println("visit double");
 		System.out.println("visit" + ctx.getText());
 		String str = ctx.getText();
-		str = str.replace(":Num", "");
 		double i = Double.parseDouble(str);
 		return new Value(i);
 	}
@@ -120,18 +127,18 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		Value leftVal = visit(ctx.numExpr(0));
 		Value rightVal = visit(ctx.numExpr(1));
 		if (ctx.op.getType() == ExpressionParser.ADD) {
-			if (leftVal.getType().toString() == "INT"
-					&& rightVal.getType().toString() == "INT") {
+			if (leftVal.getType() == ValueType.INT
+					&& rightVal.getType() == ValueType.INT) {
 				int left = visit(ctx.numExpr(0)).intVal();
 				int right = visit(ctx.numExpr(1)).intVal();
 				return new Value(left + right);
-			} else if (leftVal.getType().toString() == "DOUBLE"
-					&& rightVal.getType().toString() == "DOUBLE") {
+			} else if (leftVal.getType()  == ValueType.DOUBLE
+					&& rightVal.getType()  == ValueType.DOUBLE) {
 				double left = visit(ctx.numExpr(0)).doubleVal();
 				double right = visit(ctx.numExpr(1)).doubleVal();
 				return new Value(left + right);
-			} else if (leftVal.getType().toString() == "INT"
-					&& rightVal.getType().toString() == "DOUBLE") {
+			} else if (leftVal.getType() == ValueType.INT
+					&& rightVal.getType() == ValueType.DOUBLE) {
 				double left = (double) visit(ctx.numExpr(0)).intVal();
 				double right = visit(ctx.numExpr(1)).doubleVal();
 				return new Value(left + right);
@@ -141,18 +148,18 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 				return new Value(left + right);
 			}
 		} else {
-			if (leftVal.getType().toString() == "INT"
-					&& rightVal.getType().toString() == "INT") {
+			if (leftVal.getType() == ValueType.INT
+					&& rightVal.getType() == ValueType.INT) {
 				int left = visit(ctx.numExpr(0)).intVal();
 				int right = visit(ctx.numExpr(1)).intVal();
 				return new Value(left - right);
-			} else if (leftVal.getType().toString() == "DOUBLE"
-					&& rightVal.getType().toString() == "DOUBLE") {
+			} else if (leftVal.getType()  == ValueType.DOUBLE
+					&& rightVal.getType()  == ValueType.DOUBLE) {
 				double left = visit(ctx.numExpr(0)).doubleVal();
 				double right = visit(ctx.numExpr(1)).doubleVal();
 				return new Value(left - right);
-			} else if (leftVal.getType().toString() == "INT"
-					&& rightVal.getType().toString() == "DOUBLE") {
+			} else if (leftVal.getType() == ValueType.INT
+					&& rightVal.getType()  == ValueType.DOUBLE) {
 				double left = (double) visit(ctx.numExpr(0)).intVal();
 				double right = visit(ctx.numExpr(1)).doubleVal();
 				return new Value(left - right);
@@ -164,88 +171,7 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		}
 	}
 
-	@Override
-	public Value visitMinMax(MinMaxContext ctx) {
-		System.out.println("visit addSub");
-		System.out.println("visit" + ctx.getText());
-		Value leftVal = visit(ctx.numExpr(0));
-		Value rightVal = visit(ctx.numExpr(1));
-		if (ctx.op.getType() == ExpressionParser.MIN) {
-			if (leftVal.getType().toString() == "INT"
-					&& rightVal.getType().toString() == "INT") {
-				int left = visit(ctx.numExpr(0)).intVal();
-				int right = visit(ctx.numExpr(1)).intVal();
-				if (left < right) {
-					return new Value(left);
-				} else {
-					return new Value(right);
-				}
-			} else if (leftVal.getType().toString() == "DOUBLE"
-					&& rightVal.getType().toString() == "DOUBLE") {
-				double left = visit(ctx.numExpr(0)).doubleVal();
-				double right = visit(ctx.numExpr(1)).doubleVal();
-				if (left < right) {
-					return new Value(left);
-				} else {
-					return new Value(right);
-				}
-			} else if (leftVal.getType().toString() == "INT"
-					&& rightVal.getType().toString() == "DOUBLE") {
-				double left = (double) visit(ctx.numExpr(0)).intVal();
-				double right = visit(ctx.numExpr(1)).doubleVal();
-				if (left < right) {
-					return new Value(left);
-				} else {
-					return new Value(right);
-				}
-			} else {
-				double left = visit(ctx.numExpr(0)).doubleVal();
-				double right = (double) visit(ctx.numExpr(1)).intVal();
-				if (left < right) {
-					return new Value(left);
-				} else {
-					return new Value(right);
-				}
-			}
-		} else {
-			if (leftVal.getType().toString() == "INT"
-					&& rightVal.getType().toString() == "INT") {
-				int left = visit(ctx.numExpr(0)).intVal();
-				int right = visit(ctx.numExpr(1)).intVal();
-				if (left > right) {
-					return new Value(left);
-				} else {
-					return new Value(right);
-				}
-			} else if (leftVal.getType().toString() == "DOUBLE"
-					&& rightVal.getType().toString() == "DOUBLE") {
-				double left = visit(ctx.numExpr(0)).doubleVal();
-				double right = visit(ctx.numExpr(1)).doubleVal();
-				if (left > right) {
-					return new Value(left);
-				} else {
-					return new Value(right);
-				}
-			} else if (leftVal.getType().toString() == "INT"
-					&& rightVal.getType().toString() == "DOUBLE") {
-				double left = (double) visit(ctx.numExpr(0)).intVal();
-				double right = visit(ctx.numExpr(1)).doubleVal();
-				if (left > right) {
-					return new Value(left);
-				} else {
-					return new Value(right);
-				}
-			} else {
-				double left = visit(ctx.numExpr(0)).doubleVal();
-				double right = (double) visit(ctx.numExpr(1)).intVal();
-				if (left > right) {
-					return new Value(left);
-				} else {
-					return new Value(right);
-				}
-			}
-		}
-	}
+	
 
 	@Override
 	public Value visitMulDiv(MulDivContext ctx) {
@@ -254,18 +180,18 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		Value leftVal = visit(ctx.numExpr(0));
 		Value rightVal = visit(ctx.numExpr(1));
 		if (ctx.op.getType() == ExpressionParser.MUL) {
-			if (leftVal.getType().toString() == "INT"
-					&& rightVal.getType().toString() == "INT") {
+			if (leftVal.getType() == ValueType.INT
+					&& rightVal.getType() == ValueType.INT) {
 				int left = visit(ctx.numExpr(0)).intVal();
 				int right = visit(ctx.numExpr(1)).intVal();
 				return new Value(left * right);
-			} else if (leftVal.getType().toString() == "DOUBLE"
-					&& rightVal.getType().toString() == "DOUBLE") {
+			} else if (leftVal.getType()  == ValueType.DOUBLE
+					&& rightVal.getType()  == ValueType.DOUBLE) {
 				double left = visit(ctx.numExpr(0)).doubleVal();
 				double right = visit(ctx.numExpr(1)).doubleVal();
 				return new Value(left * right);
-			} else if (leftVal.getType().toString() == "INT"
-					&& rightVal.getType().toString() == "DOUBLE") {
+			} else if (leftVal.getType() == ValueType.INT
+					&& rightVal.getType()  == ValueType.DOUBLE) {
 				double left = (double) visit(ctx.numExpr(0)).intVal();
 				double right = visit(ctx.numExpr(1)).doubleVal();
 				return new Value(left * right);
@@ -275,18 +201,18 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 				return new Value(left * right);
 			}
 		} else {
-			if (leftVal.getType().toString() == "INT"
-					&& rightVal.getType().toString() == "INT") {
+			if (leftVal.getType() == ValueType.INT
+					&& rightVal.getType() == ValueType.INT) {
 				int left = visit(ctx.numExpr(0)).intVal();
 				int right = visit(ctx.numExpr(1)).intVal();
 				return new Value(left / right);
-			} else if (leftVal.getType().toString() == "DOUBLE"
-					&& rightVal.getType().toString() == "DOUBLE") {
+			} else if (leftVal.getType()  == ValueType.DOUBLE
+					&& rightVal.getType()  == ValueType.DOUBLE) {
 				double left = visit(ctx.numExpr(0)).doubleVal();
 				double right = visit(ctx.numExpr(1)).doubleVal();
 				return new Value(left / right);
-			} else if (leftVal.getType().toString() == "INT"
-					&& rightVal.getType().toString() == "DOUBLE") {
+			} else if (leftVal.getType() == ValueType.INT
+					&& rightVal.getType() == ValueType.DOUBLE) {
 				double left = (double) visit(ctx.numExpr(0)).intVal();
 				double right = visit(ctx.numExpr(1)).doubleVal();
 				return new Value(left / right);
@@ -298,13 +224,16 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		}
 	}
 
-
-
+	
 	@Override
 	public Value visitIdentifierString(IdentifierStringContext ctx) {
 		System.out.println("visit idString");
-		String i = "aaa";
-		return new Value(i);
+		String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
+		String observableId = ctx.observableId().getText();
+		String method = ctx.method().getText();
+		String id = hostId + "." + observableId + "." + method;
+		System.out.println("get is " + values.get(id));
+		return new Value(values.get(id).stringVal()); 
 	}
 
 
@@ -320,7 +249,11 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 	public Value visitIdentifierNum(IdentifierNumContext ctx) {
 		System.out.println("visit identifierNum");
 		System.out.println("visit " + ctx.getText());
-		String i = "100";
+		String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
+		String observableId = ctx.observableId().getText();
+		String method = ctx.method().getText();
+		String id = hostId + "." + observableId + "." + method;
+		String i = values.get(id).toString();
 		if (i.contains(".")){
 			double value = Double.parseDouble(i);
 			return new Value(value);
@@ -354,9 +287,8 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 	public Value visitBaseStr(BaseStrContext ctx) {
 		System.out.println("visit baseString");
 		String str = ctx.getText();
-		str = str.replace(":String", "");
+		str = str.substring(1, str.length()-1);
 		return new Value(str);
-	
 	}
 
 	@Override
@@ -370,7 +302,6 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		System.out.println("visit Int");
 		System.out.println("visit " + ctx.getText());
 		String str = ctx.getText();
-		str = str.replace(":Num", "");
 		Integer i = Integer.parseInt(str);
 		return new Value(i);
 	}
@@ -380,7 +311,6 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		System.out.println("visit Bool");
 		System.out.println("visit " + ctx.getText());
 		String str = ctx.getText();
-		str = str.replace(":Bool", "");
 		boolean bool = Boolean.parseBoolean(str); 
 		return new Value(bool);
 	}
@@ -471,7 +401,12 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 	@Override
 	public Value visitIdentifierBool(IdentifierBoolContext ctx) {
 		System.out.println("visit idBool");
-		return new Value(true);
+		String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
+		String observableId = ctx.observableId().getText();
+		String method = ctx.method().getText();
+		String id = hostId + "." + observableId + "." + method;
+		System.out.println("get is " + values.get(id));
+		return new Value(values.get(id).boolVal());
 	}
 
 
@@ -487,37 +422,45 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 	@Override
 	public Value visitIdentifierListInt(IdentifierListIntContext ctx) {
 		System.out.println("visit idListInt");
-		List<Integer> list = new ArrayList<Integer>();
-		list.add(100);
-		list.add(200);
-		return new Value(list);
+		String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
+		String observableId = ctx.observableId().getText();
+		String method = ctx.method().getText();
+		String id = hostId + "." + observableId + "." + method;
+		System.out.println("get is " + values.get(id));
+		return new Value(values.get(id).listVal());
 	}
 	
 	@Override
 	public Value visitIdentifierListDouble(IdentifierListDoubleContext ctx) {
-		System.out.println("visit idListString");
-		List<Double> list = new ArrayList<Double>();
-		list.add(100.0);
-		list.add(200.0);
-		return new Value(list);
+		System.out.println("visit idListDouble");
+		String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
+		String observableId = ctx.observableId().getText();
+		String method = ctx.method().getText();
+		String id = hostId + "." + observableId + "." + method;
+		System.out.println("get is " + values.get(id));
+		return new Value(values.get(id).listVal());
 	}
 	
 	@Override
 	public Value visitIdentifierListString(IdentifierListStringContext ctx) {
 		System.out.println("visit idListString");
-		List<String> list = new ArrayList<String>();
-		list.add("ciao");
-		list.add("simone");
-		return new Value(list);
+		String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
+		String observableId = ctx.observableId().getText();
+		String method = ctx.method().getText();
+		String id = hostId + "." + observableId + "." + method;
+		System.out.println("get is " + values.get(id));
+		return new Value(values.get(id).listVal());
 	}
 	
 	@Override
 	public Value visitIdentifierListBool(IdentifierListBoolContext ctx) {
 		System.out.println("visit idListBool");
-		List<Boolean> list = new ArrayList<Boolean>();
-		list.add(true);
-		list.add(true);
-		return new Value(list);
+		String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
+		String observableId = ctx.observableId().getText();
+		String method = ctx.method().getText();
+		String id = hostId + "." + observableId + "." + method;
+		System.out.println("get is " + values.get(id));
+		return new Value(values.get(id).listVal());
 	}
 
 	@Override
@@ -637,7 +580,6 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		System.out.println("visit " + ctx.getText());
 		List<Integer> list = new ArrayList<Integer>();
 		String str = ctx.DIGIT().toString();
-		str = str.replace(":Num", "");
 		int val = Integer.parseInt(str);
 		list.add(val);
 		return new Value(list);
@@ -648,7 +590,6 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		System.out.println("visit SeqIntSeqInt");
 		System.out.println("visit " + ctx.getText());
 		String str = ctx.DIGIT().toString();
-		str = str.replace(":Num", "");
 		int val = Integer.parseInt(str);
 		System.out.println("Primo valore e' " + val);
 		List<Integer> list = visit(ctx.seqInt()).listVal();
@@ -685,7 +626,6 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		System.out.println("visit " + ctx.getText());
 		List<Double> list = new ArrayList<Double>();
 		String str = ctx.DOUBLE().toString();
-		str = str.replace(":Num", "");
 		double val = Double.parseDouble(str);
 		list.add(val);
 		return new Value(list);
@@ -696,7 +636,6 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		System.out.println("visit SeqDoubleSeqDouble");
 		System.out.println("visit " + ctx.getText());
 		String str = ctx.DOUBLE().toString();
-		str = str.replace(":Num", "");
 		double val = Double.parseDouble(str);
 		System.out.println("Primo valore e' " + val);
 		List<Double> list = visit(ctx.seqDouble()).listVal();
@@ -733,7 +672,6 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		System.out.println("visit " + ctx.getText());
 		List<String> list = new ArrayList<String>();
 		String str = ctx.STRING().toString();
-		str = str.replace(":String", "");
 		list.add(str);
 		return new Value(list);
 	}
@@ -743,7 +681,6 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		System.out.println("visit SeqStringSeqString");
 		System.out.println("visit " + ctx.getText());
 		String str = ctx.STRING().toString();
-		str = str.replace(":String", "");
 		System.out.println("Primo valore e' " + str);
 		List<String> list = visit(ctx.seqString()).listVal();
 		System.out.println(list);
@@ -779,7 +716,6 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		System.out.println("visit " + ctx.getText());
 		List<Boolean> list = new ArrayList<Boolean>();
 		String str = ctx.BOOL().toString();
-		str = str.replace(":Bool", "");
 		Boolean bool = Boolean.parseBoolean(str);
 		list.add(bool);
 		return new Value(list);
@@ -790,7 +726,6 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		System.out.println("visit SeqBoolSeqBool");
 		System.out.println("visit " + ctx.getText());
 		String str = ctx.BOOL().toString();
-		str = str.replace(":Bool", "");
 		Boolean bool = Boolean.parseBoolean(str);
 		System.out.println("Primo valore e' " + bool);
 		List<Boolean> list = visit(ctx.seqBool()).listVal();
@@ -905,7 +840,7 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		if (ctx.op.getType() == ExpressionParser.ASC) {
 			boolean sorted = true;
 			for (int i = 1; i < list.size(); i++) {
-				if (list.get(i - 1) > list.get(i)) {
+				if (list.get(i - 1) >= list.get(i)) {
 					sorted = false;
 				}
 			}
@@ -913,7 +848,7 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		} else {
 			boolean sorted = true;
 			for (int i = 1; i < list.size(); i++) {
-				if (list.get(i - 1) < list.get(i)) {
+				if (list.get(i - 1) <= list.get(i)) {
 					sorted = false;
 				}
 			}
@@ -935,7 +870,7 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		if (ctx.op.getType() == ExpressionParser.ASC) {
 			boolean sorted = true;
 			for (int i = 1; i < list.size(); i++) {
-				if (list.get(i - 1) > list.get(i)) {
+				if (list.get(i - 1) >= list.get(i)) {
 					sorted = false;
 				}
 			}
@@ -943,7 +878,7 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		} else {
 			boolean sorted = true;
 			for (int i = 1; i < list.size(); i++) {
-				if (list.get(i - 1) < list.get(i)) {
+				if (list.get(i - 1) <= list.get(i)) {
 					sorted = false;
 				}
 			}
@@ -979,6 +914,68 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 			return new Value(check);
 		}
 	}
+
+
+	@Override
+	public Value visitLastListDouble(LastListDoubleContext ctx) {
+		List<Double> list = visit(ctx.listDoubleExpr()).listVal();
+		Double value = list.get(list.size() - 1);
+		return new Value(value);
+	}
+
+
+	@Override
+	public Value visitLastListInt(LastListIntContext ctx) {
+		List<Integer> list = visit(ctx.listDigitExpr()).listVal();
+		Integer value = list.get(list.size() - 1);
+		return new Value(value);
+	}
+
+
+	@Override
+	public Value visitLastListString(LastListStringContext ctx) {
+		List<String> list = visit(ctx.listStringExpr()).listVal();
+		String value = list.get(list.size() - 1);
+		return new Value(value);
+	}
+
+
+	@Override
+	public Value visitLastListBool(LastListBoolContext ctx) {
+		List<Boolean> list = visit(ctx.listBoolExpr()).listVal();
+		Boolean value = list.get(list.size() - 1);
+		return new Value(value);
+	}
+
+
+	@Override
+	public Value visitConstantListDouble(ConstantListDoubleContext ctx) {
+		List<Double> list = visit(ctx.listDoubleExpr()).listVal();
+		double right = visit(ctx.numExpr()).doubleVal();
+		double sum = 0;
+		if (!list.isEmpty()) {
+			for (double n : list) {
+				sum += n;
+			}
+		}
+		double avg = sum/list.size();
+		boolean b = true;
+		for (double n : list) {
+			if(Math.abs(avg - n) > right){
+				b = false;
+			}
+		}
+		return new Value(b);
+	}
+
+
+	@Override
+	public Value visitConstantListDigit(ConstantListDigitContext ctx) {
+		// TODO Auto-generated method stub
+		return super.visitConstantListDigit(ctx);
+	}
+	
+	
 	
 
 //	@Override

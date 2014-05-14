@@ -12,7 +12,7 @@ public interface ReactiveList extends ReactiveListenerInterface {
    * 
    * @return the value of the variable.
    */
-  public List<?> get();
-    
+  
+  public int size();
 
 }

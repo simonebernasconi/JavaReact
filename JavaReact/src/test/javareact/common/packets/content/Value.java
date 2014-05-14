@@ -145,6 +145,8 @@ public final ValueType getType() {
       return stringVal;
     case BOOL:
       return String.valueOf(boolVal);
+    case LIST:
+	      return listVal.toString(); 
     default:
       assert false : type;
       return "err";

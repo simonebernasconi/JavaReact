@@ -110,14 +110,14 @@ public abstract class Reactive implements Subscriber, ReactiveListenerInterface 
 			if (!value.equals(oldVal)) {
 				for (ReactiveListener l : reactiveListeners) {
 					l.notifyReactiveChange(value);
-					l.notifyReactiveUpdate(value);
+//					l.notifyReactiveUpdate(value);
 				}
 			}
-			else {
-				for (ReactiveListener l : reactiveListeners) {
-					l.notifyReactiveUpdate(value);
-				}
-			}
+//			else {
+//				for (ReactiveListener l : reactiveListeners) {
+//					l.notifyReactiveUpdate(value);
+//				}
+//			}
 			if (blocking) {
 				notifyAll();
 			}

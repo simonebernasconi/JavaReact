@@ -22,10 +22,10 @@ public class RemoteReactive {
 			System.out.println("The reactive value of " +n+ " is changed in: " + reactive.get());
 		}
 
-		@Override
-		public void notifyReactiveUpdate(Value value) {
-			// TODO Auto-generated method stub
-		}
+//		@Override
+//		public void notifyReactiveUpdate(Value value) {
+//			// TODO Auto-generated method stub
+//		}
 	}
 	
 

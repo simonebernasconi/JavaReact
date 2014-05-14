@@ -1,4 +1,4 @@
-package test.javareact.examples.remote;
+package test.javareact.examples.remote.car;
 
 import java.util.Scanner;
 
@@ -9,7 +9,7 @@ public class Tire4 {
 
 	public static void main(String args[]) {
 		Consts.hostName = "Tire4";
-		ObservableInteger obTire4 = new ObservableInteger("obTire4", 10);
+		ObservableInteger obTire4 = new ObservableInteger("ObTire4", 10);
 		while (true) {
 			System.out.println("Value of Tire 4 is : ");
 			Scanner scanner = new Scanner(System.in);

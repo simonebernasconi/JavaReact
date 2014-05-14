@@ -29,7 +29,7 @@ public class ExpressionsHandler {
     switch (type) {
     case INT:
       ExpressionParser integersParser = new ExpressionParser(tokens);
-      parseTree = ExpressionParser.expression();
+      parseTree = integersParser.start();
       break;
     case DOUBLE:
       ExpressionParser doublesParser = new ExpressionParser(tokens);
@@ -43,6 +43,10 @@ public class ExpressionsHandler {
       ExpressionParser stringParser = new ExpressionParser(tokens);
       parseTree = stringParser.start();
       break;
+    case LIST:
+        ExpressionParser listParser = new ExpressionParser(tokens);
+        parseTree = listParser.start();
+        break;
     default:
       assert false : type;
       parseTree = null;

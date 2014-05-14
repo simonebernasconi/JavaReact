@@ -1,4 +1,4 @@
-package test.javareact.examples.remote;
+package test.javareact.examples.remote.car;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -9,13 +9,13 @@ import java.util.Scanner;
 import test.javareact.common.Consts;
 import test.javareact.common.types.observable.ObservableList;
 
-public class ExampleList {
+public class Tire1 {
 
 	public static void main(String args[]) {
-		Consts.hostName = "Remote1";
+		Consts.hostName = "Tire1";
 		List<Double> startingValue = new ArrayList<Double>();
 		startingValue.add(0.0);
-		ObservableList obTire1 = new ObservableList("ObList", startingValue);
+		ObservableList obTire1 = new ObservableList("ObTire1", startingValue);
 		Queue<Double> queue = new LinkedList<Double>();
 		while (true) {
 			System.out.println("Value of Tire 1 is : ");
@@ -23,7 +23,7 @@ public class ExampleList {
 			String input = scanner.nextLine();
 			double in = Double.parseDouble(input);
 			System.out.println("You sent " + in);
-			if (queue.size() < 5){
+			if (queue.size() < 10){
 				queue.add(in);
 			}
 			else { 
@@ -34,18 +34,5 @@ public class ExampleList {
 			System.out.println(list);
 			obTire1.add(list);
 		}
-	
-
-		
-//		Random random = new Random();
-//
-//		while (true) {
-//			obTire1.set(random.nextInt(1000));
-//			try {
-//				Thread.sleep(1000);
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-//		}
 	}
 }

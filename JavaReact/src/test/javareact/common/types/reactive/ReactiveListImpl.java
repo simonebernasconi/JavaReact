@@ -16,12 +16,11 @@ final class ReactiveListImpl extends Reactive implements ReactiveList {
   }
 
 
-
-
 @Override
-public List<?> get() {
+public int size() {
 	requiresUpdatedValue();
-    return value.listVal();
+    return value.intVal();
 }
+
 
 }

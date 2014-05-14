@@ -22,7 +22,7 @@ public class ExampleListString {
 			System.out.println("You add " + input);
 			list.add(input);
 			System.out.println("List contains "+ list);
-			obList.set(list);
+			obList.add(list);
 		}
 		
 //		Random random = new Random();

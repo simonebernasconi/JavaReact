@@ -25,7 +25,7 @@ public class ExampleListBool {
 			}
 			else {list.add(false);}
 			System.out.println("List contains "+ list);
-			obList.set(list);
+			obList.add(list);
 		}
 		
 //		Random random = new Random();

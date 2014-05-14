@@ -6,28 +6,6 @@ import test.javareact.common.packets.content.Value;
 
 public final class ReactiveFactory {
 
-	
-	public static final ReactiveAvg getAvg(String expression, boolean startingValue, String name, boolean isPublic) {
-		ReactiveAvg result = new ReactiveAvgImpl(expression, new Value(startingValue), name, isPublic);
-		return result;
-	}
-
-	public static final ReactiveAvg getAvg(String expression, boolean startingValue, String name) {
-		ReactiveAvg result = new ReactiveAvgImpl(expression, new Value(startingValue), name, true);
-		return result;
-	}
-
-	public static final ReactiveAvg getAvg(String expression, String name,boolean isPublic) {
-		ReactiveAvg result = new ReactiveAvgImpl(expression, name, isPublic);
-		return result;
-	}
-
-	public static final ReactiveAvg getAvg(String expression, String name) {
-		ReactiveAvg result = new ReactiveAvgImpl(expression, name, true);
-		return result;
-	}
-
-
 	public static final ReactiveInteger getInteger(String expression,
 			int startingValue, String name, boolean isPublic) {
 		ReactiveInteger result = new ReactiveIntegerImpl(expression, new Value(
@@ -134,31 +112,6 @@ public final class ReactiveFactory {
 		return result;
 	}
 	
-	public static final ReactiveDecrease getDecrease(String expression,
-			boolean startingValue, String name, boolean isPublic) {
-		ReactiveDecrease result = new ReactiveDecreaseImpl(expression, new Value(
-				startingValue), name, isPublic);
-		return result;
-	}
-
-	public static final ReactiveDecrease getDecrease(String expression,
-			boolean startingValue, String name) {
-		ReactiveDecrease result = new ReactiveDecreaseImpl(expression, new Value(
-				startingValue), name, true);
-		return result;
-	}
-
-	public static final ReactiveDecrease getDecrease(String expression, String name,
-			boolean isPublic) {
-		ReactiveDecrease result = new ReactiveDecreaseImpl(expression, name, isPublic);
-		return result;
-	}
-
-	public static final ReactiveDecrease getDecrease(String expression, String name) {
-		ReactiveDecrease result = new ReactiveDecreaseImpl(expression, name, true);
-		return result;
-	}
-
 	public static final ReactiveString getString(String expression,
 			String startingValue, String name, boolean isPublic) {
 		ReactiveString result = new ReactiveStringImpl(expression, new Value(

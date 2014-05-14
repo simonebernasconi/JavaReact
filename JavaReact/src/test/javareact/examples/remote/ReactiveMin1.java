@@ -21,9 +21,9 @@ public class ReactiveMin1 implements ReactiveListener {
 		System.out.println("The result is " + value.boolVal());
 		
 	}
-
-	@Override
-	public void notifyReactiveUpdate(Value value) {
-		
-	}
+//
+//	@Override
+//	public void notifyReactiveUpdate(Value value) {
+//		
+//	}
 }

@@ -10,7 +10,7 @@ public class ProvaTire2 {
 
 	public static void main(String args[]) {
 		Consts.hostName = "Tire2";
-		ObservableBool obTire2 = new ObservableBool("obTire2", true);
+		ObservableBool obTire2 = new ObservableBool("ObTire2", true);
 		while (true) {
 			boolean bool=false;
 			System.out.println("Tire2...Insert t for true or f for false: ");

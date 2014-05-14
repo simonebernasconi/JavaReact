@@ -23,8 +23,8 @@ public class ReactiveAnd1 implements ReactiveListener {
 //		obAnd1.set(value.boolVal());
 	}
 
-	@Override
-	public void notifyReactiveUpdate(Value value) {
-		System.out.println("1The reactive value is changed in: " + value.intVal());
-	}
+//	@Override
+//	public void notifyReactiveUpdate(Value value) {
+//		System.out.println("1The reactive value is changed in: " + value.intVal());
+//	}
 }
