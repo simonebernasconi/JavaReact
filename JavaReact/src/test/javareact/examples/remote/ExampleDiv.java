@@ -3,7 +3,7 @@ package test.javareact.examples.remote;
 import test.javareact.common.Consts;
 import test.javareact.common.packets.content.Value;
 import test.javareact.common.types.reactive.ReactiveFactory;
-import test.javareact.common.types.reactive.ReactiveList;
+import test.javareact.common.types.reactive.ReactiveInterface;
 import test.javareact.common.types.reactive.ReactiveListener;
 
 public class ExampleDiv implements ReactiveListener {
@@ -12,7 +12,7 @@ public class ExampleDiv implements ReactiveListener {
 		Consts.hostName = "ReactiveDiv";
 		ExampleDiv remoteReact = new ExampleDiv();
 //		ReactiveList react= ReactiveFactory.getList("Remote1.ObList.get():ListDouble.orderAsc", "ObDiv");
-		ReactiveList react= ReactiveFactory.getList("Remote1.ObList.size():Num", "ObDiv");
+		ReactiveInterface react= ReactiveFactory.getValue("Remote1.ObList.contains(2.0):Bool", "ObDiv");
 //		ReactiveDouble react= ReactiveFactory.getDouble("Remote1.ObList.get():ListDouble.Avg", "ObDiv");
 
 		react.addReactiveListener(remoteReact);

@@ -10,7 +10,7 @@ identifierListString: hostId DOT observableId DOT method  ':ListString';
 
 hostId: '*' | ID;
 observableId: ID;
-method: 'get('')' | 'size('')';
+method: 'get('')' | 'size('')' | 'contains(' DOUBLE ')';
 
 MUL: '*';
 DIV: '/'; 

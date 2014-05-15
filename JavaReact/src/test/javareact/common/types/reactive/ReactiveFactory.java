@@ -6,6 +6,31 @@ import test.javareact.common.packets.content.Value;
 
 public final class ReactiveFactory {
 
+	public static final ReactiveInterface getValue(String expression,
+			Value startingValue, String name, boolean isPublic) {
+		ReactiveInterface result = new ReactiveInterfaceImpl(expression, startingValue, name, isPublic);
+		return result;
+	}
+
+	public static final ReactiveInterface getValue(String expression,
+			Value startingValue, String name) {
+		ReactiveInterface result = new ReactiveInterfaceImpl(expression, startingValue, name, true);
+		return result;
+	}
+
+	public static final ReactiveInterface getValue(String expression,
+			String name, boolean isPublic) {
+		ReactiveInterface result = new ReactiveInterfaceImpl(expression, name,
+				isPublic);
+		return result;
+	}
+
+	public static final ReactiveInterface getValue(String expression,
+			String name) {
+		ReactiveInterface result = new ReactiveInterfaceImpl(expression, name, true);
+		return result;
+	}
+	
 	public static final ReactiveInteger getInteger(String expression,
 			int startingValue, String name, boolean isPublic) {
 		ReactiveInteger result = new ReactiveIntegerImpl(expression, new Value(
