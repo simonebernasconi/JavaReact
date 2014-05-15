@@ -18,15 +18,20 @@ public aspect React {
     assert (sig instanceof MethodSignature);
     MethodSignature methodSig = (MethodSignature) sig;
     Method method = methodSig.getMethod();
+    System.out.println("Method in React.aj is " + method);
+    System.out.println("MethodSig in React.aj is " + methodSig);
     ImpactOn annotation = method.getAnnotation(ImpactOn.class);
     String[] impactOnMethods = annotation.method();
     
     Attribute[] attributes = new Attribute[impactOnMethods.length];
     int i=0;
     for (String impactOnMethod : impactOnMethods) {
+    	System.out.println("ImpactMethod is " + impactOnMethod);
     try {
       Method methodToInvoke = o.getClass().getMethod(impactOnMethod);
+      System.out.println("Method to invoke is " + methodToInvoke);
       Object retVal = methodToInvoke.invoke(o);
+      System.out.println("retVal is " + retVal);
       Attribute attr = new Attribute(impactOnMethod + "()", retVal);
       attributes[i++] = attr;
     } catch (Exception e) {

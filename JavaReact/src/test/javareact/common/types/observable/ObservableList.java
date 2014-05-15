@@ -20,23 +20,19 @@ public class ObservableList extends Observable {
 
 
   
-  @ImpactOn(method = { "size" })
+  @ImpactOn(method = {"contains","size"})
   public final void add(List<?> val) {
     this.val = val;
   }
   
-  @ImpactOn(method = { "contains" })
-  public final void set(List<?> val) {
-    this.val = val;
-  }
 
   
   public final int size() {
 	    return val.size();
   }
   
-  public final boolean contains(double value){
-	  return val.contains(value);
+  public final boolean contains(){
+	  return false;
   }
   
  

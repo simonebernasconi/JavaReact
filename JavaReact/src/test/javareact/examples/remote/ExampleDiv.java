@@ -12,7 +12,7 @@ public class ExampleDiv implements ReactiveListener {
 		Consts.hostName = "ReactiveDiv";
 		ExampleDiv remoteReact = new ExampleDiv();
 //		ReactiveList react= ReactiveFactory.getList("Remote1.ObList.get():ListDouble.orderAsc", "ObDiv");
-		ReactiveInterface react= ReactiveFactory.getValue("Remote1.ObList.contains(2.0):Bool", "ObDiv");
+		ReactiveInterface react= ReactiveFactory.getValue("Remote1.ObList.size():Num", "ObDiv");
 //		ReactiveDouble react= ReactiveFactory.getDouble("Remote1.ObList.get():ListDouble.Avg", "ObDiv");
 
 		react.addReactiveListener(remoteReact);

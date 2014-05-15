@@ -32,7 +32,7 @@ public class ExampleList {
 			}
 			ArrayList<Double> list = new ArrayList<Double>(queue);
 			System.out.println(list);
-			obTire1.set(list);
+			obTire1.add(list);
 		}
 	
 
