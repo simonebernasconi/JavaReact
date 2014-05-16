@@ -21,8 +21,12 @@ public aspect React {
     System.out.println("Method in React.aj is " + method);
     System.out.println("MethodSig in React.aj is " + methodSig);
     ImpactOn annotation = method.getAnnotation(ImpactOn.class);
+    System.out.println(annotation.method());
     String[] impactOnMethods = annotation.method();
-    
+    System.out.println("ImpactsOnMethodLength is " + impactOnMethods.length);
+    for (String met : impactOnMethods){
+    	System.out.println("Method in impactonMethod is " + met);
+    }
     Attribute[] attributes = new Attribute[impactOnMethods.length];
     int i=0;
     for (String impactOnMethod : impactOnMethods) {
@@ -37,8 +41,44 @@ public aspect React {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    ((Observable) o).sendEvent(attributes);
     }
+    ((Observable) o).sendEvent(attributes);
+    System.out.println("AAA");
+    
   }
+  
+//  after(Object o): hasReactiveAnnotation(o) {
+//	    Signature sig = thisJoinPoint.getSignature();
+//	    assert (sig instanceof MethodSignature);
+//	    MethodSignature methodSig = (MethodSignature) sig;
+//	    Method method = methodSig.getMethod();
+//	    System.out.println("Method in React.aj is " + method);
+//	    System.out.println("MethodSig in React.aj is " + methodSig);
+//	    ImpactOn annotation = method.getAnnotation(ImpactOn.class);
+//	    System.out.println(annotation.method());
+//	    String[] impactOnMethods = annotation.method();
+//	    System.out.println("ImpactsOnMethodLength is " + impactOnMethods.length);
+//	    for (String met : impactOnMethods){
+//	    	System.out.println("Method in impactonMethod is " + met);
+//	    }
+//	    Attribute[] attributes = new Attribute[impactOnMethods.length];
+//	    int i=0;
+//	    for (String impactOnMethod : impactOnMethods) {
+//	    	System.out.println("ImpactMethod is " + impactOnMethod);
+//	    try {
+//	      Method methodToInvoke = o.getClass().getMethod(impactOnMethod);
+//	      System.out.println("Method to invoke is " + methodToInvoke);
+//	      Object retVal = methodToInvoke.invoke(o);
+//	      System.out.println("retVal is " + retVal);
+//	      Attribute attr = new Attribute(impactOnMethod + "()", retVal);
+//	      System.out.println("impactsOnMethod prima di () is " + impactOnMethod);
+//	      attributes[i++] = attr;
+//	    } catch (Exception e) {
+//	      e.printStackTrace();
+//	    }
+//	    ((Observable) o).sendEvent(attributes);
+//	    System.out.println("AAA");
+//	    }
+//	  }
   
 }

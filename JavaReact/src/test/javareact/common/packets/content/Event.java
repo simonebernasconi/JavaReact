@@ -19,6 +19,8 @@ public class Event implements Iterable<Attribute>, Serializable {
     this.hostId = hostId;
     this.persistent = persistent;
     for (Attribute attr : attributes) {
+    	System.out.println("Attribute in Event is " + attr);
+    	System.out.println("AttributeName in Event is " + attr.getName());
       this.attributes.put(attr.getName(), attr);
     }
   }

@@ -22,7 +22,7 @@ import test.javareact.common.types.Types;
 public class ExpressionsHandler {
   private final ParseTree parseTree;
 
-  public ExpressionsHandler(String expression) {
+  public ExpressionsHandler( Types type, String expression) {
     ANTLRInputStream input = new ANTLRInputStream(expression);
     ExpressionLexer lexer = new ExpressionLexer(input);
     CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -55,7 +55,7 @@ public class ExpressionsHandler {
 //    }
   }
 
-  public final Set<Subscription> buildSubscriptions() {
+  public final Set<Subscription> buildSubscriptions(Types type) {
 	  ExpressionsSubscriptionsGeneratorVisitor visitor = new ExpressionsSubscriptionsGeneratorVisitor();
 	  visitor.visit(parseTree);
 	  return visitor.getSubscriptions();
@@ -82,7 +82,7 @@ public class ExpressionsHandler {
 //    }
   }
 
-  public final Collection<String> extractVariableNames() {
+  public final Collection<String> extractVariableNames(Types type) {
 	  ExpressionsIdentifiersExtractorVisitor visitor = new ExpressionsIdentifiersExtractorVisitor();
 	  visitor.visit(parseTree);
 	  return visitor.getIdentifiers();	
@@ -109,7 +109,7 @@ public class ExpressionsHandler {
 //    }
   }
 
-  public final Value evaluateExpression(Map<String, Value> values) {
+  public final Value evaluateExpression(Map<String, Value> values, Types type) {
 	  ExpressionsEvaluatorVisitor visitor = new ExpressionsEvaluatorVisitor(values);
       return visitor.visit(parseTree);
 //	  switch (type) {

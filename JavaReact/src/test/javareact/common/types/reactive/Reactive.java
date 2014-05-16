@@ -26,16 +26,16 @@ public abstract class Reactive implements Subscriber, ReactiveListenerInterface 
 	private final Map<String, Value> currentValues = new HashMap<String, Value>();
 	protected final Set<String> missingValues = new HashSet<String>();
 
-	protected final ClientEventForwarder forwarder;
+	private final ClientEventForwarder forwarder;
 	private final ExpressionsHandler expressionHandler;
 	protected final QueueManager queueManager = new QueueManager();
 
 	protected final boolean blocking;
-	//private final Types type;
+	private final Types type;
 	protected final String name;
 	private final boolean isPublic;
 
-	protected boolean hasValue;
+	private boolean hasValue;
 	protected Value value;
 
 	protected final List<ReactiveListener> reactiveListeners = new ArrayList<ReactiveListener>();
@@ -52,25 +52,13 @@ public abstract class Reactive implements Subscriber, ReactiveListenerInterface 
 	 * @param name
 	 *            the name the reactive is publicly known with.
 	 */
-//	protected Reactive(String expression, Value startingValue, Types type,
-//			String name, boolean isPublic) {
-//		forwarder = ClientEventForwarder.get();
-//		this.type = type;
-//		this.name = name;
-//		this.isPublic = isPublic;
-//		expressionHandler = new ExpressionsHandler(type, expression);
-//		value = startingValue;
-//		blocking = false;
-//		hasValue = true;
-//		initValues();
-//		subscribeAndAdvertise();
-//	}
-	
-	protected Reactive(String expression, Value startingValue, String name, boolean isPublic) {
+	protected Reactive(String expression, Value startingValue, Types type,
+			String name, boolean isPublic) {
 		forwarder = ClientEventForwarder.get();
+		this.type = type;
 		this.name = name;
 		this.isPublic = isPublic;
-		expressionHandler = new ExpressionsHandler(expression);
+		expressionHandler = new ExpressionsHandler(type, expression);
 		value = startingValue;
 		blocking = false;
 		hasValue = true;
@@ -88,37 +76,26 @@ public abstract class Reactive implements Subscriber, ReactiveListenerInterface 
 	 * @param name
 	 *            the name the reactive is publicly known with.
 	 */
-	protected Reactive(String expression, String name,
+	protected Reactive(String expression, Types type, String name,
 			boolean isPublic) {
 		forwarder = ClientEventForwarder.get();
+		this.type = type;
 		this.name = name;
 		this.isPublic = isPublic;
-		expressionHandler = new ExpressionsHandler(expression);
+		expressionHandler = new ExpressionsHandler(type, expression);
 		blocking = true;
 		hasValue = false;
 		initValues();
 		subscribeAndAdvertise();
+
 	}
-	
-//	protected Reactive(String expression, Types type, String name,
-//			boolean isPublic) {
-//		forwarder = ClientEventForwarder.get();
-//		this.type = type;
-//		this.name = name;
-//		this.isPublic = isPublic;
-//		expressionHandler = new ExpressionsHandler(type, expression);
-//		blocking = true;
-//		hasValue = false;
-//		initValues();
-//		subscribeAndAdvertise();
-//	}
 
 	@Override
 	public synchronized void notifyValueChanged(EventPacket evPkt) {
 		// Update the data structures
 		// Contact the queue manager to obtain the list of changes that can be
 		// processed
-		Set<EventPacket> changes = queueManager.processEventPacket(evPkt, Consts.hostName + "." + name);
+		Set<EventPacket> changes = queueManager.processEventPacket(evPkt, Consts.hostName + name);
 		boolean modified = updateDataStructures(changes);
 		// If some data has been updated and no values are missing ...
 		// ... recompute the expression and notify waiting threads
@@ -134,7 +111,6 @@ public abstract class Reactive implements Subscriber, ReactiveListenerInterface 
 			if (!value.equals(oldVal)) {
 				for (ReactiveListener l : reactiveListeners) {
 					l.notifyReactiveChange(value);
-//					l.notifyReactiveUpdate(value);
 				}
 			}
 //			else {
@@ -183,39 +159,26 @@ public abstract class Reactive implements Subscriber, ReactiveListenerInterface 
 	}
 
 	private final void initValues() {
-		for (String var : expressionHandler.extractVariableNames()) {
+		for (String var : expressionHandler.extractVariableNames(type)) {
 			missingValues.add(var);
 		}
 	}
-	
-//	private final void initValues() {
-//		for (String var : expressionHandler.extractVariableNames(type)) {
-//			missingValues.add(var);
-//		}
-//	}
 
 	private final void subscribeAndAdvertise() {
-		Set<Subscription> subs = expressionHandler.buildSubscriptions();
+		Set<Subscription> subs = expressionHandler.buildSubscriptions(type);
 		Advertisement adv = new Advertisement(name, Consts.hostName);
 		forwarder.advertise(adv, subs, isPublic);
 		forwarder.addSubscriptions(this, subs);
 	}
-	
-//	private final void subscribeAndAdvertise() {
-//		Set<Subscription> subs = expressionHandler.buildSubscriptions(type);
-//		Advertisement adv = new Advertisement(name, Consts.hostName);
-//		forwarder.advertise(adv, subs, isPublic);
-//		forwarder.addSubscriptions(this, subs);
-//	}
 
 	/**
 	 * Recompute the expression and return true iff any new event has been
 	 * generated.
 	 */
-	protected boolean recomputeExpression(UUID id,
+	protected final boolean recomputeExpression(UUID id,
 			Set<String> computedFrom, Set<String> finalExpressions) {
 		boolean generateEvents = false;
-		value = expressionHandler.evaluateExpression(currentValues);
+		value = expressionHandler.evaluateExpression(currentValues, type);
 		hasValue = true;
 		if (name != null) {
 			try {
@@ -232,27 +195,6 @@ public abstract class Reactive implements Subscriber, ReactiveListenerInterface 
 		}
 		return generateEvents;
 	}
-	
-//	protected boolean recomputeExpression(UUID id,
-//			Set<String> computedFrom, Set<String> finalExpressions) {
-//		boolean generateEvents = false;
-//		value = expressionHandler.evaluateExpression(currentValues, type);
-//		hasValue = true;
-//		if (name != null) {
-//			try {
-//				Attribute attr = new Attribute("get()", value);
-//				Event event = new Event(name, Consts.hostName, attr);
-//				Set<String> newComputedFrom = new HashSet<String>(computedFrom);
-//				newComputedFrom.add(name);
-//				forwarder.sendEvent(id, event, newComputedFrom,
-//						finalExpressions, true);
-//				generateEvents = true;
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		return generateEvents;
-//	}
 
 	protected final Set<String> getComputedFrom(Set<EventPacket> pkts) {
 		Set<String> results = new HashSet<String>();
