@@ -7,7 +7,7 @@ import java.util.Queue;
 import java.util.Scanner;
 
 import test.javareact.common.Consts;
-import test.javareact.common.types.observable.ObservableList;
+import test.javareact.common.types.observable.ObservableListInteger;
 
 public class Tire1 {
 
@@ -15,7 +15,7 @@ public class Tire1 {
 		Consts.hostName = "Tire1";
 		List<Double> startingValue = new ArrayList<Double>();
 		startingValue.add(0.0);
-		ObservableList obTire1 = new ObservableList("ObTire1", startingValue);
+		ObservableListInteger obTire1 = new ObservableListInteger("ObTire1", startingValue);
 		Queue<Double> queue = new LinkedList<Double>();
 		while (true) {
 			System.out.println("Value of Tire 1 is : ");

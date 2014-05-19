@@ -1,0 +1,115 @@
+package test.javareact.common.types.observable;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class ObservableListInteger extends Observable {
+	public List<Integer> val = new ArrayList<Integer>();
+
+	public ObservableListInteger(String observableId, boolean persistent,
+			List<?> val) {
+		super(observableId, persistent);
+		// set(val);
+	}
+
+	public ObservableListInteger(String observableId, List<?> val) {
+		super(observableId);
+		// set(val);
+	}
+
+	@ImpactOn(method = { "size", "avg", "firstElement", "sum", "lastElement",
+			"sort", "reverse", "isSort", "isReverse" })
+	public final void add(int n) {
+		val.add(n);
+	}
+
+	@ImpactOn(method = { "size", "avg", "firstElement", "sum", "lastElement",
+			"sort", "reverse", "isSort", "isReverse" })
+	public final void addAll(List<Integer> list) {
+		val.addAll(list);
+	}
+
+	@ImpactOn(method = { "size", "avg", "firstElement", "sum", "lastElement",
+			"sort", "reverse", "isSort", "isReverse" })
+	public final void remove(int n) {
+		val.remove(n);
+	}
+
+	@ImpactOn(method = { "size", "avg", "firstElement", "sum", "lastElement",
+			"sort", "reverse", "isSort", "isReverse" })
+	public final void removeAll(List<Integer> list) {
+		val.removeAll(list);
+	}
+
+	public final int size() {
+		return val.size();
+	}
+
+	public final int lastElement() {
+		return val.get(val.size() - 1);
+	}
+
+	public final int firstElement() {
+		return val.get(0);
+	}
+
+	@ImpactOn(method = { "size", "avg", "firstElement", "sum", "lastElement",
+			"sort", "reverse", "isSort", "isReverse" })
+	public void clear() {
+		val.clear();
+	}
+
+	public final int sum() {
+		int sum = 0;
+		for (int n : val) {
+			sum += n;
+		}
+		return sum;
+	}
+
+	public final double avg() {
+		double sum = 0.0;
+		double avg = 0.0;
+		for (double n : val) {
+			sum += n;
+		}
+		avg = sum / val.size();
+		return avg;
+	}
+
+	@ImpactOn(method = { "firstElement", "lastElement", "isSort", "isReverse",
+			"reverse" })
+	public final List<Integer> sort() {
+		List<Integer> list = new ArrayList<Integer>(val);
+		Collections.sort(list);
+		return list;
+	}
+
+	@ImpactOn(method = { "firstElement", "lastElement", "isSort", "isReverse",
+			"sort" })
+	public final List<Integer> reverse() {
+		List<Integer> list = new ArrayList<Integer>(val);
+		Collections.reverse(list);
+		return list;
+	}
+
+	public final boolean isSort() {
+		List<Integer> list = new ArrayList<Integer>(val);
+		Collections.sort(list);
+		if (val.equals(list)) {
+			return true;
+		} else
+			return false;
+	}
+
+	public final boolean isReverse() {
+		List<Integer> list = new ArrayList<Integer>(val);
+		Collections.reverse(list);
+		if (val.equals(list)) {
+			return true;
+		} else
+			return false;
+	}
+
+}

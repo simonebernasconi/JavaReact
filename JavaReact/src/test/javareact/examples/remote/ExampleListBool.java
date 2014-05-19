@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import test.javareact.common.Consts;
-import test.javareact.common.types.observable.ObservableDouble;
-import test.javareact.common.types.observable.ObservableList;
+import test.javareact.common.types.observable.ObservableListBool;
+import test.javareact.common.types.observable.ObservableListInteger;
 
 public class ExampleListBool {
 
@@ -14,19 +14,19 @@ public class ExampleListBool {
 		Consts.hostName = "Remote1";
 		List<Boolean> startingValue = new ArrayList<Boolean>();
 		startingValue.add(false);
-		ObservableList obList = new ObservableList("obList", startingValue);
-		List<Boolean> list = new ArrayList<Boolean>();
+		ObservableListBool obList = new ObservableListBool("obList", startingValue);
+//		List<Boolean> list = new ArrayList<Boolean>();
+		
 		while (true) {
 			System.out.println("Add Value : ");
 			Scanner scanner = new Scanner(System.in);
 			String input = scanner.nextLine();
 			if (input.compareTo("t")==0){
-				list.add(true);
+				obList.add(true);
 			}
-			else {list.add(false);}
-			System.out.println("List contains "+ list);
-			obList.add(list);
+			else {obList.add(false);}
 		}
+	}
 		
 //		Random random = new Random();
 //
@@ -38,5 +38,5 @@ public class ExampleListBool {
 //				e.printStackTrace();
 //			}
 //		}
-	}
+//	}
 }

@@ -13,7 +13,6 @@ stringExpr:     stringExpr ADD stringExpr   # Concat
     |			STRING						# BaseStr 
     |           identifierString        	# IdString     
     |           '(' stringExpr ')'          # ParensString
-    |			listStringExpr DOT 'Last'             		# LastListString  	     
     ;
 
 numExpr:    numExpr op=(MUL|DIV) numExpr                # MulDiv
@@ -21,12 +20,7 @@ numExpr:    numExpr op=(MUL|DIV) numExpr                # MulDiv
     |       DIGIT                                       # Int
     |       DOUBLE                                      # Double
     |       identifierNum                               # IdNum      
-    |       '(' numExpr ')'                             # ParensNum 
-	|		listExpr DOT 'Size'    						# SizeList
-    |		listDigitExpr DOT op=(AVG|SUM)              # AvgSumListInt  
-    |		listDoubleExpr DOT op=(AVG|SUM)             # AvgSumListDouble
-    |		listDigitExpr DOT 'Last'             		# LastListInt  
-    |		listDoubleExpr DOT 'Last'             		# LastListDouble  	 
+    |       '(' numExpr ')'                             # ParensNum   	 
     ;
     
 boolExpr:   NOT boolExpr                    # Not
@@ -38,17 +32,7 @@ boolExpr:   NOT boolExpr                    # Not
     |       boolExpr EQUAL boolExpr         			# EqualBool
     |       numExpr EQUAL numExpr           			# EqualNum
     |       stringExpr EQUAL stringExpr     			# EqualString
-    |       listExpr EQUAL listExpr        				# EqualList
-    |       listDigitExpr DOT op=(ASC|DESC)             # IsAscIsDescInt
-    |       listDoubleExpr DOT op=(ASC|DESC)            # IsAscIsDescDouble
-    |       listDigitExpr DOT 'contains' '(' numExpr ')'    # ContainsInt
-    |       listDoubleExpr DOT 'contains' '(' numExpr ')'  # ContainsDouble
-    |       listStringExpr DOT 'contains' '(' stringExpr ')'  # ContainsString
-    |       listBoolExpr DOT 'contains' '(' boolExpr ')'      # ContainsBool
-    |       listBoolExpr DOT op=(ALLTRUE|ALLFALSE)      # AllTrueFalse
-    |		listBoolExpr DOT 'Last'             		# LastListBool  
-    |		listDigitExpr DOT 'Constant(' numExpr ')'   # ConstantListDigit	
-    |		listDoubleExpr DOT 'Constant(' numExpr ')'	# ConstantListDouble	  
+    |       listExpr EQUAL listExpr        				# EqualList  
    	;
    	
 listExpr:  	listDigitExpr  			# ListDigitExpression

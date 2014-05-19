@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import test.javareact.common.Consts;
-import test.javareact.common.types.observable.ObservableList;
+import test.javareact.common.types.observable.ObservableListInteger;
 
 public class ExampleListString {
 
@@ -13,7 +13,7 @@ public class ExampleListString {
 		Consts.hostName = "Remote1";
 		List<String> startingValue = new ArrayList();
 		startingValue.add("vuoto");
-		ObservableList obList = new ObservableList("obList", startingValue);
+		ObservableListInteger obList = new ObservableListInteger("obList", startingValue);
 		List<String> list = new ArrayList();
 		while (true) {
 			System.out.println("Add Value : ");

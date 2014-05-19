@@ -26,7 +26,7 @@ public abstract class Reactive implements Subscriber, ReactiveListenerInterface 
 	private final Map<String, Value> currentValues = new HashMap<String, Value>();
 	protected final Set<String> missingValues = new HashSet<String>();
 
-	private final ClientEventForwarder forwarder;
+	protected final ClientEventForwarder forwarder;
 	private final ExpressionsHandler expressionHandler;
 	protected final QueueManager queueManager = new QueueManager();
 
@@ -35,7 +35,7 @@ public abstract class Reactive implements Subscriber, ReactiveListenerInterface 
 	protected final String name;
 	private final boolean isPublic;
 
-	private boolean hasValue;
+	protected boolean hasValue;
 	protected Value value;
 
 	protected final List<ReactiveListener> reactiveListeners = new ArrayList<ReactiveListener>();
@@ -87,7 +87,6 @@ public abstract class Reactive implements Subscriber, ReactiveListenerInterface 
 		hasValue = false;
 		initValues();
 		subscribeAndAdvertise();
-
 	}
 
 	@Override
@@ -95,7 +94,7 @@ public abstract class Reactive implements Subscriber, ReactiveListenerInterface 
 		// Update the data structures
 		// Contact the queue manager to obtain the list of changes that can be
 		// processed
-		Set<EventPacket> changes = queueManager.processEventPacket(evPkt, Consts.hostName + name);
+		Set<EventPacket> changes = queueManager.processEventPacket(evPkt, Consts.hostName + "." + name);
 		boolean modified = updateDataStructures(changes);
 		// If some data has been updated and no values are missing ...
 		// ... recompute the expression and notify waiting threads
@@ -111,6 +110,7 @@ public abstract class Reactive implements Subscriber, ReactiveListenerInterface 
 			if (!value.equals(oldVal)) {
 				for (ReactiveListener l : reactiveListeners) {
 					l.notifyReactiveChange(value);
+//					l.notifyReactiveUpdate(value);
 				}
 			}
 //			else {
@@ -175,7 +175,7 @@ public abstract class Reactive implements Subscriber, ReactiveListenerInterface 
 	 * Recompute the expression and return true iff any new event has been
 	 * generated.
 	 */
-	protected final boolean recomputeExpression(UUID id,
+	protected boolean recomputeExpression(UUID id,
 			Set<String> computedFrom, Set<String> finalExpressions) {
 		boolean generateEvents = false;
 		value = expressionHandler.evaluateExpression(currentValues, type);

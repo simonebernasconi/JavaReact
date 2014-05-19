@@ -38,12 +38,5 @@ public abstract class Observable {
     computedFrom.add(ev.getSignature());
     forwarder.sendEvent(UUID.randomUUID(), ev, computedFrom, false);
   }
-  
-//  protected synchronized void sendEvent(Attribute attribute) {
-//	    Event ev = new Event(observableId, Consts.hostName, persistent, attribute);
-//	    Set<String> computedFrom = new HashSet<String>();
-//	    computedFrom.add(ev.getSignature());
-//	    forwarder.sendEvent(UUID.randomUUID(), ev, computedFrom, false);
-//	  }
 
 }

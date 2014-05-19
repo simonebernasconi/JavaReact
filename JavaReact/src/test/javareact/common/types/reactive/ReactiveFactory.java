@@ -6,31 +6,6 @@ import test.javareact.common.packets.content.Value;
 
 public final class ReactiveFactory {
 
-	public static final ReactiveInterface getValue(String expression,
-			Value startingValue, String name, boolean isPublic) {
-		ReactiveInterface result = new ReactiveInterfaceImpl(expression, startingValue, name, isPublic);
-		return result;
-	}
-
-	public static final ReactiveInterface getValue(String expression,
-			Value startingValue, String name) {
-		ReactiveInterface result = new ReactiveInterfaceImpl(expression, startingValue, name, true);
-		return result;
-	}
-
-	public static final ReactiveInterface getValue(String expression,
-			String name, boolean isPublic) {
-		ReactiveInterface result = new ReactiveInterfaceImpl(expression, name,
-				isPublic);
-		return result;
-	}
-
-	public static final ReactiveInterface getValue(String expression,
-			String name) {
-		ReactiveInterface result = new ReactiveInterfaceImpl(expression, name, true);
-		return result;
-	}
-	
 	public static final ReactiveInteger getInteger(String expression,
 			int startingValue, String name, boolean isPublic) {
 		ReactiveInteger result = new ReactiveIntegerImpl(expression, new Value(
@@ -58,33 +33,113 @@ public final class ReactiveFactory {
 		return result;
 	}
 
-	public static final ReactiveList getInteger(String expression,
+	public static final ReactiveListInteger getListInt(String expression,
 			List<?> startingValue, String name, boolean isPublic) {
-		ReactiveList result = new ReactiveListImpl(expression, new Value(
+		ReactiveListInteger result = new ReactiveListIntegerImpl(expression, new Value(
 				startingValue), name, isPublic);
 		return result;
 	}
 
-	public static final ReactiveList getInteger(String expression,
+	public static final ReactiveListInteger getListInt(String expression,
 			List<?> startingValue, String name) {
-		ReactiveList result = new ReactiveListImpl(expression, new Value(
+		ReactiveListInteger result = new ReactiveListIntegerImpl(expression, new Value(
 				startingValue), name, true);
 		return result;
 	}
 
-	public static final ReactiveList getList(String expression,
+	public static final ReactiveListInteger getListInt(String expression,
 			String name, boolean isPublic) {
-		ReactiveList result = new ReactiveListImpl(expression, name,
+		ReactiveListInteger result = new ReactiveListIntegerImpl(expression, name,
 				isPublic);
 		return result;
 	}
 
-	public static final ReactiveList getList(String expression,
+	public static final ReactiveListInteger getListInt(String expression,
 			String name) {
-		ReactiveList result = new ReactiveListImpl(expression, name, true);
+		ReactiveListInteger result = new ReactiveListIntegerImpl(expression, name, true);
 		return result;
 	}
 
+	public static final ReactiveListDouble getListDouble(String expression,
+			List<?> startingValue, String name, boolean isPublic) {
+		ReactiveListDouble result = new ReactiveListDoubleImpl(expression, new Value(
+				startingValue), name, isPublic);
+		return result;
+	}
+
+	public static final ReactiveListDouble getListDouble(String expression,
+			List<?> startingValue, String name) {
+		ReactiveListDouble result = new ReactiveListDoubleImpl(expression, new Value(
+				startingValue), name, true);
+		return result;
+	}
+
+	public static final ReactiveListDouble getListDouble(String expression,
+			String name, boolean isPublic) {
+		ReactiveListDouble result = new ReactiveListDoubleImpl(expression, name,
+				isPublic);
+		return result;
+	}
+
+	public static final ReactiveListDouble getListDouble(String expression,
+			String name) {
+		ReactiveListDouble result = new ReactiveListDoubleImpl(expression, name, true);
+		return result;
+	}
+
+	public static final ReactiveListString getListString(String expression,
+			List<?> startingValue, String name, boolean isPublic) {
+		ReactiveListString result = new ReactiveListStringImpl(expression, new Value(
+				startingValue), name, isPublic);
+		return result;
+	}
+
+	public static final ReactiveListString getListString(String expression,
+			List<?> startingValue, String name) {
+		ReactiveListString result = new ReactiveListStringImpl(expression, new Value(
+				startingValue), name, true);
+		return result;
+	}
+
+	public static final ReactiveListString getListString(String expression,
+			String name, boolean isPublic) {
+		ReactiveListString result = new ReactiveListStringImpl(expression, name,
+				isPublic);
+		return result;
+	}
+
+	public static final ReactiveListString getListString(String expression,
+			String name) {
+		ReactiveListString result = new ReactiveListStringImpl(expression, name, true);
+		return result;
+	}
+
+	public static final ReactiveListBool getListBool(String expression,
+			List<?> startingValue, String name, boolean isPublic) {
+		ReactiveListBool result = new ReactiveListBoolImpl(expression, new Value(
+				startingValue), name, isPublic);
+		return result;
+	}
+
+	public static final ReactiveListBool getListBool(String expression,
+			List<?> startingValue, String name) {
+		ReactiveListBool result = new ReactiveListBoolImpl(expression, new Value(
+				startingValue), name, true);
+		return result;
+	}
+
+	public static final ReactiveListBool getListBool(String expression,
+			String name, boolean isPublic) {
+		ReactiveListBool result = new ReactiveListBoolImpl(expression, name,
+				isPublic);
+		return result;
+	}
+
+	public static final ReactiveListBool getListBool(String expression,
+			String name) {
+		ReactiveListBool result = new ReactiveListBoolImpl(expression, name, true);
+		return result;
+	}
 	
 	public static final ReactiveDouble getDouble(String expression,
 			double startingValue, String name, boolean isPublic) {
@@ -136,7 +191,7 @@ public final class ReactiveFactory {
 		ReactiveBool result = new ReactiveBoolImpl(expression, name, true);
 		return result;
 	}
-	
+
 	public static final ReactiveString getString(String expression,
 			String startingValue, String name, boolean isPublic) {
 		ReactiveString result = new ReactiveStringImpl(expression, new Value(

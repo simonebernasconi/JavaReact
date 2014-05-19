@@ -1,38 +1,36 @@
 package test.javareact.examples.remote;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.Scanner;
 
 import test.javareact.common.Consts;
-import test.javareact.common.types.observable.ObservableList;
+import test.javareact.common.types.observable.ObservableListInteger;
 
 public class ExampleList {
 
 	public static void main(String args[]) {
 		Consts.hostName = "Remote1";
-		List<Double> startingValue = new ArrayList<Double>();
-		startingValue.add(0.0);
-		ObservableList obTire1 = new ObservableList("ObList", startingValue);
-		Queue<Double> queue = new LinkedList<Double>();
+		List<Integer> startingValue = new ArrayList<Integer>();
+		startingValue.add(0);
+		ObservableListInteger obTire1 = new ObservableListInteger("ObList", startingValue);
+		//Queue<Double> queue = new LinkedList<Double>();
 		while (true) {
 			System.out.println("Value of Tire 1 is : ");
 			Scanner scanner = new Scanner(System.in);
 			String input = scanner.nextLine();
-			double in = Double.parseDouble(input);
+			int in = Integer.parseInt(input);
 			System.out.println("You sent " + in);
-			if (queue.size() < 5){
-				queue.add(in);
-			}
-			else { 
-				queue.remove();
-				queue.add(in);
-			}
-			ArrayList<Double> list = new ArrayList<Double>(queue);
-			System.out.println(list);
-			obTire1.add(list);
+//			if (queue.size() < 5){
+//				queue.add(in);
+//			}
+//			else { 
+//				queue.remove();
+//				queue.add(in);
+//			}
+			//ArrayList<Double> list = new ArrayList<Double>(queue);
+			//System.out.println(list);
+			obTire1.add(in);
 		}
 	
 
