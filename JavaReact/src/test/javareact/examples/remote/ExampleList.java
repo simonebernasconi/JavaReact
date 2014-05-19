@@ -5,21 +5,21 @@ import java.util.List;
 import java.util.Scanner;
 
 import test.javareact.common.Consts;
-import test.javareact.common.types.observable.ObservableListInteger;
+import test.javareact.common.types.observable.ObservableListDouble;
 
 public class ExampleList {
 
 	public static void main(String args[]) {
 		Consts.hostName = "Remote1";
-		List<Integer> startingValue = new ArrayList<Integer>();
-		startingValue.add(0);
-		ObservableListInteger obTire1 = new ObservableListInteger("ObList", startingValue);
+		List<Double> startingValue = new ArrayList<Double>();
+		startingValue.add(0.0);
+		ObservableListDouble obTire1 = new ObservableListDouble("ObList", startingValue);
 		//Queue<Double> queue = new LinkedList<Double>();
 		while (true) {
 			System.out.println("Value of Tire 1 is : ");
 			Scanner scanner = new Scanner(System.in);
 			String input = scanner.nextLine();
-			int in = Integer.parseInt(input);
+			double in = Double.parseDouble(input);
 			System.out.println("You sent " + in);
 //			if (queue.size() < 5){
 //				queue.add(in);

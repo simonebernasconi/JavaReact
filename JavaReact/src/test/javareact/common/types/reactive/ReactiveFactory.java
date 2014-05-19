@@ -3,6 +3,7 @@ package test.javareact.common.types.reactive;
 import java.util.List;
 
 import test.javareact.common.packets.content.Value;
+import test.javareact.common.packets.content.ValueType;
 
 public final class ReactiveFactory {
 
@@ -34,16 +35,15 @@ public final class ReactiveFactory {
 	}
 
 	public static final ReactiveListInteger getListInt(String expression,
-			List<?> startingValue, String name, boolean isPublic) {
-		ReactiveListInteger result = new ReactiveListIntegerImpl(expression, new Value(
-				startingValue), name, isPublic);
+			List<Integer> startingValue, String name, boolean isPublic) {
+		ReactiveListInteger result = new ReactiveListIntegerImpl(expression, new Value(startingValue, ValueType.LISTINT), name, isPublic);
 		return result;
 	}
 
 	public static final ReactiveListInteger getListInt(String expression,
-			List<?> startingValue, String name) {
+			List<Integer> startingValue, String name) {
 		ReactiveListInteger result = new ReactiveListIntegerImpl(expression, new Value(
-				startingValue), name, true);
+				startingValue, ValueType.LISTINT), name, true);
 		return result;
 	}
 
@@ -61,14 +61,14 @@ public final class ReactiveFactory {
 	}
 
 	public static final ReactiveListDouble getListDouble(String expression,
-			List<?> startingValue, String name, boolean isPublic) {
+			List<Double> startingValue, String name, boolean isPublic) {
 		ReactiveListDouble result = new ReactiveListDoubleImpl(expression, new Value(
 				startingValue), name, isPublic);
 		return result;
 	}
 
 	public static final ReactiveListDouble getListDouble(String expression,
-			List<?> startingValue, String name) {
+			List<Double> startingValue, String name) {
 		ReactiveListDouble result = new ReactiveListDoubleImpl(expression, new Value(
 				startingValue), name, true);
 		return result;
@@ -88,14 +88,14 @@ public final class ReactiveFactory {
 	}
 
 	public static final ReactiveListString getListString(String expression,
-			List<?> startingValue, String name, boolean isPublic) {
+			List<String> startingValue, String name, boolean isPublic) {
 		ReactiveListString result = new ReactiveListStringImpl(expression, new Value(
 				startingValue), name, isPublic);
 		return result;
 	}
 
 	public static final ReactiveListString getListString(String expression,
-			List<?> startingValue, String name) {
+			List<String> startingValue, String name) {
 		ReactiveListString result = new ReactiveListStringImpl(expression, new Value(
 				startingValue), name, true);
 		return result;
@@ -115,14 +115,14 @@ public final class ReactiveFactory {
 	}
 
 	public static final ReactiveListBool getListBool(String expression,
-			List<?> startingValue, String name, boolean isPublic) {
+			List<Boolean> startingValue, String name, boolean isPublic) {
 		ReactiveListBool result = new ReactiveListBoolImpl(expression, new Value(
 				startingValue), name, isPublic);
 		return result;
 	}
 
 	public static final ReactiveListBool getListBool(String expression,
-			List<?> startingValue, String name) {
+			List<Boolean> startingValue, String name) {
 		ReactiveListBool result = new ReactiveListBoolImpl(expression, new Value(
 				startingValue), name, true);
 		return result;

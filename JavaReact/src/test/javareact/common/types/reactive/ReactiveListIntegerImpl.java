@@ -54,13 +54,13 @@ public void clear() {
 @Override
 public List<Integer> sort() {
 	requiresUpdatedValue();
-    return value.listVal();
+    return value.listIntVal();
 }
 
 @Override
 public List<Integer> reverse() {
 	requiresUpdatedValue();
-    return value.listVal();
+    return value.listIntVal();
 }
 
 @Override

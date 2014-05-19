@@ -410,7 +410,7 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		String method = ctx.method().getText();
 		String id = hostId + "." + observableId + "." + method;
 		System.out.println("get is " + values.get(id));
-		return new Value(values.get(id).listVal());
+		return new Value(values.get(id).listIntVal(), ValueType.LISTINT);
 	}
 	
 	@Override
@@ -421,7 +421,7 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		String method = ctx.method().getText();
 		String id = hostId + "." + observableId + "." + method;
 		System.out.println("get is " + values.get(id));
-		return new Value(values.get(id).listVal());
+		return new Value(values.get(id).listDoubleVal(),ValueType.LISTDOUBLE);
 	}
 	
 	@Override

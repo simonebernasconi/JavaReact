@@ -8,11 +8,11 @@ import test.javareact.common.types.Types;
 final class ReactiveListStringImpl extends Reactive implements ReactiveListString {
 
   protected ReactiveListStringImpl(String expression, String name, boolean isPublic) {
-    super(expression, Types.LIST, name, isPublic);
+    super(expression, Types.LISTSTRING, name, isPublic);
   }
 
   protected ReactiveListStringImpl(String expression, Value startingValue, String name, boolean isPublic) {
-    super(expression, startingValue, Types.LIST, name, isPublic);
+    super(expression, startingValue, Types.LISTSTRING, name, isPublic);
   }
 
 
@@ -48,13 +48,13 @@ public void clear() {
 @Override
 public List<String> sort() {
 	requiresUpdatedValue();
-    return value.listVal();
+    return value.listStringVal();
 }
 
 @Override
 public List<String> reverse() {
 	requiresUpdatedValue();
-    return value.listVal();
+    return value.listStringVal();
 }
 
 @Override

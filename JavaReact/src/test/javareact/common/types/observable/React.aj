@@ -6,6 +6,7 @@ import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.MethodSignature;
 
 import test.javareact.common.packets.content.Attribute;
+import test.javareact.common.packets.content.ValueType;
 
 
 public aspect React {
@@ -35,8 +36,11 @@ public aspect React {
       Method methodToInvoke = o.getClass().getMethod(impactOnMethod);
       System.out.println("Method to invoke is " + methodToInvoke);
       Object retVal = methodToInvoke.invoke(o);
+      // TODO
+      Class<?> type = methodToInvoke.getReturnType();
+      System.out.println(type);
       System.out.println("retVal is " + retVal);
-      Attribute attr = new Attribute(impactOnMethod + "()", retVal);
+      Attribute attr = new Attribute(impactOnMethod + "()", retVal, type);
       attributes[i++] = attr;
     } catch (Exception e) {
       e.printStackTrace();

@@ -15,7 +15,7 @@ public class Attribute implements Serializable {
   }
 
   // TODO build ad-hoc Exception
-  public Attribute(String name, Object value) throws Exception {
+  public Attribute(String name, Object value, ValueType type) throws Exception {
     this.name = name;
     if (value instanceof Value) {
       this.value = (Value) value;
@@ -28,8 +28,10 @@ public class Attribute implements Serializable {
     } else if (value instanceof Boolean) {
       this.value = new Value((Boolean) value);
     } else if (value instanceof List<?>) {
-        this.value = new Value((List<?>) value);
-    } else {
+        this.value = new Value((List<?>) value, type);
+    }
+    
+    else {
       throw new Exception("Invalid value type");
     }
   }
