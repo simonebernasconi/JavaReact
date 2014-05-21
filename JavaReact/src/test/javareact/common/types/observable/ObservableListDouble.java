@@ -5,16 +5,18 @@ import java.util.Collections;
 import java.util.List;
 
 public class ObservableListDouble extends Observable {
-	public List<Double> val = new ArrayList<Double>();
+	private List<Double> val = new ArrayList<Double>();
 
 	public ObservableListDouble(String observableId, boolean persistent,
-			List<?> val) {
+			List<Double> val) {
 		super(observableId, persistent);
+		this.val = val;
 		// set(val);
 	}
 
-	public ObservableListDouble(String observableId, List<?> val) {
+	public ObservableListDouble(String observableId, List<Double> val) {
 		super(observableId);
+		this.val = val;
 		// set(val);
 	}
 

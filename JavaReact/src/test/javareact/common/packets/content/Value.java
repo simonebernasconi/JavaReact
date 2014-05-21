@@ -12,10 +12,7 @@ public class Value implements Serializable {
   private final double doubleVal;
   private final String stringVal;
   private final boolean boolVal;
-  private List<Integer> listIntVal;
-  private  List<Double> listDoubleVal;
-  private  List<String> listStringVal;
-  private  List<Boolean> listBoolVal;
+  private List listVal;
   private  ValueType type;
 
   public Value(int val) {
@@ -23,10 +20,7 @@ public class Value implements Serializable {
     doubleVal = 0;
     stringVal = null;
     boolVal = false;
-    listIntVal = null;
-    listDoubleVal = null;
-    listStringVal = null;
-    listBoolVal = null;
+    listVal = null;
     type = ValueType.INT;
   }
 
@@ -35,10 +29,7 @@ public class Value implements Serializable {
     doubleVal = val;
     stringVal = null;
     boolVal = false;
-    listIntVal = null;
-    listDoubleVal = null;
-    listStringVal = null;
-    listBoolVal = null;
+    listVal = null;
     type = ValueType.DOUBLE;
   }
 
@@ -47,10 +38,7 @@ public class Value implements Serializable {
     doubleVal = 0;
     stringVal = val;
     boolVal = false;
-    listIntVal = null;
-    listDoubleVal = null;
-    listStringVal = null;
-    listBoolVal = null;
+    listVal = null;
     type = ValueType.STRING;
   }
 
@@ -59,32 +47,19 @@ public class Value implements Serializable {
     doubleVal = 0;
     stringVal = null;
     boolVal = val;
-    listIntVal = null;
-    listDoubleVal = null;
-    listStringVal = null;
-    listBoolVal = null;
+    listVal = null;
     type = ValueType.BOOL;
   }
   
-  public Value(List<?> val, ValueType type) {
+  public Value(List<?> val) {
 	    intVal = 0;
 	    doubleVal = 0;
 	    stringVal = null;
 	    boolVal = false;
-	    listIntVal = null;
-	    listDoubleVal = null;
-	    listStringVal = null;
-	    listBoolVal = null;
-	    switch (type){
-	    case LISTINT: listIntVal = (List<Integer>) val;
-	    case LISTDOUBLE: listDoubleVal = (List<Double>) val;
-	    case LISTBOOL: listBoolVal = (List<Boolean>) val;
-	    case LISTSTRING: listStringVal = (List<String>) val;
-	    default: ;
-	    }
-	    //type = ValueType.LISTINT;
+	    listVal = val;
+	    type = ValueType.LIST;
 	  }
-  
+	
   
 public final ValueType getType() {
     return type;
@@ -109,73 +84,14 @@ public final ValueType getType() {
     return boolVal;
   }
   
-  public final List<Integer> listIntVal() {
-	    return listIntVal;
+  public final List listVal() {
+	    return listVal;
 	  }
-  
-  public final List<Double> listDoubleVal() {
-	    return listDoubleVal;
-	  }
-  
-  public final List<String> listStringVal() {
-	    return listStringVal;
-	  }
-  
-  public final List<Boolean> listBoolVal() {
-	    return listBoolVal;
-	  }
-  
   
 
-//  @Override
-//  public int hashCode() {
-//    final int prime = 31;
-//    int result = 1;
-//    result = prime * result + (boolVal ? 1231 : 1237);
-//    long temp;
-//    temp = Double.doubleToLongBits(doubleVal);
-//    result = prime * result + (int) (temp ^ (temp >>> 32));
-//    result = prime * result + intVal;
-//    result = prime * result + ((stringVal == null) ? 0 : stringVal.hashCode());
-//    result = prime * result + ((type == null) ? 0 : type.hashCode());
-//    return result;
-//  }
-//
-//  @Override
-//  public boolean equals(Object obj) {
-//    if (this == obj) {
-//      return true;
-//    }
-//    if (obj == null) {
-//      return false;
-//    }
-//    if (!(obj instanceof Value)) {
-//      return false;
-//    }
-//    Value other = (Value) obj;
-//    if (boolVal != other.boolVal) {
-//      return false;
-//    }
-//    if (Double.doubleToLongBits(doubleVal) != Double.doubleToLongBits(other.doubleVal)) {
-//      return false;
-//    }
-//    if (intVal != other.intVal) {
-//      return false;
-//    }
-//    if (stringVal == null) {
-//      if (other.stringVal != null) {
-//        return false;
-//      }
-//    } else if (!stringVal.equals(other.stringVal)) {
-//      return false;
-//    }
-//    if (type != other.type) {
-//      return false;
-//    }
-//    return true;
-//  }
 
-  @Override
+
+@Override
 public int hashCode() {
 	final int prime = 31;
 	int result = 1;
@@ -184,14 +100,7 @@ public int hashCode() {
 	temp = Double.doubleToLongBits(doubleVal);
 	result = prime * result + (int) (temp ^ (temp >>> 32));
 	result = prime * result + intVal;
-	result = prime * result
-			+ ((listBoolVal == null) ? 0 : listBoolVal.hashCode());
-	result = prime * result
-			+ ((listDoubleVal == null) ? 0 : listDoubleVal.hashCode());
-	result = prime * result
-			+ ((listIntVal == null) ? 0 : listIntVal.hashCode());
-	result = prime * result
-			+ ((listStringVal == null) ? 0 : listStringVal.hashCode());
+	result = prime * result + ((listVal == null) ? 0 : listVal.hashCode());
 	result = prime * result + ((stringVal == null) ? 0 : stringVal.hashCode());
 	result = prime * result + ((type == null) ? 0 : type.hashCode());
 	return result;
@@ -213,25 +122,10 @@ public boolean equals(Object obj) {
 		return false;
 	if (intVal != other.intVal)
 		return false;
-	if (listBoolVal == null) {
-		if (other.listBoolVal != null)
+	if (listVal == null) {
+		if (other.listVal != null)
 			return false;
-	} else if (!listBoolVal.equals(other.listBoolVal))
-		return false;
-	if (listDoubleVal == null) {
-		if (other.listDoubleVal != null)
-			return false;
-	} else if (!listDoubleVal.equals(other.listDoubleVal))
-		return false;
-	if (listIntVal == null) {
-		if (other.listIntVal != null)
-			return false;
-	} else if (!listIntVal.equals(other.listIntVal))
-		return false;
-	if (listStringVal == null) {
-		if (other.listStringVal != null)
-			return false;
-	} else if (!listStringVal.equals(other.listStringVal))
+	} else if (!listVal.equals(other.listVal))
 		return false;
 	if (stringVal == null) {
 		if (other.stringVal != null)
@@ -242,8 +136,6 @@ public boolean equals(Object obj) {
 		return false;
 	return true;
 }
-
-
 
 @Override
   public String toString() {
@@ -256,14 +148,8 @@ public boolean equals(Object obj) {
       return stringVal;
     case BOOL:
       return String.valueOf(boolVal);
-    case LISTINT:
-	      return listIntVal.toString(); 
-    case LISTDOUBLE:
-	      return listDoubleVal.toString(); 
-    case LISTSTRING:
-	      return listStringVal.toString(); 
-    case LISTBOOL:
-	      return listBoolVal.toString(); 
+    case LIST:
+      return listVal.toString(); 
     default:
       assert false : type;
       return "err";

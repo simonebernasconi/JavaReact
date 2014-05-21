@@ -7,13 +7,15 @@ public class ObservableListBool extends Observable {
 	public List<Boolean> val = new ArrayList<Boolean>();
 
 	public ObservableListBool(String observableId, boolean persistent,
-			List<?> val) {
+			List<Boolean> val) {
 		super(observableId, persistent);
+		this.val = val;
 		// set(val);
 	}
 
-	public ObservableListBool(String observableId, List<?> val) {
+	public ObservableListBool(String observableId, List<Boolean> val) {
 		super(observableId);
+		this.val = val;
 		// set(val);
 	}
 

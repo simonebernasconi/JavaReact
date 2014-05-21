@@ -36,11 +36,26 @@ public aspect React {
       Method methodToInvoke = o.getClass().getMethod(impactOnMethod);
       System.out.println("Method to invoke is " + methodToInvoke);
       Object retVal = methodToInvoke.invoke(o);
-      // TODO
-      Class<?> type = methodToInvoke.getReturnType();
-      System.out.println(type);
+      //Class<?> clazz = methodToInvoke.getReturnType();
+      //System.out.println(clazz);
+//      ValueType type = null;
+//      if (clazz.getName().endsWith("int")){
+//    	  type = ValueType.INT;
+//      }
+//      else if((clazz.getName().endsWith("double"))){
+//    	  type = ValueType.DOUBLE;
+//      }
+//      else if((clazz.getName().endsWith("boolean"))){
+//    	  type = ValueType.BOOL;
+//      }
+//      else if((clazz.getName().endsWith("string"))){
+//    	  type = ValueType.STRING;
+//      }
+//      //System.out.println(type);
+//      
       System.out.println("retVal is " + retVal);
-      Attribute attr = new Attribute(impactOnMethod + "()", retVal, type);
+      //Attribute attr = new Attribute(impactOnMethod + "()", retVal, type);
+      Attribute attr = new Attribute(impactOnMethod + "()", retVal);
       attributes[i++] = attr;
     } catch (Exception e) {
       e.printStackTrace();

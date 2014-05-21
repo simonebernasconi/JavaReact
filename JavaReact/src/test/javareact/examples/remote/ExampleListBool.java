@@ -13,8 +13,8 @@ public class ExampleListBool {
 	public static void main(String args[]) {
 		Consts.hostName = "Remote1";
 		List<Boolean> startingValue = new ArrayList<Boolean>();
-		startingValue.add(false);
-		ObservableListBool obList = new ObservableListBool("obList", startingValue);
+		//startingValue.add(false);
+		ObservableListBool obList = new ObservableListBool("ObList", startingValue);
 //		List<Boolean> list = new ArrayList<Boolean>();
 		
 		while (true) {

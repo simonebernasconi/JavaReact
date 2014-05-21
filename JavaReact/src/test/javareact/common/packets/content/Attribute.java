@@ -8,33 +8,57 @@ public class Attribute implements Serializable {
 
   private final String name;
   private final Value value;
+  //private final ValueType type;
 
-  private Attribute(String name, Value value) {
+  public Attribute(String name, Value value) {
     this.name = name;
     this.value = value;
+    //this.type = type;
   }
 
-  // TODO build ad-hoc Exception
-  public Attribute(String name, Object value, ValueType type) throws Exception {
-    this.name = name;
-    if (value instanceof Value) {
-      this.value = (Value) value;
-    } else if (value instanceof Integer) {
-      this.value = new Value((Integer) value);
-    } else if (value instanceof Double) {
-      this.value = new Value((Double) value);
-    } else if (value instanceof String) {
-      this.value = new Value((String) value);
-    } else if (value instanceof Boolean) {
-      this.value = new Value((Boolean) value);
-    } else if (value instanceof List<?>) {
-        this.value = new Value((List<?>) value, type);
-    }
-    
-    else {
-      throw new Exception("Invalid value type");
-    }
-  }
+//TODO build ad-hoc Exception
+ public Attribute(String name, Object value) throws Exception {
+   this.name = name;
+   if (value instanceof Value) {
+     this.value = (Value) value;
+   } else if (value instanceof Integer) {
+     this.value = new Value((Integer) value);
+   } else if (value instanceof Double) {
+     this.value = new Value((Double) value);
+   } else if (value instanceof String) {
+     this.value = new Value((String) value);
+   } else if (value instanceof Boolean) {
+     this.value = new Value((Boolean) value);
+   } 
+   else if (value instanceof List<?>) {
+       this.value = new Value((List<?>) value);
+   }
+   else {
+     throw new Exception("Invalid value type");
+   }
+ }
+  
+  
+//  // TODO build ad-hoc Exception
+//  public Attribute(String name, Object value, ValueType type) throws Exception {
+//    this.name = name;
+//    if (value instanceof Value) {
+//      this.value = (Value) value;
+//    } else if (value instanceof Integer) {
+//      this.value = new Value((Integer) value);
+//    } else if (value instanceof Double) {
+//      this.value = new Value((Double) value);
+//    } else if (value instanceof String) {
+//      this.value = new Value((String) value);
+//    } else if (value instanceof Boolean) {
+//      this.value = new Value((Boolean) value);
+//    } else if (value instanceof List<?>) {
+//        this.value = new Value((List<?>) value, type);
+//    }
+//    else {
+//      throw new Exception("Invalid value type");
+//    }
+//  }
 
   public Attribute(String name, int value) {
     this(name, new Value(value));

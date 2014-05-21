@@ -34,112 +34,110 @@ public final class ReactiveFactory {
 		return result;
 	}
 
-	public static final ReactiveListInteger getListInt(String expression,
-			List<Integer> startingValue, String name, boolean isPublic) {
-		ReactiveListInteger result = new ReactiveListIntegerImpl(expression, new Value(startingValue, ValueType.LISTINT), name, isPublic);
-		return result;
-	}
-
-	public static final ReactiveListInteger getListInt(String expression,
-			List<Integer> startingValue, String name) {
-		ReactiveListInteger result = new ReactiveListIntegerImpl(expression, new Value(
-				startingValue, ValueType.LISTINT), name, true);
-		return result;
-	}
-
-	public static final ReactiveListInteger getListInt(String expression,
-			String name, boolean isPublic) {
-		ReactiveListInteger result = new ReactiveListIntegerImpl(expression, name,
-				isPublic);
-		return result;
-	}
-
-	public static final ReactiveListInteger getListInt(String expression,
-			String name) {
-		ReactiveListInteger result = new ReactiveListIntegerImpl(expression, name, true);
-		return result;
-	}
-
-	public static final ReactiveListDouble getListDouble(String expression,
-			List<Double> startingValue, String name, boolean isPublic) {
-		ReactiveListDouble result = new ReactiveListDoubleImpl(expression, new Value(
-				startingValue), name, isPublic);
-		return result;
-	}
-
-	public static final ReactiveListDouble getListDouble(String expression,
-			List<Double> startingValue, String name) {
-		ReactiveListDouble result = new ReactiveListDoubleImpl(expression, new Value(
-				startingValue), name, true);
-		return result;
-	}
-
-	public static final ReactiveListDouble getListDouble(String expression,
-			String name, boolean isPublic) {
-		ReactiveListDouble result = new ReactiveListDoubleImpl(expression, name,
-				isPublic);
-		return result;
-	}
-
-	public static final ReactiveListDouble getListDouble(String expression,
-			String name) {
-		ReactiveListDouble result = new ReactiveListDoubleImpl(expression, name, true);
-		return result;
-	}
-
-	public static final ReactiveListString getListString(String expression,
-			List<String> startingValue, String name, boolean isPublic) {
-		ReactiveListString result = new ReactiveListStringImpl(expression, new Value(
-				startingValue), name, isPublic);
-		return result;
-	}
-
-	public static final ReactiveListString getListString(String expression,
-			List<String> startingValue, String name) {
-		ReactiveListString result = new ReactiveListStringImpl(expression, new Value(
-				startingValue), name, true);
-		return result;
-	}
-
-	public static final ReactiveListString getListString(String expression,
-			String name, boolean isPublic) {
-		ReactiveListString result = new ReactiveListStringImpl(expression, name,
-				isPublic);
-		return result;
-	}
-
-	public static final ReactiveListString getListString(String expression,
-			String name) {
-		ReactiveListString result = new ReactiveListStringImpl(expression, name, true);
-		return result;
-	}
-
-	public static final ReactiveListBool getListBool(String expression,
-			List<Boolean> startingValue, String name, boolean isPublic) {
-		ReactiveListBool result = new ReactiveListBoolImpl(expression, new Value(
-				startingValue), name, isPublic);
-		return result;
-	}
-
-	public static final ReactiveListBool getListBool(String expression,
-			List<Boolean> startingValue, String name) {
-		ReactiveListBool result = new ReactiveListBoolImpl(expression, new Value(
-				startingValue), name, true);
-		return result;
-	}
-
-	public static final ReactiveListBool getListBool(String expression,
-			String name, boolean isPublic) {
-		ReactiveListBool result = new ReactiveListBoolImpl(expression, name,
-				isPublic);
-		return result;
-	}
-
-	public static final ReactiveListBool getListBool(String expression,
-			String name) {
-		ReactiveListBool result = new ReactiveListBoolImpl(expression, name, true);
-		return result;
-	}
+//	public static final ReactiveListInteger getListInt(String expression,
+//			List<Integer> startingValue, String name, boolean isPublic) {
+//		ReactiveListInteger result = new ReactiveListIntegerImpl(expression, new Value(startingValue, ValueType.LISTINT), name, isPublic);
+//		return result;
+//	}
+//
+//	public static final ReactiveListInteger getListInt(String expression, String name) {
+//		ReactiveListInteger result = new ReactiveListIntegerImpl(expression, ValueType.LISTINT), name, true);
+//		return result;
+//	}
+//
+//	public static final ReactiveListInteger getListInt(String expression,
+//			String name, boolean isPublic) {
+//		ReactiveListInteger result = new ReactiveListIntegerImpl(expression, name,
+//				isPublic);
+//		return result;
+//	}
+//
+//	public static final ReactiveListInteger getListInt(String expression,
+//			String name) {
+//		ReactiveListInteger result = new ReactiveListIntegerImpl(expression, name, true);
+//		return result;
+//	}
+//
+//	public static final ReactiveListDouble getListDouble(String expression,
+//			List<Double> startingValue, String name, boolean isPublic) {
+//		ReactiveListDouble result = new ReactiveListDoubleImpl(expression, new Value(
+//				startingValue,ValueType.LISTDOUBLE), name, isPublic);
+//		return result;
+//	}
+//
+//	public static final ReactiveListDouble getListDouble(String expression,
+//			List<Double> startingValue, String name) {
+//		ReactiveListDouble result = new ReactiveListDoubleImpl(expression, new Value(
+//				startingValue,ValueType.LISTDOUBLE), name, true);
+//		return result;
+//	}
+//
+//	public static final ReactiveListDouble getListDouble(String expression,
+//			String name, boolean isPublic) {
+//		ReactiveListDouble result = new ReactiveListDoubleImpl(expression, name,
+//				isPublic);
+//		return result;
+//	}
+//
+//	public static final ReactiveListDouble getListDouble(String expression,
+//			String name) {
+//		ReactiveListDouble result = new ReactiveListDoubleImpl(expression, name, true);
+//		return result;
+//	}
+//
+//	public static final ReactiveListString getListString(String expression,
+//			List<String> startingValue, String name, boolean isPublic) {
+//		ReactiveListString result = new ReactiveListStringImpl(expression, new Value(
+//				startingValue,ValueType.LISTSTRING), name, isPublic);
+//		return result;
+//	}
+//
+//	public static final ReactiveListString getListString(String expression,
+//			List<String> startingValue, String name) {
+//		ReactiveListString result = new ReactiveListStringImpl(expression, new Value(
+//				startingValue,ValueType.LISTSTRING), name, true);
+//		return result;
+//	}
+//
+//	public static final ReactiveListString getListString(String expression,
+//			String name, boolean isPublic) {
+//		ReactiveListString result = new ReactiveListStringImpl(expression, name,
+//				isPublic);
+//		return result;
+//	}
+//
+//	public static final ReactiveListString getListString(String expression,
+//			String name) {
+//		ReactiveListString result = new ReactiveListStringImpl(expression, name, true);
+//		return result;
+//	}
+//
+//	public static final ReactiveListBool getListBool(String expression,
+//			List<Boolean> startingValue, String name, boolean isPublic) {
+//		ReactiveListBool result = new ReactiveListBoolImpl(expression, new Value(
+//				startingValue,ValueType.LISTBOOL), name, isPublic);
+//		return result;
+//	}
+//
+//	public static final ReactiveListBool getListBool(String expression,
+//			List<Boolean> startingValue, String name) {
+//		ReactiveListBool result = new ReactiveListBoolImpl(expression, new Value(
+//				startingValue,ValueType.LISTBOOL), name, true);
+//		return result;
+//	}
+//
+//	public static final ReactiveListBool getListBool(String expression,
+//			String name, boolean isPublic) {
+//		ReactiveListBool result = new ReactiveListBoolImpl(expression, name,
+//				isPublic);
+//		return result;
+//	}
+//
+//	public static final ReactiveListBool getListBool(String expression,
+//			String name) {
+//		ReactiveListBool result = new ReactiveListBoolImpl(expression, name, true);
+//		return result;
+//	}
 	
 	public static final ReactiveDouble getDouble(String expression,
 			double startingValue, String name, boolean isPublic) {
