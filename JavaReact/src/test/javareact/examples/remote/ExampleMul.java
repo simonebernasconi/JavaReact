@@ -11,7 +11,7 @@ public class ExampleMul implements ReactiveListener {
 	public static void main(String args[]) {
 		Consts.hostName = "ReactiveMul";
 		ExampleMul remoteReact = new ExampleMul();
-		ReactiveDouble react= ReactiveFactory.getDouble("Remote1.obInt1.get() * Remote2.obInt2.get() ", 0, "obMul");
+		ReactiveDouble react= ReactiveFactory.getDouble("Remote1.obInt.get() + 10", 0, "obMul");
 		react.addReactiveListener(remoteReact);
 	}
 

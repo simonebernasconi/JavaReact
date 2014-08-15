@@ -1,9 +1,6 @@
 package test.javareact.common.types.reactive;
 
-import java.util.List;
-
 import test.javareact.common.packets.content.Value;
-import test.javareact.common.packets.content.ValueType;
 
 public final class ReactiveFactory {
 

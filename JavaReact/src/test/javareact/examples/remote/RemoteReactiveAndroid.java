@@ -11,7 +11,7 @@ public class RemoteReactiveAndroid {
     ReactiveInteger react1 = ReactiveFactory.getInteger("android.obInt.get()", 10, "react1");
 
     while (true) {
-      System.out.println("React1: " + react1.getInt());
+      System.out.println("React1: " + react1.get());
       try {
         Thread.sleep(500);
       } catch (InterruptedException e) {

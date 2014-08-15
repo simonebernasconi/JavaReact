@@ -9,7 +9,7 @@ public class Example1 {
 
 	public static void main(String args[]) {
 		Consts.hostName = "Remote1";
-		ObservableInteger obTire1 = new ObservableInteger("ObInt1", 10);
+		ObservableInteger obTire1 = new ObservableInteger("ObInt", 10);
 		while (true) {
 			System.out.println("Value of Tire 1 is : ");
 			Scanner scanner = new Scanner(System.in);
@@ -19,16 +19,7 @@ public class Example1 {
 			obTire1.set(in);
 		}
 		
-		
-//		Consts.hostName = "Remote1";
-//		ObservableString obTire1 = new ObservableString("obInt1", "");
-//		while (true) {
-//			System.out.println("Value of Tire 1 is : ");
-//			Scanner scanner = new Scanner(System.in);
-//			String input = scanner.nextLine();
-//			System.out.println("You sent " + input);
-//			obTire1.set(input);
-//		}
+	
 		
 	}
 }

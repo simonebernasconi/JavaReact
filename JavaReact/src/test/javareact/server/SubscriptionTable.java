@@ -19,7 +19,6 @@ final class SubscriptionTable {
       subs.put(node, subsList);
     }
     subsList.add(sub);
-    System.out.println("Subs " + subs);
   }
 
   final void removeSubscription(NodeDescriptor node, Subscription sub) {

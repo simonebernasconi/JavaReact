@@ -11,7 +11,7 @@ expression: 	stringExpr						# StringExpression
 
 stringExpr:     stringExpr ADD stringExpr   # Concat
     |			STRING						# BaseStr 
-    |           identifierString        	# IdString     
+    |           identifier        	# IdString     
     |           '(' stringExpr ')'          # ParensString
     ;
 
@@ -19,14 +19,14 @@ numExpr:    numExpr op=(MUL|DIV) numExpr                # MulDiv
     |       numExpr op=(ADD|SUB) numExpr                # AddSub
     |       DIGIT                                       # Int
     |       DOUBLE                                      # Double
-    |       identifierNum                               # IdNum      
+    |       identifier                               # IdNum      
     |       '(' numExpr ')'                             # ParensNum   	 
     ;
     
 boolExpr:   NOT boolExpr                    # Not
     |       boolExpr op=(AND|OR) boolExpr   # AndOr
     |       BOOL                            # Bool
-    |       identifierBool                  # IdBool        
+    |       identifier                  # IdBool        
     |       '(' boolExpr ')'                # ParensBool
     |       numExpr op=(MIN|MAX) numExpr    			# MinMax     
     |       boolExpr EQUAL boolExpr         			# EqualBool
@@ -47,41 +47,41 @@ listString: '[' seqString ']';
 listBool: '[' seqBool ']';
 
 seqInt: DIGIT				# SeqIntDigit
-	|	identifierNum	# SeqIntIdentifierListInt
+	|	identifier	# SeqIntIdentifierListInt
 	| 	seqInt ',' DIGIT	# SeqIntSeqInt
-	| 	seqInt ',' identifierNum	# SeqIntSeqIntIdListInt	
+	| 	seqInt ',' identifier	# SeqIntSeqIntIdListInt	
 	;
 	
 seqDouble: DOUBLE				# SeqDoubleDouble
-	|	identifierNum	# SeqDoubleIdentifierListDouble
+	|	identifier	# SeqDoubleIdentifierListDouble
 	| 	seqDouble ',' DOUBLE	# SeqDoubleSeqDouble
-	| 	seqDouble ',' identifierNum	# SeqDoubleSeqDoubleIdListDouble	
+	| 	seqDouble ',' identifier	# SeqDoubleSeqDoubleIdListDouble	
 	;
 	   
 seqString: STRING				# SeqStringString
-	|	identifierString	# SeqStringIdentifierListString
+	|	identifier	# SeqStringIdentifierListString
 	| 	seqString ',' STRING	# SeqStringSeqString
-	| 	seqString ',' identifierString	# SeqStringSeqStringIdListString	
+	| 	seqString ',' identifier	# SeqStringSeqStringIdListString	
 	;
 	
 seqBool: BOOL				# SeqBoolBool
-	|	identifierBool	# SeqBoolIdentifierListBool
+	|	identifier	# SeqBoolIdentifierListBool
 	| 	seqBool ',' BOOL	# SeqBoolSeqBool
-	| 	seqBool ',' identifierBool	# SeqBoolSeqBoolIdListBool	
+	| 	seqBool ',' identifier	# SeqBoolSeqBoolIdListBool	
 	;
 
 listDigitExpr:  listDigit                                                       # ListDigit_Label
-    |           identifierListInt                                               # IdListInt      
+    |           identifier                                               # IdListInt      
     ;
     
 listDoubleExpr:  listDouble                                                      # ListDouble_Label
-    |           identifierListDouble                                               # IdListDouble      
+    |           identifier                                               # IdListDouble      
     ;
 
 listStringExpr: listString                                                       # ListString_Label
-    |           identifierListString                                             # IdListString       
+    |           identifier                                             # IdListString       
     ;
 
 listBoolExpr: listBool                                                       # ListBool_Label
-    |           identifierListBool                                             # IdListBool       
+    |           identifier                                             # IdListBool       
     ;   	

@@ -25,13 +25,7 @@ import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IdListI
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IdListStringContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IdNumContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IdStringContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IdentifierBoolContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IdentifierListBoolContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IdentifierListDoubleContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IdentifierListIntContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IdentifierListStringContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IdentifierNumContext;
-import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IdentifierStringContext;
+import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IdentifierContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.IntContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ListBoolContext;
 import test.javareact.common.expressions.antlr_grammars.ExpressionParser.ListBoolExpressionContext;
@@ -208,15 +202,28 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 	}
 
 	
+	
+	
+//	@Override
+//	public Value visitIdentifierString(IdentifierStringContext ctx) {
+//		System.out.println("visit idString");
+//		String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
+//		String observableId = ctx.observableId().getText();
+//		String method = ctx.method().getText();
+//		String id = hostId + "." + observableId + "." + method;
+//		System.out.println("get is " + values.get(id));
+//		return new Value(values.get(id).stringVal()); 
+//	}
+
+
 	@Override
-	public Value visitIdentifierString(IdentifierStringContext ctx) {
-		System.out.println("visit idString");
-		String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
-		String observableId = ctx.observableId().getText();
-		String method = ctx.method().getText();
-		String id = hostId + "." + observableId + "." + method;
-		System.out.println("get is " + values.get(id));
-		return new Value(values.get(id).stringVal()); 
+	public Value visitIdentifier(IdentifierContext ctx) {
+		System.out.println("visit identifier");
+		 String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
+		    String observableId = ctx.observableId().getText();
+		    String method = ctx.method().getText();
+		    String id = hostId + "." + observableId + "." + method;
+		    return values.get(id);
 	}
 
 
@@ -228,36 +235,36 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		return new Value(string1.concat(string2));
 	}
 
-	@Override
-	public Value visitIdentifierNum(IdentifierNumContext ctx) {
-		System.out.println("visit identifierNum");
-		System.out.println("visit " + ctx.getText());
-		String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
-		String observableId = ctx.observableId().getText();
-		String method = ctx.method().getText();
-		String id = hostId + "." + observableId + "." + method;
-		String i = values.get(id).toString();
-		if (i.contains(".")){
-			double value = Double.parseDouble(i);
-			return new Value(value);
-		}
-		else {
-			int value = Integer.parseInt(i);
-			return new Value(value);
-		}
-	}
+//	@Override
+//	public Value visitIdentifierNum(IdentifierNumContext ctx) {
+//		System.out.println("visit identifierNum");
+//		System.out.println("visit " + ctx.getText());
+//		String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
+//		String observableId = ctx.observableId().getText();
+//		String method = ctx.method().getText();
+//		String id = hostId + "." + observableId + "." + method;
+//		String i = values.get(id).toString();
+//		if (i.contains(".")){
+//			double value = Double.parseDouble(i);
+//			return new Value(value);
+//		}
+//		else {
+//			int value = Integer.parseInt(i);
+//			return new Value(value);
+//		}
+//	}
 
 
 	@Override
 	public Value visitIdString(IdStringContext ctx) {
-		return visit(ctx.identifierString());
+		return visit(ctx.identifier());
 	}
 
 	@Override
 	public Value visitIdNum(IdNumContext ctx) {
 		System.out.println("visit idNum");
 		System.out.println("visit " + ctx.getText());
-		return visit(ctx.identifierNum());
+		return visit(ctx.identifier());
 }
 
 	@Override
@@ -381,16 +388,16 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		return visit(ctx.boolExpr());
 	}
 
-	@Override
-	public Value visitIdentifierBool(IdentifierBoolContext ctx) {
-		System.out.println("visit idBool");
-		String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
-		String observableId = ctx.observableId().getText();
-		String method = ctx.method().getText();
-		String id = hostId + "." + observableId + "." + method;
-		System.out.println("get is " + values.get(id));
-		return new Value(values.get(id).boolVal());
-	}
+//	@Override
+//	public Value visitIdentifierBool(IdentifierBoolContext ctx) {
+//		System.out.println("visit idBool");
+//		String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
+//		String observableId = ctx.observableId().getText();
+//		String method = ctx.method().getText();
+//		String id = hostId + "." + observableId + "." + method;
+//		System.out.println("get is " + values.get(id));
+//		return new Value(values.get(id).boolVal());
+//	}
 
 
 
@@ -398,72 +405,72 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 	public Value visitIdBool(IdBoolContext ctx) {
 		System.out.println("visit idBool");
 		System.out.println("visit " + ctx.getText());
-		return visit(ctx.identifierBool());
+		return visit(ctx.identifier());
 	}
 
 
-	@Override
-	public Value visitIdentifierListInt(IdentifierListIntContext ctx) {
-		System.out.println("visit idListInt");
-		String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
-		String observableId = ctx.observableId().getText();
-		String method = ctx.method().getText();
-		String id = hostId + "." + observableId + "." + method;
-		System.out.println("get is " + values.get(id));
-		return values.get(id);
-	}
-	
-	@Override
-	public Value visitIdentifierListDouble(IdentifierListDoubleContext ctx) {
-		System.out.println("visit idListDouble");
-		String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
-		String observableId = ctx.observableId().getText();
-		String method = ctx.method().getText();
-		String id = hostId + "." + observableId + "." + method;
-		System.out.println("get is " + values.get(id));
-		return values.get(id);
-	}
-	
-	@Override
-	public Value visitIdentifierListString(IdentifierListStringContext ctx) {
-		System.out.println("visit idListString");
-		String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
-		String observableId = ctx.observableId().getText();
-		String method = ctx.method().getText();
-		String id = hostId + "." + observableId + "." + method;
-		System.out.println("get is " + values.get(id));
-		return values.get(id);
-	}
-	
-	@Override
-	public Value visitIdentifierListBool(IdentifierListBoolContext ctx) {
-		System.out.println("visit idListBool");
-		String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
-		String observableId = ctx.observableId().getText();
-		String method = ctx.method().getText();
-		String id = hostId + "." + observableId + "." + method;
-		System.out.println("get is " + values.get(id));
-		return values.get(id);
-	}
+//	@Override
+//	public Value visitIdentifierListInt(IdentifierListIntContext ctx) {
+//		System.out.println("visit idListInt");
+//		String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
+//		String observableId = ctx.observableId().getText();
+//		String method = ctx.method().getText();
+//		String id = hostId + "." + observableId + "." + method;
+//		System.out.println("get is " + values.get(id));
+//		return values.get(id);
+//	}
+//	
+//	@Override
+//	public Value visitIdentifierListDouble(IdentifierListDoubleContext ctx) {
+//		System.out.println("visit idListDouble");
+//		String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
+//		String observableId = ctx.observableId().getText();
+//		String method = ctx.method().getText();
+//		String id = hostId + "." + observableId + "." + method;
+//		System.out.println("get is " + values.get(id));
+//		return values.get(id);
+//	}
+//	
+//	@Override
+//	public Value visitIdentifierListString(IdentifierListStringContext ctx) {
+//		System.out.println("visit idListString");
+//		String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
+//		String observableId = ctx.observableId().getText();
+//		String method = ctx.method().getText();
+//		String id = hostId + "." + observableId + "." + method;
+//		System.out.println("get is " + values.get(id));
+//		return values.get(id);
+//	}
+//	
+//	@Override
+//	public Value visitIdentifierListBool(IdentifierListBoolContext ctx) {
+//		System.out.println("visit idListBool");
+//		String hostId = (ctx.hostId() == null) ? Consts.hostName : ctx.hostId().getText();
+//		String observableId = ctx.observableId().getText();
+//		String method = ctx.method().getText();
+//		String id = hostId + "." + observableId + "." + method;
+//		System.out.println("get is " + values.get(id));
+//		return values.get(id);
+//	}
 
 	@Override
 	public Value visitIdListInt(IdListIntContext ctx) {
-		return visit(ctx.identifierListInt());
+		return visit(ctx.identifier());
 	}
 
 	@Override
 	public Value visitIdListDouble(IdListDoubleContext ctx) {
-		return visit(ctx.identifierListDouble());
+		return visit(ctx.identifier());
 	}
 	
 	@Override
 	public Value visitIdListString(IdListStringContext ctx) {
-		return visit(ctx.identifierListString());
+		return visit(ctx.identifier());
 	}
 	
 	@Override
 	public Value visitIdListBool(IdListBoolContext ctx) {
-		return visit(ctx.identifierListBool());
+		return visit(ctx.identifier());
 	}
 
 	@Override
@@ -585,7 +592,7 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 	public Value visitSeqIntSeqIntIdListInt(SeqIntSeqIntIdListIntContext ctx) {
 		System.out.println("visit SeqIntIdSeqIntIdListInt");
 		System.out.println("visit " + ctx.getText());
-		int val = visit(ctx.identifierNum()).intVal();
+		int val = visit(ctx.identifier()).intVal();
 		System.out.println("Primo valore e' " + val);
 		List<Integer> list = visit(ctx.seqInt()).listVal();
 		System.out.println(list);
@@ -598,7 +605,7 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		System.out.println("visit SeqIntIdListInt");
 		System.out.println("visit " + ctx.getText());
 		List<Integer> list = new ArrayList<Integer>();
-		int val = visit(ctx.identifierNum()).intVal();
+		int val = visit(ctx.identifier()).intVal();
 		list.add(val);
 		return new Value(list);
 	}
@@ -631,7 +638,7 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 	public Value visitSeqDoubleSeqDoubleIdListDouble(SeqDoubleSeqDoubleIdListDoubleContext ctx) {
 		System.out.println("visit SeqDoubleIdSeqDoubleIdListDouble");
 		System.out.println("visit " + ctx.getText());
-		double val = visit(ctx.identifierNum()).doubleVal();
+		double val = visit(ctx.identifier()).doubleVal();
 		System.out.println("Primo valore e' " + val);
 		List<Double> list = visit(ctx.seqDouble()).listVal();
 		System.out.println(list);
@@ -644,7 +651,7 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		System.out.println("visit SeqDoubleIdListDouble");
 		System.out.println("visit " + ctx.getText());
 		List<Double> list = new ArrayList<Double>();
-		double val = visit(ctx.identifierNum()).doubleVal();
+		double val = visit(ctx.identifier()).doubleVal();
 		list.add(val);
 		return new Value(list);
 	}
@@ -675,7 +682,7 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 	public Value visitSeqStringSeqStringIdListString(SeqStringSeqStringIdListStringContext ctx) {
 		System.out.println("visit SeqStringSeqStringIdListString");
 		System.out.println("visit " + ctx.getText());
-		String val = visit(ctx.identifierString()).stringVal();
+		String val = visit(ctx.identifier()).stringVal();
 		System.out.println("Primo valore e' " + val);
 		List<String> list = visit(ctx.seqString()).listVal();
 		System.out.println(list);
@@ -688,7 +695,7 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		System.out.println("visit SeqStringIdentifierListString");
 		System.out.println("visit " + ctx.getText());
 		List<String> list = new ArrayList<String>();
-		String val = visit(ctx.identifierString()).stringVal();
+		String val = visit(ctx.identifier()).stringVal();
 		list.add(val);
 		return new Value(list);
 	}
@@ -721,7 +728,7 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 	public Value visitSeqBoolSeqBoolIdListBool(SeqBoolSeqBoolIdListBoolContext ctx) {
 		System.out.println("visit SeqBoolSeqBoolIdListBool");
 		System.out.println("visit " + ctx.getText());
-		Boolean val = visit(ctx.identifierBool()).boolVal();
+		Boolean val = visit(ctx.identifier()).boolVal();
 		System.out.println("Primo valore e' " + val);
 		List<Boolean> list = visit(ctx.seqBool()).listVal();
 		System.out.println(list);
@@ -734,7 +741,7 @@ public class ExpressionsEvaluatorVisitor extends ExpressionBaseVisitor<Value> {
 		System.out.println("visit SeqBoolIdentifierListBool");
 		System.out.println("visit " + ctx.getText());
 		List<Boolean> list = new ArrayList<Boolean>();
-		Boolean val = visit(ctx.identifierBool()).boolVal();
+		Boolean val = visit(ctx.identifier()).boolVal();
 		list.add(val);
 		return new Value(list);
 	}

@@ -27,10 +27,10 @@ public abstract class Observable {
     this(observableId, false);
   }
 
-  private final void sendAdvertisement() {
-    Advertisement adv = new Advertisement(observableId, Consts.hostName);
-    forwarder.advertise(adv, true);
-  }
+	private final void sendAdvertisement() {
+		Advertisement adv = new Advertisement(observableId, Consts.hostName);
+		forwarder.advertise(adv, true);
+	}
 
   protected synchronized void sendEvent(Attribute[] attributes) {
     Event ev = new Event(observableId, Consts.hostName, persistent, attributes);

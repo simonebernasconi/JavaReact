@@ -1,17 +1,18 @@
 grammar Common;
     
-identifierNum: hostId DOT observableId DOT method ':Num';
-identifierString: hostId DOT observableId DOT method  ':String';
-identifierBool: hostId DOT observableId DOT method  ':Bool';
-identifierListInt: hostId DOT observableId DOT method  ':ListInt';
-identifierListBool: hostId DOT observableId DOT method  ':ListBool';
-identifierListDouble: hostId DOT observableId DOT method  ':ListDouble';
-identifierListString: hostId DOT observableId DOT method  ':ListString';
+//identifierNum: hostId DOT observableId DOT method ':Num';
+//identifierString: hostId DOT observableId DOT method  ':String';
+//identifierBool: hostId DOT observableId DOT method  ':Bool';
+//identifierListInt: hostId DOT observableId DOT method  ':ListInt';
+//identifierListBool: hostId DOT observableId DOT method  ':ListBool';
+//identifierListDouble: hostId DOT observableId DOT method  ':ListDouble';
+//identifierListString: hostId DOT observableId DOT method  ':ListString';
+
+identifier: hostId DOT observableId DOT method; 
 
 hostId: '*' | ID;
 observableId: ID;
-method: 'get('')' | 'size('')' | 'sum(' ')' | 'avg(' ')' | 'isSort(' ')' | 'isReverse(' ')' | 'clear(' ')' |'sort(' ')' | 'reverse(' ')' | 'isAllTrue(' ')' | 'isAllFalse(' ')' |'firstElement(' ')' | 'lastElement(' ')'   ;
-
+method : ID'(' ')' ;
 MUL: '*';
 DIV: '/'; 
 ADD: '+';
@@ -30,7 +31,7 @@ DESC: 'orderDesc';
 ALLTRUE: 'isAllTrue';
 ALLFALSE: 'isAllFalse';
 
-ID: [A-Z] [a-zA-Z0-9]*;
+ID: [a-zA-Z] [a-zA-Z0-9]*;
 STRING: '\''[ a-zA-Z0-9]+ '\'';
 DIGIT: [0-9]+ ;
 DOUBLE: [0-9]* DOT [0-9]+ ;

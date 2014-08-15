@@ -18,26 +18,26 @@ public class ObservableListInteger extends Observable {
 		// set(val);
 	}
 
-	@ImpactOn(method = { "size", "avg", "firstElement", "sum", "lastElement",
-			"sort", "reverse", "isSort", "isReverse" })
+	@ImpactOn(method = {"contains", "size", "avg", "firstElement", "sum", "lastElement",
+			"isSort", "isReverse" })
 	public final void add(int n) {
 		val.add(n);
 	}
 
-	@ImpactOn(method = { "size", "avg", "firstElement", "sum", "lastElement",
-			"sort", "reverse", "isSort", "isReverse" })
+	@ImpactOn(method = {"contains", "size", "avg", "firstElement", "sum", "lastElement",
+			"isSort", "isReverse" })
 	public final void addAll(List<Integer> list) {
 		val.addAll(list);
 	}
 
-	@ImpactOn(method = { "size", "avg", "firstElement", "sum", "lastElement",
-			"sort", "reverse", "isSort", "isReverse" })
+	@ImpactOn(method = {"contains", "size", "avg", "firstElement", "sum", "lastElement",
+			"isSort", "isReverse" })
 	public final void remove(int n) {
 		val.remove(n);
 	}
 
-	@ImpactOn(method = { "size", "avg", "firstElement", "sum", "lastElement",
-			"sort", "reverse", "isSort", "isReverse" })
+	@ImpactOn(method = {"contains", "size", "avg", "firstElement", "sum", "lastElement",
+			"isSort", "isReverse" })
 	public final void removeAll(List<Integer> list) {
 		val.removeAll(list);
 	}
@@ -54,8 +54,8 @@ public class ObservableListInteger extends Observable {
 		return val.get(0);
 	}
 
-	@ImpactOn(method = { "size", "avg", "firstElement", "sum", "lastElement",
-		 "isSort", "isReverse" })
+	@ImpactOn(method = {"contains", "size", "avg", "sum", "firstElement", "lastElement",
+			"isSort", "isReverse" })
 	public void clear() {
 		val.clear();
 	}
@@ -78,15 +78,15 @@ public class ObservableListInteger extends Observable {
 		return avg;
 	}
 
-	@ImpactOn(method = { "firstElement", "lastElement", "isSort", "isReverse" })
-	public final void sort() {
-		Collections.sort(val);
-	}
-
-	@ImpactOn(method = { "firstElement", "lastElement", "isSort", "isReverse" })
-	public final void reverse() {
-		Collections.reverse(val);
-	}
+//	@ImpactOn(method = { "firstElement", "lastElement", "isSort", "isReverse" })
+//	public final void sort() {
+//		Collections.sort(val);
+//	}
+//
+//	@ImpactOn(method = { "firstElement", "lastElement", "isSort", "isReverse" })
+//	public final void reverse() {
+//		Collections.reverse(val);
+//	}
 
 	public final boolean isSort() {
 		List<Integer> list = new ArrayList<Integer>(val);
@@ -105,5 +105,13 @@ public class ObservableListInteger extends Observable {
 		} else
 			return false;
 	}
+	
+	@ImpactOn(method = {"avg", "sum","lastElement",
+			"isSort", "isReverse" })
+	public final void changeLast(int n) {
+		val.remove(val.size()-1);
+		val.add(n);
+	}
+
 
 }

@@ -54,6 +54,7 @@ public abstract class Reactive implements Subscriber, ReactiveListenerInterface 
 	 */
 	protected Reactive(String expression, Value startingValue, Types type,
 			String name, boolean isPublic) {
+		System.out.println("EXPRESSION IS " + expression);
 		forwarder = ClientEventForwarder.get();
 		this.type = type;
 		this.name = name;
@@ -78,6 +79,7 @@ public abstract class Reactive implements Subscriber, ReactiveListenerInterface 
 	 */
 	protected Reactive(String expression, Types type, String name,
 			boolean isPublic) {
+		System.out.println("EXPRESSION IS " + expression);
 		forwarder = ClientEventForwarder.get();
 		this.type = type;
 		this.name = name;

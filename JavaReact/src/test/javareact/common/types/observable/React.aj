@@ -6,7 +6,6 @@ import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.MethodSignature;
 
 import test.javareact.common.packets.content.Attribute;
-import test.javareact.common.packets.content.ValueType;
 
 
 public aspect React {
@@ -24,7 +23,6 @@ public aspect React {
     ImpactOn annotation = method.getAnnotation(ImpactOn.class);
     System.out.println(annotation.method());
     String[] impactOnMethods = annotation.method();
-    System.out.println("ImpactsOnMethodLength is " + impactOnMethods.length);
     for (String met : impactOnMethods){
     	System.out.println("Method in impactonMethod is " + met);
     }
@@ -36,25 +34,7 @@ public aspect React {
       Method methodToInvoke = o.getClass().getMethod(impactOnMethod);
       System.out.println("Method to invoke is " + methodToInvoke);
       Object retVal = methodToInvoke.invoke(o);
-      //Class<?> clazz = methodToInvoke.getReturnType();
-      //System.out.println(clazz);
-//      ValueType type = null;
-//      if (clazz.getName().endsWith("int")){
-//    	  type = ValueType.INT;
-//      }
-//      else if((clazz.getName().endsWith("double"))){
-//    	  type = ValueType.DOUBLE;
-//      }
-//      else if((clazz.getName().endsWith("boolean"))){
-//    	  type = ValueType.BOOL;
-//      }
-//      else if((clazz.getName().endsWith("string"))){
-//    	  type = ValueType.STRING;
-//      }
-//      //System.out.println(type);
-//      
       System.out.println("retVal is " + retVal);
-      //Attribute attr = new Attribute(impactOnMethod + "()", retVal, type);
       Attribute attr = new Attribute(impactOnMethod + "()", retVal);
       attributes[i++] = attr;
     } catch (Exception e) {
@@ -62,7 +42,6 @@ public aspect React {
     }
     }
     ((Observable) o).sendEvent(attributes);
-    System.out.println("AAA");
     
   }
   

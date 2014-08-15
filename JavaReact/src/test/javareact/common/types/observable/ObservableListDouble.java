@@ -20,25 +20,25 @@ public class ObservableListDouble extends Observable {
 		// set(val);
 	}
 
-	@ImpactOn(method = { "size", "avg", "sum", "firstElement", "lastElement",
+	@ImpactOn(method = {"size", "avg", "sum", "firstElement", "lastElement",
 			"isSort", "isReverse" })
 	public final void add(double n) {
 		val.add(n);
 	}
 
-	@ImpactOn(method = { "size", "avg", "sum", "firstElement", "lastElement",
+	@ImpactOn(method = {"size", "avg", "sum", "firstElement", "lastElement",
 			"isSort", "isReverse" })
 	public final void addAll(List<Double> list) {
 		val.addAll(list);
 	}
 
-	@ImpactOn(method = { "size", "avg", "sum", "firstElement", "lastElement",
+	@ImpactOn(method = {"size", "avg", "sum", "firstElement", "lastElement",
 			"isSort", "isReverse" })
 	public final void remove(double n) {
 		val.remove(n);
 	}
 
-	@ImpactOn(method = { "size", "avg", "sum", "firstElement", "lastElement",
+	@ImpactOn(method = {"size", "avg", "sum", "firstElement", "lastElement",
 			"isSort", "isReverse" })
 	public final void removeAll(List<Double> list) {
 		val.removeAll(list);
@@ -56,7 +56,7 @@ public class ObservableListDouble extends Observable {
 		return val.get(0);
 	}
 
-	@ImpactOn(method = { "size", "avg", "sum", "firstElement", "lastElement",
+	@ImpactOn(method = {"size", "avg", "sum", "firstElement", "lastElement",
 			"isSort", "isReverse" })
 	public void clear() {
 		val.clear();
@@ -80,20 +80,6 @@ public class ObservableListDouble extends Observable {
 		return avg;
 	}
 
-	@ImpactOn(method = { "firstElement", "lastElement", "isSort", "isReverse" })
-	public final List<Double> sort() {
-		List<Double> list = new ArrayList<Double>(val);
-		Collections.sort(list);
-		return list;
-	}
-
-	@ImpactOn(method = { "firstElement", "lastElement", "isSort", "isReverse"})
-	public final List<Double> reverse() {
-		List<Double> list = new ArrayList<Double>(val);
-		Collections.reverse(list);
-		return list;
-	}
-
 	public final boolean isSort() {
 		List<Double> list = new ArrayList<Double>(val);
 		Collections.sort(list);
@@ -110,6 +96,13 @@ public class ObservableListDouble extends Observable {
 			return true;
 		} else
 			return false;
+	}
+	
+	@ImpactOn(method = {"avg", "sum","firstElement","lastElement",
+			"isSort", "isReverse" })
+	public final void changeLast(double n) {
+		val.remove(val.size()-1);
+		val.add(n);
 	}
 
 }

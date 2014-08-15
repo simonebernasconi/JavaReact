@@ -22,7 +22,6 @@ final class ClientSubscriptionTable {
       subs.put(subscriber, subsList);
     }
     subsList.add(sub);
-    System.out.println("Client SubTable " + subsList );
   }
 
   final void addSubscriptions(Subscriber subscriber, Collection<Subscription> subs) {
@@ -96,5 +95,4 @@ final class ClientSubscriptionTable {
   public String toString() {
     return "ClientSubscriptionTable [\n subs=" + subs + "\n serverSubscriptions=" + serverSubscriptions + "\n]";
   }
-
 }

@@ -18,26 +18,26 @@ public class ObservableListString extends Observable {
 		// set(val);
 	}
 
-	@ImpactOn(method = { "size", "firstElement", "lastElement", "sort",
-			"reverse", "isSort", "isReverse", "concat" })
+	@ImpactOn(method = {"contains", "size", "concat", "firstElement", "lastElement",
+			"isSort", "isReverse" })
 	public final void add(String str) {
 		val.add(str);
 	}
 
-	@ImpactOn(method = { "size", "firstElement", "lastElement", "sort",
-			"reverse", "isSort", "isReverse", "concat" })
+	@ImpactOn(method = {"contains", "size", "concat", "firstElement", "lastElement",
+			"isSort", "isReverse" })
 	public final void addAll(List<String> list) {
 		val.addAll(list);
 	}
 
-	@ImpactOn(method = { "size", "firstElement", "lastElement", "sort",
-			"reverse", "isSort", "isReverse", "concat" })
+	@ImpactOn(method = {"contains", "size", "concat", "firstElement", "lastElement",
+			"isSort", "isReverse" })
 	public final void remove(String str) {
 		val.remove(str);
 	}
 
-	@ImpactOn(method = { "size", "firstElement", "lastElement", "sort",
-			"reverse", "isSort", "isReverse", "concat" })
+	@ImpactOn(method = {"contains", "size", "concat", "firstElement", "lastElement",
+			"isSort", "isReverse" })
 	public final void removeAll(List<String> list) {
 		val.removeAll(list);
 	}
@@ -54,8 +54,8 @@ public class ObservableListString extends Observable {
 		return val.get(0);
 	}
 
-	@ImpactOn(method = { "size", "firstElement", "lastElement", "sort",
-			"reverse", "isSort", "isReverse", "concat" })
+	@ImpactOn(method = {"contains", "size", "concat", "firstElement", "lastElement",
+			"isSort", "isReverse" })
 	public void clear() {
 		val.clear();
 	}
@@ -68,21 +68,21 @@ public class ObservableListString extends Observable {
 		return concat;
 	}
 
-	@ImpactOn(method = { "firstElement", "lastElement", "isSort", "isReverse",
-			"reverse" })
-	public final List<String> sort() {
-		List<String> list = new ArrayList<String>(val);
-		Collections.sort(list);
-		return list;
-	}
-
-	@ImpactOn(method = { "firstElement", "lastElement", "isSort", "isReverse",
-			"sort" })
-	public final List<String> reverse() {
-		List<String> list = new ArrayList<String>(val);
-		Collections.reverse(list);
-		return list;
-	}
+//	@ImpactOn(method = { "firstElement", "lastElement", "isSort", "isReverse",
+//			"reverse" })
+//	public final List<String> sort() {
+//		List<String> list = new ArrayList<String>(val);
+//		Collections.sort(list);
+//		return list;
+//	}
+//
+//	@ImpactOn(method = { "firstElement", "lastElement", "isSort", "isReverse",
+//			"sort" })
+//	public final List<String> reverse() {
+//		List<String> list = new ArrayList<String>(val);
+//		Collections.reverse(list);
+//		return list;
+//	}
 
 	public final boolean isSort() {
 		List<String> list = new ArrayList<String>(val);
